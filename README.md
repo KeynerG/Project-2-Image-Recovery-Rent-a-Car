@@ -1,12 +1,18 @@
-# Proyecto 2 - Recuperación de inmágenes y Rent a Car
+# Proyecto - Image Recovery & Rent A Car
 
-Algoritmos y estructuras de Datos 2 - CE2103
-II Semestre del 2021
+### Institución
+[Instituto Tecnológico de Costa Rica](https://www.tec.ac.cr/)
 
-### Estudiantes:
+### Programa
+[Licenciatura en Ingeniería en Computadores](https://www.tec.ac.cr/programas-academicos/licenciatura-ingenier%C3%ADa-computadores)
 
-Valerie Hernandez Fernandez - 20XXXXXXXX
+### Curso
+[CE2103 - Algoritmos y Estructuras de Datos II](https://www.tec.ac.cr/planes-estudio/licenciatura-ingenier%C3%ADa-computadores)
 
-Jose Andres Rodriguez Rojas - 2019XXXXXX
+### Semestre
+II 2021
 
-Keyner Gómez Pana -2018250637
+### Estudiantes
+- [Keyner S. Gómez Pana](https://github.com/KeynerG) - 2018250637
+- [Valerie M. Hernández Fernández](https://github.com/valeriehernandez-7) - 2020010829
+- [Jose A. Rodríguez Rojas](https://github.com/JoseAndres216) - 2019279722
