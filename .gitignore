@@ -13,3 +13,7 @@
 /Rent-A-Car/.idea/modules.xml
 /Rent-A-Car/.idea/vcs.xml
 /Rent-A-Car/.idea/workspace.xml
+
+*.xml
+
+Rent-A-Car/src/.idea/
