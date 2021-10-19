@@ -77,9 +77,9 @@ void SimpleList<T>::addNodeAt(int index, T data) {
 
 template<class T>
 void SimpleList<T>::addNodeAtStart(T data) {
-    if(!this->head){
+    if (!this->head) {
         this->head = new SimpleNode<T>;
-        this->head->data= data;
+        this->head->data = data;
         this->head->next = nullptr;
         this->tail = this->head;
     } else {
@@ -153,8 +153,12 @@ template<class T>
 void SimpleList<T>::printList() {
     SimpleNode<T> *aux = this->head;
     while (aux != nullptr) {
-        cout << "Node data: " << aux->getData() << endl;
-        aux = aux->next;
+        try {
+            cout << "Node data: " << aux->getData() << ", ";
+            aux = aux->next;
+        } catch (error_code e) {
+            cout << "Error caught: " << e << endl;
+        }
     }
 }
 

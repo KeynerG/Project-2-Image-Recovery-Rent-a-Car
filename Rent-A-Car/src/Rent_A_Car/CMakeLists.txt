@@ -21,7 +21,7 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        DataStructures/SimpleList/SimpleList.h DataStructures/SimpleList/SimpleNode.h)
+        DataStructures/SimpleList/SimpleList.h DataStructures/SimpleList/SimpleNode.h DataStructures/Graph/Graph.cpp DataStructures/Graph/Graph.h DataStructures/Graph/Vertex.cpp DataStructures/Graph/Vertex.h DataStructures/Graph/Edge.cpp DataStructures/Graph/Edge.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Rent_A_Car
