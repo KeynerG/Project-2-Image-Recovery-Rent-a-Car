@@ -6,6 +6,8 @@
 #import "Vertex.h"
 
 #import <iostream>
+#import <ctime>
+#import <cstdlib>
 
 using namespace std;
 
@@ -30,6 +32,10 @@ public:
     void addEdge(int originId, int destinyId);
 
     void addEdge(int originId, int destinyId, int weight);
+
+    bool checkEdgeExistence(int originId, int destinyId);
+
+    void generateGraphOf(int nodes);
 
     void printGraph();
 };
