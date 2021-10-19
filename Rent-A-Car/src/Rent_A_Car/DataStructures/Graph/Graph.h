@@ -25,9 +25,11 @@ public:
 
     void setVertexList(const SimpleList<Vertex> &vertexList);
 
-    void addVertex(string id, string name);
+    void addVertex(string name);
 
     void addEdge(int originId, int destinyId);
+
+    void addEdge(int originId, int destinyId, int weight);
 
     void printGraph();
 };

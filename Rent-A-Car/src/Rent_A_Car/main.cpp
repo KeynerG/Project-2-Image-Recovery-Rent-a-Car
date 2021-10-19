@@ -5,10 +5,10 @@
 
 int main(int argc, char *argv[]) {
     Graph g;
-    g.addVertex("1", "PZ");
-    g.addVertex("2", "Chepe");
-    g.addVertex("3", "TR");
-    g.addEdge(1,3);
+    g.addVertex("PZ");
+    g.addVertex("Chepe");
+    g.addVertex("TR");
+    g.addEdge(1,3, 25);
     g.addEdge(1, 2);
     g.addEdge(2,1);
     g.addEdge(2,3);

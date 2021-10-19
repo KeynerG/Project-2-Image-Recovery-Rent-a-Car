@@ -21,14 +21,20 @@ void Graph::setVertexList(const SimpleList<Vertex> &vertexList) {
     Graph::vertexList = vertexList;
 }
 
-void Graph::addVertex(string id, string name) {
-    Vertex toAdd = Vertex(id, name);
+void Graph::addVertex(string name) {
+    Vertex toAdd = Vertex(to_string(this->vertexList.len + 1), name);
     vertexList.addNodeAtEnd(toAdd);
 }
 
 void Graph::addEdge(int origindId, int destinyId) {
     Edge toAdd = Edge(to_string(this->edgesList.len + 1), this->vertexList.getNodeIn(origindId - 1),
                       this->vertexList.getNodeIn(destinyId - 1));
+    edgesList.addNodeAtEnd(toAdd);
+}
+
+void Graph::addEdge(int origindId, int destinyId, int weight) {
+    Edge toAdd = Edge(to_string(this->edgesList.len + 1), this->vertexList.getNodeIn(origindId - 1),
+                      this->vertexList.getNodeIn(destinyId - 1), weight);
     edgesList.addNodeAtEnd(toAdd);
 }
 
