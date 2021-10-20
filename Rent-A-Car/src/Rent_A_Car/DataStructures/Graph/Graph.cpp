@@ -60,7 +60,7 @@ void Graph::generateGraphOf(int nodes) {
 
         // Generates a random number for the individual vertex connections
         srand(time(0));
-        int vertexConnections = (rand() % (this->vertexList.len / 2)) + 1;
+        int vertexConnections = (rand() % (this->vertexList.len / 3)) + 1;
 
         for (int j = 0; j < vertexConnections; j++) {
 
