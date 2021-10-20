@@ -1,11 +1,11 @@
-#include "ui/homescreen.h"
+#include "ui/mainscreen.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    HomeScreen w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+    MainScreen screen;
+    screen.show();
+    return app.exec();
 }

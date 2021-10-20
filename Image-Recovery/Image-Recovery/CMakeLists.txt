@@ -16,11 +16,11 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(PROJECT_SOURCES
+        resources.qrc
         src/main.cpp
-        src/ui/homescreen.cpp
-        src/ui/homescreen.h
-        src/ui/homescreen.ui
-)
+        src/ui/mainscreen.cpp
+        src/ui/mainscreen.h
+        src/ui/mainscreen.ui)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Image-Recovery
