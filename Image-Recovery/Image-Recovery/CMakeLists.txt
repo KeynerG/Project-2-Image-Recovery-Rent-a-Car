@@ -20,7 +20,13 @@ set(PROJECT_SOURCES
         src/main.cpp
         src/ui/mainscreen.cpp
         src/ui/mainscreen.h
-        src/ui/mainscreen.ui)
+        src/ui/mainscreen.ui
+        src/algorithm/DataManager.cpp
+        src/algorithm/DataManager.h
+        src/algorithm/Genetic.cpp
+        src/algorithm/Genetic.h
+        src/data-structures/SimpleList.h
+        src/data-structures/SimpleNode.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Image-Recovery
