@@ -16,6 +16,8 @@ set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt/6.2.0/gcc_64/lib/cmake/)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
+include_directories(cmake-build-debug/)
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp

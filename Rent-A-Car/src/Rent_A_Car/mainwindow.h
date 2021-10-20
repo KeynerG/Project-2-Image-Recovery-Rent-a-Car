@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QSlider>
+#include <QPushButton>
+#include "DataStructures/Graph/Graph.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,8 +18,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+private slots:
+    void onConfirmButtonClicked(bool checked);
 private:
     Ui::MainWindow *ui;
+    QLabel *title;
+    QLabel *instructionsLabel;
+    QSlider *slider;
+    QLabel *vertexAmount;
+    QPushButton *confirmButton;
 };
 #endif // MAINWINDOW_H
