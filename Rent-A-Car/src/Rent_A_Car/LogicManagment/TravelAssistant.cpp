@@ -19,7 +19,7 @@ void TravelAssistant::generateRoutes(int cities, QProgressBar *progress) {
     this->routes.printGraph();
 }
 
-void TravelAssistant::clculateRoute(Vertex origin, Vertex destiny) {
+void TravelAssistant::clculateRoute(int originId, int destinyId) {
     //Codigo del backtracking
 }
 

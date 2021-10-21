@@ -62,22 +62,9 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
 
     progress->setValue(10);
 
-    for (int i = 1; i < this->vertexList.len - 1; i++) {
+    for (int i = 1; i < this->vertexList.len + 1; i++) {
 
         progress->setValue(i * 100 / this->vertexList.len);
-        if ((i * 100 / this->vertexList.len) >= 50) {
-            progress->setStyleSheet("QProgressBar {"
-                                    "background-color: #001010;"
-                                    "color: #001010;"
-                                    "border-style: outset;"
-                                    "border-width: 1px;"
-                                    "border-color: #00ffff;"
-                                    "border-radius: 5px;"
-                                    "text-align: center; }"
-
-                                    "QProgressBar::chunk {"
-                                    "background-color: #00ffff; }");
-        }
 
         // Generates a random number for the individual vertex connections
         srand(time(0));

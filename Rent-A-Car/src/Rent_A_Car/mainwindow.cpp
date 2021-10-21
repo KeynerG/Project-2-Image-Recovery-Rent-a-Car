@@ -23,8 +23,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     slider->setRange(4, 20);
     slider->setSliderPosition(4);
     slider->setGeometry(135, 205, 105, 25);
-    slider->setStyleSheet("QSlider::groove-horizontal{background-color:#004040; color:00ffff;}\n"
+    slider->setStyleSheet("QSlider::groove-horizontal{background-color:#004040; color:#00ffff;}\n"
                           "QSlider::handle:horizontal { background-color: #004040; border: 1px solid #00ffff; width: 8px; height: 10px; line-height: 10px; margin-top: -5px; margin-bottom: -5px; border-radius: 5px;}"
+                          "QSlider::sub-page:horizontal{background-color:#004040; color:#00ffff; border-radius:3px;}"
     );
 
     //Vertix amount display
@@ -39,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     confirmButton = new QPushButton(this);
     confirmButton->setText("Generate");
     confirmButton->setGeometry(150, 250, 100, 25);
-    confirmButton->setStyleSheet("background-color:#004040; color:#00ffff; border-style: solid; border-radius: 1px;");
+    confirmButton->setStyleSheet("background-color:#004040; color:#00ffff; border-style: solid; border-radius: 3px;");
     confirmButton->setCheckable(true);
     connect(confirmButton, SIGNAL(clicked(bool)), this, SLOT(onConfirmButtonClicked(bool)));
 
@@ -47,17 +48,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     loadingIcon = new QProgressBar(this);
     loadingIcon->setRange(0, 100);
     loadingIcon->setGeometry(100, 325, 200, 25);
-    loadingIcon->setStyleSheet("QProgressBar {"
-                               "background-color: #001010;"
-                               "color: white;"
-                               "border-style: outset;"
-                               "border-width: 1px;"
-                               "border-color: #00ffff;"
-                               "border-radius: 5px;"
-                               "text-align: center; }"
-
-                               "QProgressBar::chunk {"
-                               "background-color: #00ffff; }");
+    loadingIcon->setStyleSheet(
+            "QProgressBar {""background-color: #001010;""color: white;""border-style: outset;""border-width: 1px;""border-color: #004040;""border-radius: 3px;""text-align: center; }""QProgressBar::chunk {""background-color: #004040;}");
     loadingIcon->setValue(0);
 }
 
