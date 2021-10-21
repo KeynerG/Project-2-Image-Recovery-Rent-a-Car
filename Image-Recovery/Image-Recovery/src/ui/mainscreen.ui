@@ -31,7 +31,7 @@
   <property name="windowTitle">
    <string>Image Recovery</string>
   </property>
-  <widget class="QLabel" name="background">
+  <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -40,131 +40,143 @@
      <height>500</height>
     </rect>
    </property>
-   <property name="minimumSize">
-    <size>
-     <width>700</width>
-     <height>500</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>700</width>
-     <height>500</height>
-    </size>
-   </property>
-   <property name="lineWidth">
-    <number>0</number>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="../../resources.qrc">:/src/resources/backgrounds/home.png</pixmap>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>390</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="palette">
-    <palette>
-     <active>
-      <colorrole role="Button">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>18</red>
-         <green>34</green>
-         <blue>34</blue>
-        </color>
-       </brush>
-      </colorrole>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>60</red>
-         <green>180</green>
-         <blue>180</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </active>
-     <inactive>
-      <colorrole role="Button">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>18</red>
-         <green>34</green>
-         <blue>34</blue>
-        </color>
-       </brush>
-      </colorrole>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>60</red>
-         <green>180</green>
-         <blue>180</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </inactive>
-     <disabled>
-      <colorrole role="Button">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>18</red>
-         <green>34</green>
-         <blue>34</blue>
-        </color>
-       </brush>
-      </colorrole>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>60</red>
-         <green>68</green>
-         <blue>102</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </disabled>
-    </palette>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <stylestrategy>PreferDefault</stylestrategy>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::ClickFocus</enum>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>&amp;Start</string>
-   </property>
-   <property name="default">
-    <bool>false</bool>
-   </property>
-   <property name="flat">
-    <bool>false</bool>
-   </property>
+   <widget class="QWidget" name="welcomeScreenPage">
+    <widget class="QLabel" name="background">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>700</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>10</width>
+       <height>10</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>700</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../../resources.qrc">:/src/resources/backgrounds/home.png</pixmap>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="startButton">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>440</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>18</red>
+           <green>34</green>
+           <blue>34</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>60</red>
+           <green>180</green>
+           <blue>180</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>18</red>
+           <green>34</green>
+           <blue>34</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>60</red>
+           <green>180</green>
+           <blue>180</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>18</red>
+           <green>34</green>
+           <blue>34</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>60</red>
+           <green>68</green>
+           <blue>102</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <stylestrategy>PreferDefault</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>&amp;Start</string>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources>
