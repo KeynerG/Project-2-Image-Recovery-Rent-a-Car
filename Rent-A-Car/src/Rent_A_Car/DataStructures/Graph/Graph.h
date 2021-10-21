@@ -8,6 +8,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <QProgressBar>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ public:
 
     bool checkEdgeExistence(int originId, int destinyId);
 
-    void generateGraphOf(int nodes);
+    void generateGraphOf(int nodes, QProgressBar *progress);
 
     void printGraph();
 };

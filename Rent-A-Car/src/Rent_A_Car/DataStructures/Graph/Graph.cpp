@@ -51,16 +51,42 @@ bool Graph::checkEdgeExistence(int originId, int destinyId) {
     return false;
 }
 
-void Graph::generateGraphOf(int nodes) {
+void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
+    this->vertexList = SimpleList<Vertex>();
+    this->edgesList = SimpleList<Edge>();
+    progress->setValue(0);
+
     for (int i = 0; i < nodes; i++) {
         addVertex("City " + to_string(this->vertexList.len + 1));
     }
 
-    for (int i = 0; i < this->vertexList.len; i++) {
+    progress->setValue(10);
+
+    for (int i = 1; i < this->vertexList.len - 1; i++) {
+
+        progress->setValue(i * 100 / this->vertexList.len);
+        if ((i * 100 / this->vertexList.len) >= 50) {
+            progress->setStyleSheet("QProgressBar {"
+                                    "background-color: #001010;"
+                                    "color: #001010;"
+                                    "border-style: outset;"
+                                    "border-width: 1px;"
+                                    "border-color: #00ffff;"
+                                    "border-radius: 5px;"
+                                    "text-align: center; }"
+
+                                    "QProgressBar::chunk {"
+                                    "background-color: #00ffff; }");
+        }
 
         // Generates a random number for the individual vertex connections
         srand(time(0));
-        int vertexConnections = (rand() % (this->vertexList.len / 3)) + 1;
+        int vertexConnections;
+        if (nodes == 4) {
+            vertexConnections = (rand() % 3) + 1;
+        } else {
+            vertexConnections = (rand() % 4) + 1;
+        }
 
         for (int j = 0; j < vertexConnections; j++) {
 
@@ -70,14 +96,14 @@ void Graph::generateGraphOf(int nodes) {
 
             // Generates a random number for the edge weight
             srand(time(0));
-            int randomizedWeight = (rand() % 100) + 1;
+            int randomizedWeight = (rand() % 90) + 10;
 
-            if (vertexToConnect != (i + 1) and !checkEdgeExistence((i + 1), vertexToConnect)) {
+            if (vertexToConnect != i and !checkEdgeExistence(i, vertexToConnect)) {
                 if (this->edgesList.head == nullptr) {
-                    addEdge((i + 1), vertexToConnect, randomizedWeight);
-                } else if (vertexToConnect != stoi(this->edgesList.tail->getData().getDestiny().getId()) and
-                                                   randomizedWeight != this->edgesList.tail->getData().getWeight()) {
-                    addEdge((i + 1), vertexToConnect, randomizedWeight);
+                    addEdge(i, vertexToConnect, randomizedWeight);
+                } else if (vertexToConnect != stoi(this->edgesList.tail->getData().getDestiny().getId()) or
+                           randomizedWeight != this->edgesList.tail->getData().getWeight()) {
+                    addEdge(i, vertexToConnect, randomizedWeight);
                 } else {
                     j--;
                 }
@@ -86,6 +112,7 @@ void Graph::generateGraphOf(int nodes) {
             }
         }
     }
+    progress->setValue(100);
 }
 
 void Graph::printGraph() {
