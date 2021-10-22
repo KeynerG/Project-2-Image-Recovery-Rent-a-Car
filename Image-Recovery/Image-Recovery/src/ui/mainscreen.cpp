@@ -16,6 +16,10 @@ void MainScreen::on_startButton_clicked() {
 
 void MainScreen::on_displayLoadScreenButton_clicked() {
     ui->stackedWidget->setCurrentIndex(2);
+    DataManager::getInstance()->setImagePath(ui->imagePathLine->text().toUtf8().constData());
+    DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
+    DataManager::getInstance()->setGenerationsAmount(ui->generationSpinBox->value());
+    DataManager::getInstance()->setXmlPath("../src/generations/");
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
@@ -54,14 +58,12 @@ void MainScreen::on_solidButton_clicked() {
     ui->generationSpinBox->setValue(1);
     ui->generationSpinBox->setEnabled(false);
     checkUserInformation();
-    DataManager::getInstance()->setGenerationsAmount(ui->generationSpinBox->value());
 }
 
 void MainScreen::on_patternButton_clicked() {
     ui->generationSpinBox->setValue(15);
     ui->generationSpinBox->setEnabled(true);
     checkUserInformation();
-    DataManager::getInstance()->setGenerationsAmount(ui->generationSpinBox->value());
 }
 
 void MainScreen::checkUserInformation() {
