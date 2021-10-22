@@ -20,7 +20,7 @@ void TravelAssistant::generateRoutes(int cities, QProgressBar *progress) {
 }
 
 void TravelAssistant::clculateRoute(int originId, int destinyId) {
-    //Codigo del backtracking
+    this->routes.calculateBestRoute(originId, destinyId);
 }
 
 TravelAssistant *TravelAssistant::getInstance() {

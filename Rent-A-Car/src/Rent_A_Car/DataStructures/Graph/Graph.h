@@ -17,6 +17,11 @@ private:
     SimpleList<Edge> edgesList;
     SimpleList<Vertex> vertexList;
 
+    SimpleList<Edge> sortedEdges;
+    SimpleList<Edge> activeEdges;
+    SimpleList<SimpleList<Edge>> finalRoutes;
+    SimpleList<Edge> finalRoute;
+
 public:
     Graph();
 
@@ -28,6 +33,18 @@ public:
 
     void setVertexList(const SimpleList<Vertex> &vertexList);
 
+    const SimpleList<Edge> &getSortedEdges() const;
+
+    void setSortedEdges(const SimpleList<Edge> &sortedEdges);
+
+    const SimpleList<Edge> &getActiveEdges() const;
+
+    void setActiveEdges(const SimpleList<Edge> &activeEdges);
+
+    const SimpleList<SimpleList<Edge>> &getFinalRoutes() const;
+
+    void setFinalRoutes(const SimpleList<SimpleList<Edge>> &finalRoutes);
+
     void addVertex(string name);
 
     void addEdge(int originId, int destinyId);
@@ -36,7 +53,11 @@ public:
 
     bool checkEdgeExistence(int originId, int destinyId);
 
+    void sortEdgesListByWeight();
+
     void generateGraphOf(int nodes, QProgressBar *progress);
+
+    void calculateBestRoute(int originId, int destinyId);
 
     void printGraph();
 };
