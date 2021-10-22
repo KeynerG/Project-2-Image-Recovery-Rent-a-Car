@@ -17,7 +17,7 @@ private:
     string xmlPath;
     bool isSolidImage;
     int generationsAmount;
-    SimpleList <SimpleList<SimpleNode <int>>> generationsList;
+    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
     vector<int> voidSpace;
 
 public:
@@ -38,16 +38,15 @@ public:
 
     void setGenerationsAmount(int generationsAmount);
 
-    const SimpleList <SimpleList<SimpleNode <int>>> &
+    const SimpleList<SimpleList<SimpleNode<int>>> &
 
     getGenerationsList() const;
 
-    void setGenerationsList(const SimpleList <SimpleList<SimpleNode <int>>> &generationsList);
+    void setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList);
 
     const vector<int> &getVoidSpace() const;
 
     void setVoidSpace(const vector<int> &voidSpace);
-
 };
 
 #endif //IMAGE_RECOVERY_DATAMANAGER_H

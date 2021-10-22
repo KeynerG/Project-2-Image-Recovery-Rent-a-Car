@@ -1,8 +1,9 @@
 #ifndef IMAGE_RECOVERY_MAINSCREEN_H
 #define IMAGE_RECOVERY_MAINSCREEN_H
 
-#include "setupscreen.h"
 #include <QWidget>
+#include <QFileDialog>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainScreen; }
@@ -16,13 +17,29 @@ public:
 
     ~MainScreen();
 
+    void checkUserInformation();
+
 private slots:
 
     void on_startButton_clicked();
 
+    void on_displayLoadScreenButton_clicked();
+
+    void on_displayGenerationScreenButton_clicked();
+
+    void on_displayFinalScreenButton_clicked();
+
+    void on_closeButton_clicked();
+
+    void on_browseButton_clicked();
+
+    void on_solidButton_clicked();
+
+    void on_patternButton_clicked();
+
 private:
     Ui::MainScreen *ui;
-    SetupScreen setupScreen;
+    QMessageBox *qMessageBox;
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H

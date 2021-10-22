@@ -21,15 +21,6 @@ set(PROJECT_SOURCES
         src/ui/mainscreen.cpp
         src/ui/mainscreen.h
         src/ui/mainscreen.ui
-        src/ui/setupscreen.cpp
-        src/ui/setupscreen.h
-        src/ui/setupscreen.ui
-        src/ui/loadscreen.cpp
-        src/ui/loadscreen.h
-        src/ui/loadscreen.ui
-        src/ui/geneticscreen.cpp
-        src/ui/geneticscreen.h
-        src/ui/geneticscreen.ui
         src/algorithm/DataManager.cpp
         src/algorithm/DataManager.h
         src/algorithm/Genetic.cpp

@@ -38,9 +38,7 @@ DataManager::getGenerationsList() const {
     return generationsList;
 }
 
-void DataManager::setGenerationsList(const SimpleList <SimpleList<SimpleNode <int>>
-
-> &generationsList) {
+void DataManager::setGenerationsList(const SimpleList <SimpleList<SimpleNode <int>>> &generationsList) {
 DataManager::generationsList = generationsList;
 }
 
