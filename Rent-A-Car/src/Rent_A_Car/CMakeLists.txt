@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 
-project(Rent_A_Car VERSION 0.1 LANGUAGES CXX)
+project(Rent_A_Car VERSION 0.1)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -8,9 +8,8 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt/6.2.0/gcc_64/lib/cmake/)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
@@ -23,7 +22,16 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        DataStructures/SimpleList/SimpleList.h DataStructures/SimpleList/SimpleNode.h DataStructures/Graph/Graph.cpp DataStructures/Graph/Graph.h DataStructures/Graph/Vertex.cpp DataStructures/Graph/Vertex.h DataStructures/Graph/Edge.cpp DataStructures/Graph/Edge.h LogicManagment/TravelAssistant.cpp LogicManagment/TravelAssistant.h)
+        DataStructures/SimpleList/SimpleList.h 
+        DataStructures/SimpleList/SimpleNode.h 
+        DataStructures/Graph/Graph.cpp 
+        DataStructures/Graph/Graph.h 
+        DataStructures/Graph/Vertex.cpp 
+        DataStructures/Graph/Vertex.h 
+        DataStructures/Graph/Edge.cpp 
+        DataStructures/Graph/Edge.h 
+        LogicManagment/TravelAssistant.cpp 
+        LogicManagment/TravelAssistant.h)
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Rent_A_Car
