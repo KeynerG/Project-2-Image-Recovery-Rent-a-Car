@@ -54,12 +54,14 @@ void MainScreen::on_solidButton_clicked() {
     ui->generationSpinBox->setValue(1);
     ui->generationSpinBox->setEnabled(false);
     checkUserInformation();
+    DataManager::getInstance()->setGenerationsAmount(ui->generationSpinBox->value());
 }
 
 void MainScreen::on_patternButton_clicked() {
     ui->generationSpinBox->setValue(15);
     ui->generationSpinBox->setEnabled(true);
     checkUserInformation();
+    DataManager::getInstance()->setGenerationsAmount(ui->generationSpinBox->value());
 }
 
 void MainScreen::checkUserInformation() {

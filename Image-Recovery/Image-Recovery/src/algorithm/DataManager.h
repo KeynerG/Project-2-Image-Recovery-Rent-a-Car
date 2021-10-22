@@ -19,6 +19,11 @@ private:
     int generationsAmount;
     SimpleList<SimpleList<SimpleNode<int>>> generationsList;
     vector<int> voidSpace;
+    static DataManager *instance;
+
+protected:
+
+    DataManager();
 
 public:
 
@@ -47,6 +52,12 @@ public:
     const vector<int> &getVoidSpace() const;
 
     void setVoidSpace(const vector<int> &voidSpace);
+
+    DataManager(DataManager &other) = delete;
+
+    void operator=(const DataManager &) = delete;
+
+    static DataManager *getInstance();
 };
 
 #endif //IMAGE_RECOVERY_DATAMANAGER_H

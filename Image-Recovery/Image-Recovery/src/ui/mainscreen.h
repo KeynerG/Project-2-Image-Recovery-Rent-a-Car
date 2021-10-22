@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "src/algorithm/DataManager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainScreen; }

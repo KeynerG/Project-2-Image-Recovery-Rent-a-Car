@@ -1,5 +1,11 @@
 #include "DataManager.h"
 
+DataManager *DataManager::instance = nullptr;
+
+DataManager::DataManager() {
+
+}
+
 const string &DataManager::getImagePath() const {
     return imagePath;
 }
@@ -49,3 +55,11 @@ const vector<int> &DataManager::getVoidSpace() const {
 void DataManager::setVoidSpace(const vector<int> &voidSpace) {
     DataManager::voidSpace = voidSpace;
 }
+DataManager *DataManager::getInstance() {
+    if (instance == nullptr) {
+        instance = new DataManager();
+    }
+    return instance;
+}
+
+
