@@ -5,9 +5,4 @@
 /Image-Recovery/.idea/
 
 # Rent-A-Car Files
-/Rent-A-Car/cmake-build-debug/
-/Rent-A-Car/.idea/.gitignore
-/Rent-A-Car/.idea/misc.xml
-/Rent-A-Car/.idea/modules.xml
-/Rent-A-Car/.idea/vcs.xml
-/Rent-A-Car/.idea/workspace.xml
+/Rent-A-Car/src/.idea/
