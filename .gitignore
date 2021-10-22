@@ -1,10 +1,8 @@
 # Image-Recovery Files
-/Image-Recovery/cmake-build-debug/
-/Image-Recovery/.idea/.gitignore
-/Image-Recovery/.idea/misc.xml
-/Image-Recovery/.idea/modules.xml
-/Image-Recovery/.idea/vcs.xml
-/Image-Recovery/.idea/workspace.xml
+/Image-Recovery/Image-Recovery/cmake-build-debug/
+/Image-Recovery/Image-Recovery/CMakeLists.txt.user
+/Image-Recovery/build-Image-Recovery-Desktop_Qt_6_2_0_GCC_64bit-Debug/
+/Image-Recovery/.idea/
 
 # Rent-A-Car Files
 /Rent-A-Car/cmake-build-debug/
