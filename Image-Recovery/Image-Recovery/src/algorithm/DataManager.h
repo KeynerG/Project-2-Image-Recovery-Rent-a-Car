@@ -4,7 +4,7 @@
 #include "src/data-structures/SimpleList.h"
 #include "src/data-structures/SimpleNode.h"
 
-#include <iostream>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -14,7 +14,8 @@ class DataManager {
 private:
 
     string imagePath;
-    string xmlPath;
+    string finalImagePath = "../src/generations/1.png";
+    string xmlPath = "../src/generations";
     bool isSolidImage;
     int generationsAmount;
     SimpleList<SimpleList<SimpleNode<int>>> generationsList;
@@ -30,6 +31,10 @@ public:
     const string &getImagePath() const;
 
     void setImagePath(const string &imagePath);
+
+    const string &getFinalImagePath() const;
+
+    void setFinalImagePath(const string &finalImagePath);
 
     const string &getXmlPath() const;
 

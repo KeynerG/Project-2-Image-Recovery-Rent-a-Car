@@ -10,8 +10,8 @@ class Genetic {
 
 private:
 
-    SimpleList <SimpleList<SimpleNode <int>>> generationsList;
-    SimpleList <SimpleNode<int>> generation;
+    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
+    SimpleList<SimpleNode<int>> generation;
 
 public:
 

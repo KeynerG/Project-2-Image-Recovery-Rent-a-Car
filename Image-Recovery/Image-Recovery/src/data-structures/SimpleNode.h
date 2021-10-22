@@ -1,8 +1,6 @@
 #ifndef IMAGE_RECOVERY_SIMPLENODE_H
 #define IMAGE_RECOVERY_SIMPLENODE_H
 
-#include <iostream>
-
 using namespace std;
 
 template<class T>

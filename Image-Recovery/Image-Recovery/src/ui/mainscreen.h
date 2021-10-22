@@ -1,10 +1,12 @@
 #ifndef IMAGE_RECOVERY_MAINSCREEN_H
 #define IMAGE_RECOVERY_MAINSCREEN_H
 
+#include "src/algorithm/DataManager.h"
+
 #include <QWidget>
 #include <QFileDialog>
 #include <QMessageBox>
-#include "src/algorithm/DataManager.h"
+#include <QDesktopServices>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainScreen; }
@@ -37,6 +39,8 @@ private slots:
     void on_solidButton_clicked();
 
     void on_patternButton_clicked();
+
+    void on_openButton_clicked();
 
 private:
     Ui::MainScreen *ui;

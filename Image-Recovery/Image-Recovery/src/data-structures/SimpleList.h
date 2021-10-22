@@ -1,8 +1,9 @@
 #ifndef IMAGE_RECOVERY_SIMPLELIST_H
 #define IMAGE_RECOVERY_SIMPLELIST_H
 
-#include <iostream>
 #include "SimpleNode.h"
+
+#include <iostream>
 
 using namespace std;
 
