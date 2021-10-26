@@ -63,7 +63,8 @@ private slots:
 private:
     Ui::MainScreen *ui;
     QMessageBox *qMessageBox;
-    QImage userImage;
+    QString userImagePath;
+    QImage *userImage;
     QPoint topLeft;
     QPoint bottomRight;
     QRect *missingFrame;

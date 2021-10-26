@@ -35,14 +35,16 @@ void MainScreen::checkUserInformation() {
 }
 
 void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner) {
+    userImage = new QImage(userImagePath);
     missingFrame = new QRect(topLeftCorner, bottomRightCorner);
-    for (int y = missingFrame->topLeft().y(); y < missingFrame->height(); ++y) {
-        QRgb *line = reinterpret_cast<QRgb *>(userImage.scanLine(y));
-        for (int x = missingFrame->topLeft().x(); x < missingFrame->width(); ++x) {
+    for (int y = missingFrame->topLeft().y(); y < missingFrame->bottomLeft().y(); ++y) {
+        QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
+        for (int x = missingFrame->topLeft().x(); x < missingFrame->topRight().x(); ++x) {
             QRgb &rgb = line[x];
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
         }
     }
+    ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
 }
 
 void MainScreen::on_startButton_clicked() {
@@ -66,9 +68,6 @@ void MainScreen::on_displayCropScreenBackButton_clicked() {
 
 void MainScreen::on_displayPreviewScreenButton_clicked() {
     removeSelection(topLeft, bottomRight);
-    ui->userImageSelect->setPixmap(
-            QPixmap::fromImage(userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,
-                                                 Qt::TransformationMode::SmoothTransformation));
     ui->stackedWidget->setCurrentIndex(3);
 }
 
@@ -106,7 +105,7 @@ void MainScreen::on_browseButton_clicked() {
         QImage imageSelected;
         validImage = imageSelected.load(imagePath);
         if (validImage) {
-            userImage.load(imagePath);
+            userImagePath = imagePath;
             ui->imagePathLine->setText(imagePath);
             ui->userImage->setPixmap(QPixmap::fromImage(imageSelected.scaled(ui->userImage->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation)));
 
