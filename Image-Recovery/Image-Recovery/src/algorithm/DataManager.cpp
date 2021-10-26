@@ -4,36 +4,36 @@ DataManager *DataManager::instance = nullptr;
 
 DataManager::DataManager() {}
 
-const string &DataManager::getImagePath() const {
+const QString &DataManager::getImagePath() const {
     return imagePath;
 }
 
-void DataManager::setImagePath(const string &imagePath) {
+void DataManager::setImagePath(const QString &imagePath) {
     DataManager::imagePath = imagePath;
 }
 
-const string &DataManager::getFinalImagePath() const {
+const QString &DataManager::getFinalImagePath() const {
     return finalImagePath;
 }
 
-void DataManager::setFinalImagePath(const string &finalImagePath) {
+void DataManager::setFinalImagePath(const QString &finalImagePath) {
     DataManager::finalImagePath = finalImagePath;
 }
 
-const string &DataManager::getXmlPath() const {
+const QString &DataManager::getXmlPath() const {
     return xmlPath;
 }
 
-void DataManager::setXmlPath(const string &xmlPath) {
+void DataManager::setXmlPath(const QString &xmlPath) {
     DataManager::xmlPath = xmlPath;
 }
 
-bool DataManager::isSolidImage1() const {
-    return isSolidImage;
+bool DataManager::isSolidImage() const {
+    return solidImage;
 }
 
-void DataManager::setIsSolidImage(bool isSolidImage) {
-    DataManager::isSolidImage = isSolidImage;
+void DataManager::setIsSolidImage(bool solidImage) {
+    DataManager::solidImage = solidImage;
 }
 
 int DataManager::getGenerationsAmount() const {
@@ -44,22 +44,12 @@ void DataManager::setGenerationsAmount(int generationsAmount) {
     DataManager::generationsAmount = generationsAmount;
 }
 
-const SimpleList<SimpleList<SimpleNode<int>>> &
-
-DataManager::getGenerationsList() const {
+const SimpleList<SimpleList<SimpleNode<int>>> &DataManager::getGenerationsList() const {
     return generationsList;
 }
 
 void DataManager::setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList) {
     DataManager::generationsList = generationsList;
-}
-
-const vector<int> &DataManager::getVoidSpace() const {
-    return voidSpace;
-}
-
-void DataManager::setVoidSpace(const vector<int> &voidSpace) {
-    DataManager::voidSpace = voidSpace;
 }
 
 DataManager *DataManager::getInstance() {

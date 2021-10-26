@@ -4,43 +4,24 @@
 #include "src/data-structures/SimpleList.h"
 #include "src/data-structures/SimpleNode.h"
 
-#include <string>
-#include <vector>
-
-using namespace std;
+#include <QString>
 
 class DataManager {
 
-private:
-
-    string imagePath;
-    string finalImagePath = "../src/generations/1.png";
-    string xmlPath = "../src/generations";
-    bool isSolidImage;
-    int generationsAmount;
-    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
-    vector<int> voidSpace;
-    static DataManager *instance;
-
-protected:
-
-    DataManager();
-
 public:
+    const QString &getImagePath() const;
 
-    const string &getImagePath() const;
+    void setImagePath(const QString &imagePath);
 
-    void setImagePath(const string &imagePath);
+    const QString &getFinalImagePath() const;
 
-    const string &getFinalImagePath() const;
+    void setFinalImagePath(const QString &finalImagePath);
 
-    void setFinalImagePath(const string &finalImagePath);
+    const QString &getXmlPath() const;
 
-    const string &getXmlPath() const;
+    void setXmlPath(const QString &xmlPath);
 
-    void setXmlPath(const string &xmlPath);
-
-    bool isSolidImage1() const;
+    bool isSolidImage() const;
 
     void setIsSolidImage(bool isSolidImage);
 
@@ -48,21 +29,27 @@ public:
 
     void setGenerationsAmount(int generationsAmount);
 
-    const SimpleList<SimpleList<SimpleNode<int>>> &
-
-    getGenerationsList() const;
+    const SimpleList<SimpleList<SimpleNode<int>>> &getGenerationsList() const;
 
     void setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList);
-
-    const vector<int> &getVoidSpace() const;
-
-    void setVoidSpace(const vector<int> &voidSpace);
 
     DataManager(DataManager &other) = delete;
 
     void operator=(const DataManager &) = delete;
 
     static DataManager *getInstance();
+
+private:
+    QString imagePath;
+    QString finalImagePath;
+    QString xmlPath = "../src/generations";
+    bool solidImage;
+    int generationsAmount;
+    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
+    static DataManager *instance;
+
+protected:
+    DataManager();
 };
 
 #endif //IMAGE_RECOVERY_DATAMANAGER_H

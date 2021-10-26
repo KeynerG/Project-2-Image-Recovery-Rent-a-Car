@@ -87,8 +87,10 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
     if (ui->patternButton->isChecked()) {
         ui->formatSelectedLabel->setText("Pattern");
     }
-    ui->resultImage->setPixmap(QPixmap(QString::fromStdString(DataManager::getInstance()->getFinalImagePath())).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
-    ui->filesPathLine->setText(QString::fromStdString(DataManager::getInstance()->getXmlPath()));
+    if (DataManager::getInstance()->getFinalImagePath() != nullptr) {
+        ui->resultImage->setPixmap(QPixmap(QString(DataManager::getInstance()->getFinalImagePath())).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
+    }
+    ui->filesPathLine->setText(QString(DataManager::getInstance()->getXmlPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
 }
@@ -161,6 +163,6 @@ void MainScreen::on_bottomVerticalSlider_valueChanged(int value) {
 }
 
 void MainScreen::on_openButton_clicked() {
-    QString filesPath = QString::fromStdString(DataManager::getInstance()->getXmlPath());
+    QString filesPath = QString(DataManager::getInstance()->getXmlPath());
     QDesktopServices::openUrl(QUrl::fromLocalFile(filesPath));
 }
