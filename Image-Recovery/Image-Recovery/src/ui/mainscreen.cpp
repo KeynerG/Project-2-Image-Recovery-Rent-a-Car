@@ -107,12 +107,16 @@ void MainScreen::on_browseButton_clicked() {
         if (validImage) {
             userImagePath = imagePath;
             ui->imagePathLine->setText(imagePath);
-            ui->userImage->setPixmap(QPixmap::fromImage(imageSelected.scaled(ui->userImage->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation)));
+            ui->userImage->setPixmap(QPixmap::fromImage(imageSelected.scaled(ui->userImage->size(), Qt::AspectRatioMode::KeepAspectRatio, Qt::TransformationMode::SmoothTransformation)));
 
             ui->userImageCrop->setPixmap(QPixmap::fromImage(imageSelected.scaled(ui->userImageCrop->size(), Qt::AspectRatioMode::KeepAspectRatio, Qt::TransformationMode::SmoothTransformation)));
+            ui->topHorizontalSlider->setValue(0);
             ui->topHorizontalSlider->setMaximum(imageSelected.width());
+            ui->topVerticalSlider->setValue(0);
             ui->topVerticalSlider->setMaximum(imageSelected.height());
+            ui->bottomHorizontalSlider->setValue(0);
             ui->bottomHorizontalSlider->setMaximum(imageSelected.width());
+            ui->bottomVerticalSlider->setValue(0);
             ui->bottomVerticalSlider->setMaximum(imageSelected.height());
         } else {
             qMessageBox = new QMessageBox(QMessageBox::Warning, "Image Recovery - Alert", "The selected file is not a valid image file.", QMessageBox::StandardButton::Ok, this);
