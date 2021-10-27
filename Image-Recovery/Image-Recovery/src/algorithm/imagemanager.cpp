@@ -1,3 +1,4 @@
+#include <QDir>
 #include <QImage>
 #include <QPixmap>
 #include <QPoint>
@@ -145,6 +146,10 @@ public:
     }
 
     const QString &getGenFilePath() const {
+        QDir genDir(genFilePath);
+        if (!genDir.exists()) {
+            genDir.mkdir(genFilePath);
+        }
         return genFilePath;
     }
 
