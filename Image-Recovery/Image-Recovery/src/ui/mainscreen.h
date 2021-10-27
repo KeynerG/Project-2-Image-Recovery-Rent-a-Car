@@ -2,7 +2,6 @@
 #define IMAGE_RECOVERY_MAINSCREEN_H
 
 #include "src/algorithm/datamanager.h"
-#include "src/algorithm/imagemanager.cpp"
 
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -29,10 +28,6 @@ public:
     void checkUserInformation();
 
     void removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner);
-
-    friend struct Pixel;
-
-    friend struct Image;
 
 private slots:
 
@@ -77,8 +72,9 @@ private:
     QImage *userImage;
     QPoint topLeft;
     QPoint bottomRight;
-    QRect *missingFrame;
-    QVector<Pixel> genecticReference;
+    QRect *selectedFrame;
+    QVector<QRgb> *genecticReference;
+    QVector<QRgb> *missingFrame;
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H

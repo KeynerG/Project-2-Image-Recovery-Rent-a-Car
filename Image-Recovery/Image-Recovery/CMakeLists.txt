@@ -25,7 +25,6 @@ set(PROJECT_SOURCES
         src/algorithm/datamanager.h
         src/algorithm/genetic.cpp
         src/algorithm/genetic.h
-        src/algorithm/imagemanager.cpp
         src/data-structures/simplelist.h
         src/data-structures/simplenode.h)
 

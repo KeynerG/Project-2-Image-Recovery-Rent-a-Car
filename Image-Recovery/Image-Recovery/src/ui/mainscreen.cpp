@@ -36,10 +36,10 @@ void MainScreen::checkUserInformation() {
 
 void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner) {
     userImage = new QImage(userImagePath);
-    missingFrame = new QRect(topLeftCorner, bottomRightCorner);
-    for (int y = missingFrame->topLeft().y(); y < missingFrame->bottomLeft().y(); ++y) {
+    selectedFrame = new QRect(topLeftCorner, bottomRightCorner);
+    for (int y = selectedFrame->topLeft().y(); y < selectedFrame->bottomLeft().y(); ++y) {
         QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
-        for (int x = missingFrame->topLeft().x(); x < missingFrame->topRight().x(); ++x) {
+        for (int x = selectedFrame->topLeft().x(); x < selectedFrame->topRight().x(); ++x) {
             // frameReference<>()
             // colorTable()
             QRgb &rgb = line[x];
