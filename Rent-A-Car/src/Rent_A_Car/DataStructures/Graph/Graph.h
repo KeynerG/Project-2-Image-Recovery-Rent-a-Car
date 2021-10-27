@@ -62,6 +62,10 @@ public:
 
     void calculateBestRoute(int originId, int destinyId);
 
+    void calculateBestRouteRecursive(int originId, int destinyId);
+
+    void printFinalRoute();
+
     void printGraph();
 };
 

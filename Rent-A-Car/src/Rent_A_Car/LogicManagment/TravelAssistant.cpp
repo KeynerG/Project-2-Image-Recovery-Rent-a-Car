@@ -16,7 +16,6 @@ void TravelAssistant::setRoutes(const Graph &routes) {
 
 void TravelAssistant::generateRoutes(int cities, QProgressBar *progress) {
     this->routes.generateGraphOf(cities, progress);
-    this->routes.printGraph();
 }
 
 void TravelAssistant::clculateRoute(int originId, int destinyId) {

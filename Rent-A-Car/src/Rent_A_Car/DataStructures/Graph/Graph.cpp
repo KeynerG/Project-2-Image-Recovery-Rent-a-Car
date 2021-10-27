@@ -135,8 +135,9 @@ void Graph::sortActiveEdgesListByWeight() {
 }
 
 void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
-    this->vertexList = SimpleList<Vertex>();
-    this->edgesList = SimpleList<Edge>();
+    this->vertexList.clearList();
+    this->edgesList.clearList();
+
     progress->setValue(0);
 
     for (int i = 0; i < nodes; i++) {
@@ -201,20 +202,30 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
 
     progress->setValue(100);
 
-    sortEdgesListByWeight();
-
     printGraph();
 
-    cout << "OrigenID: ";
     int origen, destino;
+    cout << endl << "OrigenID: ";
     cin >> origen;
-    cout << endl << endl << "DestinoID: ";
+    cout << endl << "DestinoID: ";
     cin >> destino;
 
     calculateBestRoute(origen, destino);
 }
 
 void Graph::calculateBestRoute(int originId, int destinyId) {
+    sortedEdges.clearList();
+    activeEdges.clearList();
+    sortedActiveEdges.clearList();
+    possibleRoutes.clearList();
+    finalRoute.clearList();
+
+    sortEdgesListByWeight();
+
+    calculateBestRouteRecursive(originId, destinyId);
+}
+
+void Graph::calculateBestRouteRecursive(int originId, int destinyId) {
     // Breaking case: If the route is finished
     if (originId == destinyId) {
         SimpleNode<SimpleList<Edge>> *bestRoute = this->possibleRoutes.head;
@@ -225,7 +236,7 @@ void Graph::calculateBestRoute(int originId, int destinyId) {
                     this->finalRoute.addNodeAtEnd(edg->getData());
                     edg = edg->getNext();
                 }
-                printGraph();
+                printFinalRoute();
                 return;
             } else {
                 bestRoute = bestRoute->getNext();
@@ -319,8 +330,30 @@ void Graph::calculateBestRoute(int originId, int destinyId) {
     }
 
     // Calls itself recursively with a new OriginId parameter.
-    calculateBestRoute(movingToNode, destinyId);
+    calculateBestRouteRecursive(movingToNode, destinyId);
 
+}
+
+void Graph::printFinalRoute() {
+    cout << endl << "*****************************************************************************************" << endl;
+    cout << endl << "Final route list:" << endl;
+    SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
+    int maxWeight = fEdgeAux->getData().getWeight();
+    while (fEdgeAux != nullptr) {
+        cout << "Edge data - ID: " << fEdgeAux->getData().getId() << ", origin: "
+             << fEdgeAux->getData().getOrigin().getId() << ", destiny: " << fEdgeAux->getData().getDestiny().getId()
+             << ", weight: " << to_string(fEdgeAux->getData().getWeight()) << "." << endl;
+
+        if (fEdgeAux->getData().getWeight() > maxWeight) {
+            maxWeight = fEdgeAux->getData().getWeight();
+        }
+
+        fEdgeAux = fEdgeAux->getNext();
+    }
+
+    cout << endl << "More expensive connection weight: " << maxWeight << endl;
+
+    cout << endl << "*****************************************************************************************" << endl;
 }
 
 void Graph::printGraph() {
@@ -332,36 +365,22 @@ void Graph::printGraph() {
              << "." << endl;
         vertexAux = vertexAux->getNext();
     }
+
     cout << endl << "Edges list:" << endl;
     SimpleNode<Edge> *edgeAux = this->edgesList.head;
     while (edgeAux != nullptr) {
-        cout << "Edge data - ID: " << edgeAux->getData().getId() << ", origin: "
-             << edgeAux->getData().getOrigin().getId() << ", destiny: " << edgeAux->getData().getDestiny().getId()
+        cout << "Edge data - ID: " << edgeAux->getData().getId() << ", connection between: "
+             << edgeAux->getData().getOrigin().getId() << " and " << edgeAux->getData().getDestiny().getId()
              << ", weight: " << to_string(edgeAux->getData().getWeight()) << "." << endl;
         edgeAux = edgeAux->getNext();
     }
-    cout << endl << "Sorted edges list:" << endl;
-    SimpleNode<Edge> *sEdgeAux = this->sortedEdges.head;
-    while (sEdgeAux != nullptr) {
-        cout << "Edge data - ID: " << sEdgeAux->getData().getId() << ", origin: "
-             << sEdgeAux->getData().getOrigin().getId() << ", destiny: " << sEdgeAux->getData().getDestiny().getId()
-             << ", weight: " << to_string(sEdgeAux->getData().getWeight()) << "." << endl;
-        sEdgeAux = sEdgeAux->getNext();
-    }
-    cout << endl << "Active edges list:" << endl;
-    SimpleNode<Edge> *aEdgeAux = this->activeEdges.head;
-    while (aEdgeAux != nullptr) {
-        cout << "Edge data - ID: " << aEdgeAux->getData().getId() << ", origin: "
-             << aEdgeAux->getData().getOrigin().getId() << ", destiny: " << aEdgeAux->getData().getDestiny().getId()
-             << ", weight: " << to_string(aEdgeAux->getData().getWeight()) << "." << endl;
-        aEdgeAux = aEdgeAux->getNext();
-    }
-    cout << endl << "Final route list:" << endl;
-    SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
-    while (fEdgeAux != nullptr) {
-        cout << "Edge data - ID: " << fEdgeAux->getData().getId() << ", origin: "
-             << fEdgeAux->getData().getOrigin().getId() << ", destiny: " << fEdgeAux->getData().getDestiny().getId()
-             << ", weight: " << to_string(fEdgeAux->getData().getWeight()) << "." << endl;
-        fEdgeAux = fEdgeAux->getNext();
-    }
+
+//    cout << endl << "Sorted edges list:" << endl;
+//    SimpleNode<Edge> *sEdgeAux = this->sortedEdges.head;
+//    while (sEdgeAux != nullptr) {
+//        cout << "Edge data - ID: " << sEdgeAux->getData().getId() << ", origin: "
+//             << sEdgeAux->getData().getOrigin().getId() << ", destiny: " << sEdgeAux->getData().getDestiny().getId()
+//             << ", weight: " << to_string(sEdgeAux->getData().getWeight()) << "." << endl;
+//        sEdgeAux = sEdgeAux->getNext();
+//    }
 }
