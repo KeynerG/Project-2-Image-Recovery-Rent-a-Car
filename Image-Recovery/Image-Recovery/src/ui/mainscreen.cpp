@@ -80,6 +80,8 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
     ui->generationSlider->setMaximum(DataManager::getInstance()->getGenerationsAmount());
+    ui->generationSlider->setSingleStep(ui->generationSpinBox->value());
+    ui->generationSlider->setPageStep(ui->generationSpinBox->value());
     ui->stackedWidget->setCurrentIndex(5);
 }
 
@@ -137,7 +139,7 @@ void MainScreen::on_solidButton_clicked() {
 }
 
 void MainScreen::on_patternButton_clicked() {
-    ui->generationSpinBox->setValue(15);
+    ui->generationSpinBox->setValue(1000);
     ui->generationSpinBox->setEnabled(true);
     ui->generationSlider->setHidden(false);
     checkUserInformation();

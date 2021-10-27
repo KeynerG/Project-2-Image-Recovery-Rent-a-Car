@@ -41,7 +41,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="welcomeScreenPage">
     <widget class="QLabel" name="backgroundWelcome">
@@ -1083,10 +1083,10 @@
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>30</number>
+         <number>1000</number>
         </property>
         <property name="value">
-         <number>15</number>
+         <number>1000</number>
         </property>
        </widget>
       </item>
@@ -4226,6 +4226,9 @@
    </widget>
    <widget class="QWidget" name="generationScreenPage">
     <widget class="QSlider" name="generationSlider">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -4329,13 +4332,13 @@
       <number>1</number>
      </property>
      <property name="maximum">
-      <number>30</number>
+      <number>1000</number>
      </property>
      <property name="pageStep">
       <number>1</number>
      </property>
      <property name="tracking">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -4434,7 +4437,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>70</y>
+       <y>120</y>
        <width>621</width>
        <height>261</height>
       </rect>
@@ -4480,8 +4483,8 @@
     <widget class="QLabel" name="genLabel">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>350</y>
+       <x>40</x>
+       <y>70</y>
        <width>91</width>
        <height>41</height>
       </rect>
@@ -4538,9 +4541,9 @@
     <widget class="QLabel" name="genNumberLabel">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>350</y>
-       <width>61</width>
+       <x>130</x>
+       <y>70</y>
+       <width>531</width>
        <height>41</height>
       </rect>
      </property>
