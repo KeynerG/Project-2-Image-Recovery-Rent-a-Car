@@ -1,7 +1,7 @@
 #ifndef IMAGE_RECOVERY_SIMPLELIST_H
 #define IMAGE_RECOVERY_SIMPLELIST_H
 
-#include "SimpleNode.h"
+#include "simplenode.h"
 
 #include <iostream>
 

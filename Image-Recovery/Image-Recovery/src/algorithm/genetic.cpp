@@ -1,4 +1,4 @@
-#include "Genetic.h"
+#include "genetic.h"
 
 void Genetic::createGeneration() {
 

@@ -1,4 +1,4 @@
-#include "DataManager.h"
+#include "datamanager.h"
 
 DataManager *DataManager::instance = nullptr;
 

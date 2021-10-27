@@ -1,8 +1,8 @@
 #ifndef IMAGE_RECOVERY_DATAMANAGER_H
 #define IMAGE_RECOVERY_DATAMANAGER_H
 
-#include "src/data-structures/SimpleList.h"
-#include "src/data-structures/SimpleNode.h"
+#include "src/data-structures/simplelist.h"
+#include "src/data-structures/simplenode.h"
 
 #include <QString>
 

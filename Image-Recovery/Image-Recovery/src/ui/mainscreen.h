@@ -1,12 +1,18 @@
 #ifndef IMAGE_RECOVERY_MAINSCREEN_H
 #define IMAGE_RECOVERY_MAINSCREEN_H
 
-#include "src/algorithm/DataManager.h"
+#include "src/algorithm/datamanager.h"
+#include "src/algorithm/imagemanager.cpp"
 
-#include <QWidget>
-#include <QFileDialog>
-#include <QMessageBox>
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QImage>
+#include <QMessageBox>
+#include <QPoint>
+#include <QRect>
+#include <QString>
+#include <QVector>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainScreen; }
@@ -23,6 +29,10 @@ public:
     void checkUserInformation();
 
     void removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner);
+
+    friend struct Pixel;
+
+    friend struct Image;
 
 private slots:
 
@@ -68,6 +78,7 @@ private:
     QPoint topLeft;
     QPoint bottomRight;
     QRect *missingFrame;
+    QVector<Pixel> genecticReference;
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H
