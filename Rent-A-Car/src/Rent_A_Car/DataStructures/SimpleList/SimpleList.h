@@ -31,6 +31,8 @@ public:
 
     void addNodeAtEnd(T data);
 
+    void addNodeAtEnd(SimpleNode<T> *node);
+
     T getNodeIn(int index);
 
     void deleteFirstNode();
@@ -40,6 +42,8 @@ public:
     void deleteNode(SimpleNode<T> *nodeToDelete);
 
     void deleteLastNode();
+
+    void clearList();
 
     void printList();
 };
@@ -122,6 +126,13 @@ void SimpleList<T>::addNodeAtEnd(T data) {
 }
 
 template<class T>
+void SimpleList<T>::addNodeAtEnd(SimpleNode<T> *node) {
+    this->tail->setNext(node);
+    this->tail = node;
+    this->len++;
+}
+
+template<class T>
 T SimpleList<T>::getNodeIn(int index) {
     if (index == 0) {
         // Get the first element
@@ -141,6 +152,7 @@ void SimpleList<T>::deleteFirstNode() {
     if(this->len >= 2){
         SimpleNode<T> *aux = this->head;
         this->head = this->head->getNext();
+        aux->setNext(nullptr);
         delete(aux);
     }else{
         this->head = nullptr;
@@ -189,6 +201,13 @@ void SimpleList<T>::deleteLastNode() {
         this->tail = nullptr;
     }
     this->len--;
+}
+
+template<class T>
+void SimpleList<T>::clearList() {
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->len = 0;
 }
 
 template<class T>

@@ -19,7 +19,8 @@ private:
 
     SimpleList<Edge> sortedEdges;
     SimpleList<Edge> activeEdges;
-    SimpleList<SimpleList<Edge>> finalRoutes;
+    SimpleList<Edge> sortedActiveEdges;
+    SimpleList<SimpleList<Edge>> possibleRoutes;
     SimpleList<Edge> finalRoute;
 
 public:
@@ -54,6 +55,8 @@ public:
     bool checkEdgeExistence(int originId, int destinyId);
 
     void sortEdgesListByWeight();
+
+    void sortActiveEdgesListByWeight();
 
     void generateGraphOf(int nodes, QProgressBar *progress);
 

@@ -5,10 +5,10 @@ Graph::Graph() {
     this->vertexList = SimpleList<Vertex>();
     this->sortedEdges = SimpleList<Edge>();
     this->activeEdges = SimpleList<Edge>();
-    this->finalRoutes = SimpleList<SimpleList<Edge>>();
+    this->possibleRoutes = SimpleList<SimpleList<Edge>>();
 
-    this->finalRoutes.setHead(nullptr);
-    this->finalRoutes.setTail(nullptr);
+    this->possibleRoutes.setHead(nullptr);
+    this->possibleRoutes.setTail(nullptr);
 }
 
 const SimpleList<Edge> &Graph::getEdgesList() const {
@@ -44,11 +44,11 @@ void Graph::setActiveEdges(const SimpleList<Edge> &activeEdges) {
 }
 
 const SimpleList<SimpleList<Edge>> &Graph::getFinalRoutes() const {
-    return finalRoutes;
+    return possibleRoutes;
 }
 
 void Graph::setFinalRoutes(const SimpleList<SimpleList<Edge>> &finalRoutes) {
-    Graph::finalRoutes = finalRoutes;
+    Graph::possibleRoutes = finalRoutes;
 }
 
 void Graph::addVertex(string name) {
@@ -103,6 +103,37 @@ void Graph::sortEdgesListByWeight() {
     }
 }
 
+void Graph::sortActiveEdgesListByWeight() {
+    SimpleList<Edge> activeEdgesListCopy;
+    SimpleNode<Edge> *ctrlC = this->activeEdges.head;
+    while (ctrlC != nullptr) {
+        activeEdgesListCopy.addNodeAtEnd(ctrlC->getData());
+        ctrlC = ctrlC->getNext();
+    }
+
+    ctrlC = this->sortedActiveEdges.head;
+    while (ctrlC != nullptr) {
+        activeEdgesListCopy.addNodeAtEnd(ctrlC->getData());
+        ctrlC = ctrlC->getNext();
+    }
+
+    activeEdges.clearList();
+    sortedActiveEdges.clearList();
+
+    while (activeEdgesListCopy.len > 0) {
+        SimpleNode<Edge> *minWeight = activeEdgesListCopy.head;
+        SimpleNode<Edge> *aux = activeEdgesListCopy.head->getNext();
+        while (aux != nullptr) {
+            if (aux->getData().getWeight() <= minWeight->getData().getWeight()) {
+                minWeight = aux;
+            }
+            aux = aux->getNext();
+        }
+        this->sortedActiveEdges.addNodeAtEnd(minWeight->getData());
+        activeEdgesListCopy.deleteNode(minWeight);
+    }
+}
+
 void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
     this->vertexList = SimpleList<Vertex>();
     this->edgesList = SimpleList<Edge>();
@@ -151,6 +182,23 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
             }
         }
     }
+
+    //Optimizes edges, deleting duplicates (inverted)
+    SimpleNode<Edge> *current = edgesList.head;
+    while (current != edgesList.tail) {
+        SimpleNode<Edge> *nextOnes = current->getNext();
+        while (nextOnes != nullptr) {
+            if ((current->getData().getOrigin().getId() == nextOnes->getData().getOrigin().getId() and
+                 current->getData().getDestiny().getId() == nextOnes->getData().getDestiny().getId()) or
+                (current->getData().getOrigin().getId() == nextOnes->getData().getDestiny().getId() and
+                 current->getData().getDestiny().getId() == nextOnes->getData().getOrigin().getId())) {
+                edgesList.deleteNode(nextOnes);
+            }
+            nextOnes = nextOnes->getNext();
+        }
+        current = current->getNext();
+    }
+
     progress->setValue(100);
 
     sortEdgesListByWeight();
@@ -167,86 +215,112 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
 }
 
 void Graph::calculateBestRoute(int originId, int destinyId) {
+    // Breaking case: If the route is finished
     if (originId == destinyId) {
-        SimpleNode<SimpleList<Edge>> *aux = this->finalRoutes.getHead();
-
-        while(aux != nullptr){
-            if(stoi(aux->getData().getTail()->getData().getDestiny().getId()) == destinyId){
-                SimpleNode<Edge> *auxaux = aux->getData().getHead();
-                while(auxaux != nullptr){
-                    this->finalRoute.addNodeAtEnd(auxaux->getData());
-                    auxaux = auxaux->getNext();
+        SimpleNode<SimpleList<Edge>> *bestRoute = this->possibleRoutes.head;
+        while (bestRoute != nullptr) {
+            if (stoi(bestRoute->getData().tail->getData().getDestiny().getId()) == destinyId) {
+                SimpleNode<Edge> *edg = bestRoute->getData().head;
+                while (edg != nullptr) {
+                    this->finalRoute.addNodeAtEnd(edg->getData());
+                    edg = edg->getNext();
                 }
-            }else{
-                aux = aux->getNext();
+                printGraph();
+                return;
+            } else {
+                bestRoute = bestRoute->getNext();
             }
         }
-        return;
-    } else {
-        int possibilities = -1;
-        SimpleNode<Edge> *aux = this->sortedEdges.getHead();
-        while (aux != nullptr) {
-            if (stoi(aux->getData().getOrigin().getId()) == originId or
-                stoi(aux->getData().getDestiny().getId()) == originId) {
-                this->activeEdges.addNodeAtEnd(aux->getData());
-                this->sortedEdges.deleteNode(aux);
-                possibilities++;
-            }
-            aux = aux->getNext();
-        }
-
-        SimpleNode<Edge> *bestRoute = activeEdges.head;
-        aux = activeEdges.head->getNext();
-        while (aux != nullptr) {
-            if (aux->getData().getWeight() <= bestRoute->getData().getWeight()) {
-                bestRoute = aux;
-            }
-            aux = aux->getNext();
-        }
-
-        if (finalRoutes.getHead() == nullptr) {
-            SimpleList<Edge> newRoute;
-            newRoute.addNodeAtEnd(bestRoute->getData());
-            finalRoutes.addNodeAtEnd(newRoute);
-            this->activeEdges.deleteNode(bestRoute);
-        } else {
-            bool included = false;
-            SimpleNode<SimpleList<Edge>> *aux = this->finalRoutes.getHead();
-            while (aux != nullptr) {
-                if (stoi(aux->getData().getTail()->getData().getDestiny().getId()) == originId) {
-                    aux->getData().addNodeAtEnd(bestRoute->getData());
-                    this->activeEdges.deleteNode(bestRoute);
-                    included = true;
-                }
-                aux = aux->getNext();
-            }
-
-            if(!included){
-                SimpleList<Edge> newRoute;
-                newRoute.addNodeAtEnd(bestRoute->getData());
-                finalRoutes.addNodeAtEnd(newRoute);
-                this->activeEdges.deleteNode(bestRoute);
-            }
-        }
-
-        SimpleNode<SimpleList<Edge>> *insertedElement = this->finalRoutes.getHead();
-        SimpleList<Edge> listToRepeat;
-
-        while(insertedElement != nullptr){
-            if(insertedElement->getData().getTail() == bestRoute){
-                listToRepeat = insertedElement->getData();
-            }else{
-                insertedElement = insertedElement->getNext();
-            }
-        }
-
-        while(possibilities > 0){
-            this->finalRoutes.addNodeAtEnd(listToRepeat);
-            possibilities--;
-        }
-
-        calculateBestRoute(stoi(bestRoute->getData().getDestiny().getId()), destinyId);
     }
+
+    // Activates all useful connections.
+    SimpleNode<Edge> *usefulConnection = this->sortedEdges.head;
+    while (usefulConnection != nullptr) {
+        if (stoi(usefulConnection->getData().getDestiny().getId()) == originId) {
+            //usefulConnection->getData().invertOriginDestiny();
+            Edge conn = Edge(usefulConnection->getData().getId(), usefulConnection->getData().getDestiny(),
+                             usefulConnection->getData().getOrigin(), usefulConnection->getData().getWeight());
+            activeEdges.addNodeAtEnd(conn);
+
+            SimpleNode<Edge> *del = usefulConnection;
+            usefulConnection = usefulConnection->getNext();
+
+            sortedEdges.deleteNode(del);
+        } else if (stoi(usefulConnection->getData().getOrigin().getId()) == originId) {
+            activeEdges.addNodeAtEnd(usefulConnection->getData());
+            SimpleNode<Edge> *del = usefulConnection;
+            usefulConnection = usefulConnection->getNext();
+
+            sortedEdges.deleteNode(del);
+        } else {
+            usefulConnection = usefulConnection->getNext();
+        }
+    }
+
+    // Sorts the list of active connections.
+    sortActiveEdgesListByWeight();
+
+    // Gets the best connection on active connections.
+    SimpleNode<Edge> *bestConnection = sortedActiveEdges.head;
+
+    // Determines which node is the program moving to.
+    int movingToNode = stoi(bestConnection->getData().getDestiny().getId());
+
+    // Adds the best connection in a "possible routes" list. Saves the route made.
+    SimpleList<Edge> possibleRoute;
+    if (possibleRoutes.len <= 0) {
+        possibleRoute.addNodeAtEnd(bestConnection->getData());
+        possibleRoutes.addNodeAtEnd(possibleRoute);
+    } else {
+        SimpleNode<SimpleList<Edge>> *route = possibleRoutes.head;
+        bool added = false;
+        while (route != nullptr and !added) {
+            SimpleNode<Edge> *routeLastEdge = route->getData().getTail();
+            if (stoi(routeLastEdge->getData().getDestiny().getId()) ==
+                stoi(bestConnection->getData().getOrigin().getId())) {
+                route->getData().addNodeAtEnd(bestConnection);
+
+                SimpleNode<Edge> *aux = route->getData().head;
+                while (aux->getData().getId() != bestConnection->getData().getId()) {
+                    possibleRoute.addNodeAtEnd(aux->getData());
+                    aux = aux->getNext();
+                }
+                possibleRoute.addNodeAtEnd(aux->getData());
+
+                possibleRoutes.addNodeAtEnd(possibleRoute);
+
+                added = true;
+            }
+            route = route->getNext();
+        }
+
+        if (!added) {
+            possibleRoute.addNodeAtEnd(bestConnection->getData());
+            possibleRoutes.addNodeAtEnd(possibleRoute);
+        }
+    }
+
+    sortedActiveEdges.deleteFirstNode();
+
+    // Gets how many connections movingToNode node have.
+    SimpleNode<Edge> *checker = sortedEdges.head;
+    int connections = 0;
+    while (checker != nullptr) {
+        if (stoi(checker->getData().getOrigin().getId()) == movingToNode or
+            stoi(checker->getData().getDestiny().getId()) == movingToNode) {
+            connections++;
+        }
+        checker = checker->getNext();
+    }
+
+    // Adds n times the route copied into "possibles routes" list.
+    for (int i = 0; i < connections; i++) {
+        this->possibleRoutes.addNodeAtEnd(possibleRoute);
+    }
+
+    // Calls itself recursively with a new OriginId parameter.
+    calculateBestRoute(movingToNode, destinyId);
+
 }
 
 void Graph::printGraph() {
