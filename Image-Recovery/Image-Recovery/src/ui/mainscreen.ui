@@ -4226,9 +4226,6 @@
    </widget>
    <widget class="QWidget" name="generationScreenPage">
     <widget class="QSlider" name="generationSlider">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
      <property name="geometry">
       <rect>
        <x>40</x>
