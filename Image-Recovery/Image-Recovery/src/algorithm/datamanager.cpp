@@ -12,6 +12,14 @@ void DataManager::setImagePath(const QString &imagePath) {
     DataManager::imagePath = imagePath;
 }
 
+const QString &DataManager::getGenImagePath() const {
+    return genImagePath;
+}
+
+void DataManager::setGenImagePath(const QString &genImagePath) {
+    DataManager::genImagePath = genImagePath;
+}
+
 const QString &DataManager::getFinalImagePath() const {
     return finalImagePath;
 }
@@ -34,6 +42,22 @@ bool DataManager::isSolidImage() const {
 
 void DataManager::setIsSolidImage(bool solidImage) {
     DataManager::solidImage = solidImage;
+}
+
+int DataManager::getCurrentGeneration() const {
+    return currentGeneration;
+}
+
+void DataManager::setCurrentGeneration(int currentGeneration) {
+    DataManager::currentGeneration = currentGeneration;
+}
+
+int DataManager::getUserNGenerations() const {
+    return userNGenerations;
+}
+
+void DataManager::setUserNGenerations(int userNGenerations) {
+    DataManager::userNGenerations = userNGenerations;
 }
 
 int DataManager::getGenerationsAmount() const {

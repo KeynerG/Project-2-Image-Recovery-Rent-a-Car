@@ -9,9 +9,14 @@
 class DataManager {
 
 public:
+
     const QString &getImagePath() const;
 
     void setImagePath(const QString &imagePath);
+
+    const QString &getGenImagePath() const;
+
+    void setGenImagePath(const QString &genImagePath);
 
     const QString &getFinalImagePath() const;
 
@@ -24,6 +29,14 @@ public:
     bool isSolidImage() const;
 
     void setIsSolidImage(bool isSolidImage);
+
+    int getCurrentGeneration() const;
+
+    void setCurrentGeneration(int currentGeneration);
+
+    int getUserNGenerations() const;
+
+    void setUserNGenerations(int userNGenerations);
 
     int getGenerationsAmount() const;
 
@@ -39,17 +52,20 @@ public:
 
     static DataManager *getInstance();
 
-private:
-    QString imagePath;
-    QString finalImagePath;
-    QString xmlPath = "../src/generations";
-    bool solidImage;
-    int generationsAmount;
-    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
-    static DataManager *instance;
-
 protected:
     DataManager();
+
+private:
+    bool solidImage;
+    int currentGeneration = 1;
+    int userNGenerations = 1;
+    int generationsAmount = 1;
+    QString imagePath;
+    QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentGeneration()))) + ".png";
+    QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getGenerationsAmount()))) + ".png";
+    QString xmlPath = "../src/generations/";
+    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
+    static DataManager *instance;
 };
 
 #endif //IMAGE_RECOVERY_DATAMANAGER_H

@@ -40,8 +40,11 @@ void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner)
     for (int y = missingFrame->topLeft().y(); y < missingFrame->bottomLeft().y(); ++y) {
         QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
         for (int x = missingFrame->topLeft().x(); x < missingFrame->topRight().x(); ++x) {
+            // frameReference<>()
+            // colorTable()
             QRgb &rgb = line[x];
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
+            // missingFrame<>()
         }
     }
     ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
@@ -58,7 +61,7 @@ void MainScreen::on_displaySetupScreenButton_clicked() {
 void MainScreen::on_displayCropScreenButton_clicked() {
     DataManager::getInstance()->setImagePath(ui->imagePathLine->text().toUtf8().constData());
     DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
-    DataManager::getInstance()->setGenerationsAmount(ui->generationSpinBox->value());
+    DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
     ui->stackedWidget->setCurrentIndex(2);
 }
 
@@ -87,9 +90,7 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
     if (ui->patternButton->isChecked()) {
         ui->formatSelectedLabel->setText("Pattern");
     }
-    if (DataManager::getInstance()->getFinalImagePath() != nullptr) {
-        ui->resultImage->setPixmap(QPixmap(QString(DataManager::getInstance()->getFinalImagePath())).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
-    }
+    ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getXmlPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
