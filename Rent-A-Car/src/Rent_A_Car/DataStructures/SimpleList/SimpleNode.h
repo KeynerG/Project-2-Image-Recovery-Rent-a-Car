@@ -5,21 +5,44 @@
 
 using namespace std;
 
+/**
+ * @class SimpleNode
+ * @brief Class for a simply linked node.
+ * @tparam T
+ */
 template<class T>
-
 class SimpleNode {
 public:
     SimpleNode<T> *next;
     T data;
 
+    /**
+     * @brief Class default constructor.
+     */
     SimpleNode();
 
+    /**
+     * @brief next getter.
+     * @return next
+     */
     SimpleNode<T> *getNext();
 
+    /**
+     * @brief next setter.
+     * @param next
+     */
     void setNext(SimpleNode<T> *next);
 
+    /**
+     * @brief data getter.
+     * @return data
+     */
     T getData();
 
+    /**
+     * @brief data setter.
+     * @param data
+     */
     void setData(T data);
 };
 

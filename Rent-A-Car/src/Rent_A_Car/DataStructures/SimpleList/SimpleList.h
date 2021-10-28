@@ -7,44 +7,109 @@
 
 using namespace std;
 
+/**
+ * @class SimpleList
+ * @brief Class for a simply linked list.
+ * @tparam T
+ */
 template<class T>
-
 class SimpleList {
 public:
     SimpleNode<T> *head;
     SimpleNode<T> *tail;
     int len;
 
+    /**
+     * @brief Class default constructor.
+     */
     SimpleList<T>();
 
+    /**
+     * @brief head getter.
+     * @return head
+     */
     SimpleNode<T> *getHead();
 
+    /**
+     * @brief head setter.
+     * @param head
+     */
     void setHead(SimpleNode<T> *head);
 
+    /**
+     * @brief tail getter.
+     * @return tail
+     */
     SimpleNode<T> *getTail();
 
+    /**
+     * @brief tail setter.
+     * @param tail
+     */
     void setTail(SimpleNode<T> *tail);
 
+    /**
+     * @brief Function to add a node with T data at the start of the list.
+     * @param data
+     */
     void addNodeAtStart(T data);
 
+    /**
+     * @brief Function to add a node with T data in an specific index.
+     * @param index
+     * @param data
+     */
     void addNodeAt(int index, T data);
 
+    /**
+     * @brief Function to add a node with T data at the end of the list.
+     * @param data
+     */
     void addNodeAtEnd(T data);
 
+    /**
+     * @brief Function to add a node at the end of the list.
+     * @param node
+     */
     void addNodeAtEnd(SimpleNode<T> *node);
 
+    /**
+     * @brief Function to get the data of the node in the given index.
+     * @param index
+     * @return
+     */
     T getNodeIn(int index);
 
+    /**
+     * @brief Function to delete the first node of the list.
+     */
     void deleteFirstNode();
 
+    /**
+     * @brief Function to delete the node placed in the given index.
+     * @param index
+     */
     void deleteNodeAt(int index);
 
+    /**
+     * @brief Function to delete an specific node in the list.
+     * @param nodeToDelete
+     */
     void deleteNode(SimpleNode<T> *nodeToDelete);
 
+    /**
+     * @brief Function to delete the last node of the list.
+     */
     void deleteLastNode();
 
+    /**
+     * @brief Function to  clear list.
+     */
     void clearList();
 
+    /**
+     * @brief Function to print the list node's data.
+     */
     void printList();
 };
 
