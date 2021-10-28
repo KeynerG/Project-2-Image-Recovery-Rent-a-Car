@@ -7,9 +7,11 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QImage>
+#include <QMap>
 #include <QMessageBox>
 #include <QPoint>
 #include <QRect>
+#include <QRgb>
 #include <QString>
 #include <QVector>
 #include <QWidget>
@@ -77,6 +79,7 @@ private:
     QPoint bottomRight;
     QRect *selectedFrame;
     QVector<QRgb> geneticReference;
+    QMap<QRgb, int> colorTable;
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H

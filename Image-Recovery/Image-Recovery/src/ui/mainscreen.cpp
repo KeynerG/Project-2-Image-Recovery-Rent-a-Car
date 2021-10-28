@@ -50,8 +50,8 @@ void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner)
         QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
         for (int x = selectedFrame->topLeft().x(); x < selectedFrame->topRight().x(); ++x) {
             QRgb &rgb = line[x];
-            geneticReference.push_back(rgb);
-            // colorTable(rgb);
+            geneticReference.append(rgb);
+            colorTable.insert(rgb, geneticReference.count(rgb));
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
         }
     }
@@ -88,6 +88,7 @@ void MainScreen::on_displayPreviewScreenButton_clicked() {
 
 void MainScreen::on_displayLoadScreenButton_clicked() {
     DataManager::getInstance()->setReference(geneticReference);
+    DataManager::getInstance()->setColorTableReference(colorTable);
     ui->stackedWidget->setCurrentIndex(4);
 }
 
@@ -103,7 +104,9 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
     if (ui->patternButton->isChecked()) {
         ui->formatSelectedLabel->setText("Pattern");
     }
-    ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
+    if (QDir(DataManager::getInstance()->getFinalImagePath()).exists()) {
+        ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
+    }
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getXmlPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);

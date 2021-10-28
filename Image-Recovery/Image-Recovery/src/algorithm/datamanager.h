@@ -4,8 +4,9 @@
 #include "src/data-structures/simplelist.h"
 #include "src/data-structures/simplenode.h"
 
-#include <QRect>
+#include <QMap>
 #include <QString>
+#include <QRect>
 #include <QRgb>
 #include <QVector>
 
@@ -41,6 +42,10 @@ public:
 
     void setReference(const QVector<QRgb> &reference);
 
+    const QMap<QRgb, int> &getColorTableReference() const;
+
+    void setColorTableReference(const QMap<QRgb, int> &colorTableReference);
+
     const QString &getImagePath() const;
 
     void setImagePath(const QString &imagePath);
@@ -73,11 +78,12 @@ protected:
 private:
     bool solidImage;
     int currentFileGeneration = 1;
-    int lastGenerationFile = 11;
+    int lastGenerationFile = 1;
     int userNGenerations = 1;
     int generationsAmount = 1;
     QRect frame;
     QVector<QRgb> reference;
+    QMap<QRgb, int> colorTableReference;
     QString imagePath;
     QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentFileGeneration()))) + ".png";
     QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png";
