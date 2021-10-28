@@ -905,7 +905,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Generations</string>
+         <string>Generation Step</string>
         </property>
        </widget>
       </item>
@@ -4226,6 +4226,9 @@
    </widget>
    <widget class="QWidget" name="generationScreenPage">
     <widget class="QSlider" name="generationSlider">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -4325,6 +4328,9 @@
        </disabled>
       </palette>
      </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
      <property name="minimum">
       <number>1</number>
      </property>
@@ -4335,7 +4341,7 @@
       <number>1</number>
      </property>
      <property name="tracking">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -4538,9 +4544,9 @@
     <widget class="QLabel" name="genNumberLabel">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>140</x>
        <y>70</y>
-       <width>531</width>
+       <width>521</width>
        <height>41</height>
       </rect>
      </property>

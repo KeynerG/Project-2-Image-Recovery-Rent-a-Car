@@ -37,17 +37,18 @@ void MainScreen::checkUserInformation() {
 void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner) {
     userImage = new QImage(userImagePath);
     selectedFrame = new QRect(topLeftCorner, bottomRightCorner);
+    DataManager::getInstance()->setFrame(*selectedFrame);
     for (int y = selectedFrame->topLeft().y(); y < selectedFrame->bottomLeft().y(); ++y) {
         QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
         for (int x = selectedFrame->topLeft().x(); x < selectedFrame->topRight().x(); ++x) {
-            // frameReference<>()
-            // colorTable()
             QRgb &rgb = line[x];
+            // frameReference(rgb);
+            // colorTable(rgb);
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
-            // missingFrame<>()
         }
     }
     ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
+    // saveImage(userImage);
 }
 
 void MainScreen::on_startButton_clicked() {
@@ -75,13 +76,12 @@ void MainScreen::on_displayPreviewScreenButton_clicked() {
 }
 
 void MainScreen::on_displayLoadScreenButton_clicked() {
+    DataManager::getInstance()->setReference(geneticReference);
     ui->stackedWidget->setCurrentIndex(4);
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
-    ui->generationSlider->setMaximum(DataManager::getInstance()->getGenerationsAmount());
-    ui->generationSlider->setSingleStep(ui->generationSpinBox->value());
-    ui->generationSlider->setPageStep(ui->generationSpinBox->value());
+    ui->generationSlider->setMaximum(DataManager::getInstance()->getLastGenerationFile());
     ui->stackedWidget->setCurrentIndex(5);
 }
 

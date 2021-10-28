@@ -4,11 +4,42 @@
 #include "src/data-structures/simplelist.h"
 #include "src/data-structures/simplenode.h"
 
+#include <QRect>
 #include <QString>
+#include <QRgb>
+#include <QVector>
 
 class DataManager {
 
 public:
+
+    bool isSolidImage() const;
+
+    void setIsSolidImage(bool isSolidImage);
+
+    int getCurrentFileGeneration() const;
+
+    void setCurrentFileGeneration(int currentFileGeneration);
+
+    int getLastGenerationFile() const;
+
+    void setLastGenerationFile(int lastGenerationFile);
+
+    int getUserNGenerations() const;
+
+    void setUserNGenerations(int userNGenerations);
+
+    int getGenerationsAmount() const;
+
+    void setGenerationsAmount(int generationsAmount);
+
+    const QRect &getFrame() const;
+
+    void setFrame(const QRect &frame);
+
+    const QVector<QRgb> &getReference() const;
+
+    void setReference(const QVector<QRgb> &reference);
 
     const QString &getImagePath() const;
 
@@ -26,22 +57,6 @@ public:
 
     void setXmlPath(const QString &xmlPath);
 
-    bool isSolidImage() const;
-
-    void setIsSolidImage(bool isSolidImage);
-
-    int getCurrentGeneration() const;
-
-    void setCurrentGeneration(int currentGeneration);
-
-    int getUserNGenerations() const;
-
-    void setUserNGenerations(int userNGenerations);
-
-    int getGenerationsAmount() const;
-
-    void setGenerationsAmount(int generationsAmount);
-
     const SimpleList<SimpleList<SimpleNode<int>>> &getGenerationsList() const;
 
     void setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList);
@@ -57,12 +72,15 @@ protected:
 
 private:
     bool solidImage;
-    int currentGeneration = 1;
+    int currentFileGeneration = 1;
+    int lastGenerationFile = 11;
     int userNGenerations = 1;
     int generationsAmount = 1;
+    QRect frame;
+    QVector<QRgb> reference;
     QString imagePath;
-    QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentGeneration()))) + ".png";
-    QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getGenerationsAmount()))) + ".png";
+    QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentFileGeneration()))) + ".png";
+    QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png";
     QString xmlPath = "../src/generations/";
     SimpleList<SimpleList<SimpleNode<int>>> generationsList;
     static DataManager *instance;

@@ -4,6 +4,62 @@ DataManager *DataManager::instance = nullptr;
 
 DataManager::DataManager() {}
 
+bool DataManager::isSolidImage() const {
+    return solidImage;
+}
+
+void DataManager::setIsSolidImage(bool solidImage) {
+    DataManager::solidImage = solidImage;
+}
+
+int DataManager::getCurrentFileGeneration() const {
+    return currentFileGeneration;
+}
+
+void DataManager::setCurrentFileGeneration(int currentFileGeneration) {
+    DataManager::currentFileGeneration = currentFileGeneration;
+}
+
+int DataManager::getLastGenerationFile() const {
+    return lastGenerationFile;
+}
+
+void DataManager::setLastGenerationFile(int lastGenerationFile) {
+    DataManager::lastGenerationFile = lastGenerationFile;
+}
+
+int DataManager::getUserNGenerations() const {
+    return userNGenerations;
+}
+
+void DataManager::setUserNGenerations(int userNGenerations) {
+    DataManager::userNGenerations = userNGenerations;
+}
+
+int DataManager::getGenerationsAmount() const {
+    return generationsAmount;
+}
+
+void DataManager::setGenerationsAmount(int generationsAmount) {
+    DataManager::generationsAmount = generationsAmount;
+}
+
+const QRect &DataManager::getFrame() const {
+    return frame;
+}
+
+void DataManager::setFrame(const QRect &frame) {
+    DataManager::frame = frame;
+}
+
+const QVector<QRgb> &DataManager::getReference() const {
+    return reference;
+}
+
+void DataManager::setReference(const QVector<QRgb> &reference) {
+    DataManager::reference = reference;
+}
+
 const QString &DataManager::getImagePath() const {
     return imagePath;
 }
@@ -34,38 +90,6 @@ const QString &DataManager::getXmlPath() const {
 
 void DataManager::setXmlPath(const QString &xmlPath) {
     DataManager::xmlPath = xmlPath;
-}
-
-bool DataManager::isSolidImage() const {
-    return solidImage;
-}
-
-void DataManager::setIsSolidImage(bool solidImage) {
-    DataManager::solidImage = solidImage;
-}
-
-int DataManager::getCurrentGeneration() const {
-    return currentGeneration;
-}
-
-void DataManager::setCurrentGeneration(int currentGeneration) {
-    DataManager::currentGeneration = currentGeneration;
-}
-
-int DataManager::getUserNGenerations() const {
-    return userNGenerations;
-}
-
-void DataManager::setUserNGenerations(int userNGenerations) {
-    DataManager::userNGenerations = userNGenerations;
-}
-
-int DataManager::getGenerationsAmount() const {
-    return generationsAmount;
-}
-
-void DataManager::setGenerationsAmount(int generationsAmount) {
-    DataManager::generationsAmount = generationsAmount;
 }
 
 const SimpleList<SimpleList<SimpleNode<int>>> &DataManager::getGenerationsList() const {

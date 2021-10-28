@@ -73,8 +73,7 @@ private:
     QPoint topLeft;
     QPoint bottomRight;
     QRect *selectedFrame;
-    QVector<QRgb> *genecticReference;
-    QVector<QRgb> *missingFrame;
+    QVector<QRgb> geneticReference;
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H
