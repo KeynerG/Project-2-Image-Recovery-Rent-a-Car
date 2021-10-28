@@ -4,6 +4,7 @@
 #include "src/algorithm/datamanager.h"
 
 #include <QDesktopServices>
+#include <QDir>
 #include <QFileDialog>
 #include <QImage>
 #include <QMessageBox>
@@ -26,6 +27,8 @@ public:
     ~MainScreen();
 
     void checkUserInformation();
+
+    void saveGenImage(QImage image);
 
     void removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner);
 

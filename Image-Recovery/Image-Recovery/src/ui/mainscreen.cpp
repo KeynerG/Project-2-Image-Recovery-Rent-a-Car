@@ -34,6 +34,14 @@ void MainScreen::checkUserInformation() {
     }
 }
 
+void MainScreen::saveGenImage(QImage image) {
+    QString path = "../src/generations/missing.png";
+    bool saved = image.save(path);
+    if (saved) {
+        DataManager::getInstance()->setImagePath(path);
+    }
+}
+
 void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner) {
     userImage = new QImage(userImagePath);
     selectedFrame = new QRect(topLeftCorner, bottomRightCorner);
@@ -48,10 +56,14 @@ void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner)
         }
     }
     ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
-    // saveImage(userImage);
+    saveGenImage(*userImage);
 }
 
 void MainScreen::on_startButton_clicked() {
+    QDir genDir("../src/generations/");
+    if (!genDir.exists()) {
+        genDir.mkpath("../src/generations/");
+    }
     ui->stackedWidget->setCurrentIndex(1);
 }
 
@@ -60,7 +72,6 @@ void MainScreen::on_displaySetupScreenButton_clicked() {
 }
 
 void MainScreen::on_displayCropScreenButton_clicked() {
-    DataManager::getInstance()->setImagePath(ui->imagePathLine->text().toUtf8().constData());
     DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
     DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
     ui->stackedWidget->setCurrentIndex(2);
@@ -99,6 +110,10 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
 }
 
 void MainScreen::on_closeButton_clicked() {
+    QDir genDir("../src/generations/");
+    if (genDir.exists()) {
+        genDir.removeRecursively();
+    }
     this->close();
 }
 
