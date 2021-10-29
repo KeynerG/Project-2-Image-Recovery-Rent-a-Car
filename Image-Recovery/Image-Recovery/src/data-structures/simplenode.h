@@ -3,6 +3,11 @@
 
 using namespace std;
 
+/**
+ * @class SimpleNode
+ * @brief
+ * @author <a href="https://github.com/JoseAndres216">Jose A. Rodríguez Rojas</a>
+ */
 template<class T>
 class SimpleNode {
 

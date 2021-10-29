@@ -23,3 +23,7 @@ void Genetic::mutation() {
 void Genetic::createXML() {
 
 }
+
+void Genetic::createImage() {
+
+}
