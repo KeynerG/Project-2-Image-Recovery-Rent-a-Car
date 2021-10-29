@@ -45,7 +45,6 @@ void MainScreen::saveGenImage(QImage image) {
 void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner) {
     userImage = new QImage(userImagePath);
     selectedFrame = new QRect(topLeftCorner, bottomRightCorner);
-    DataManager::getInstance()->setFrame(*selectedFrame);
     for (int y = selectedFrame->topLeft().y(); y < selectedFrame->bottomLeft().y(); ++y) {
         QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
         for (int x = selectedFrame->topLeft().x(); x < selectedFrame->topRight().x(); ++x) {
@@ -55,8 +54,6 @@ void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner)
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
         }
     }
-    ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
-    saveGenImage(*userImage);
 }
 
 void MainScreen::on_startButton_clicked() {
@@ -72,8 +69,6 @@ void MainScreen::on_displaySetupScreenButton_clicked() {
 }
 
 void MainScreen::on_displayCropScreenButton_clicked() {
-    DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
-    DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
     ui->stackedWidget->setCurrentIndex(2);
 }
 
@@ -83,13 +78,18 @@ void MainScreen::on_displayCropScreenBackButton_clicked() {
 
 void MainScreen::on_displayPreviewScreenButton_clicked() {
     removeSelection(topLeft, bottomRight);
+    ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
     ui->stackedWidget->setCurrentIndex(3);
 }
 
 void MainScreen::on_displayLoadScreenButton_clicked() {
+    ui->stackedWidget->setCurrentIndex(4);
+    DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
+    DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
+    DataManager::getInstance()->setFrame(*selectedFrame);
     DataManager::getInstance()->setReference(geneticReference);
     DataManager::getInstance()->setColorTableReference(colorTable);
-    ui->stackedWidget->setCurrentIndex(4);
+    saveGenImage(*userImage);
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
@@ -108,7 +108,7 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
         ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
     }
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getXmlPath()));
-    ui->generationTotalLabel->setText(QString::fromStdString(to_string(DataManager::getInstance()->getGenerationsAmount())));
+    ui->generationTotalLabel->setText(QString::fromStdString(std::to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
 }
 
