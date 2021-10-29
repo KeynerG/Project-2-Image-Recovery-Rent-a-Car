@@ -79,7 +79,7 @@ private:
     QPoint bottomRight;
     QRect *selectedFrame;
     QVector<QRgb> geneticReference;
-    QMap<QRgb, int> colorTable;
+    QMap<QRgb, long> colorTable;
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H

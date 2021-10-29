@@ -42,9 +42,9 @@ public:
 
     void setReference(const QVector<QRgb> &reference);
 
-    const QMap<QRgb, int> &getColorTableReference() const;
+    const QMap<QRgb, long> &getColorTableReference() const;
 
-    void setColorTableReference(const QMap<QRgb, int> &colorTableReference);
+    void setColorTableReference(const QMap<QRgb, long> &colorTableReference);
 
     const QString &getImagePath() const;
 
@@ -83,7 +83,7 @@ private:
     int generationsAmount = 1;
     QRect frame;
     QVector<QRgb> reference;
-    QMap<QRgb, int> colorTableReference;
+    QMap<QRgb, long> colorTableReference;
     QString imagePath;
     QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentFileGeneration()))) + ".png";
     QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png";
