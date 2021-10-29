@@ -31,7 +31,7 @@ public:
 
     void saveGenImage(QImage image);
 
-    void removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner);
+    void imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner);
 
 private slots:
 
