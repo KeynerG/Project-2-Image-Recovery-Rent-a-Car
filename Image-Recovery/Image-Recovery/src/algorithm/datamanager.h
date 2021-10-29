@@ -34,9 +34,13 @@ public:
 
     void setGenerationsAmount(int generationsAmount);
 
-    const QRect &getFrame() const;
+    const QPoint &getFrameTopLeftPoint() const;
 
-    void setFrame(const QRect &frame);
+    void setFrameTopLeftPoint(const QPoint &frameTopLeftPoint);
+
+    const QPoint &getFrameBottomRightPoint() const;
+
+    void setFrameBottomRightPoint(const QPoint &frameBottomRightPoint);
 
     const QVector<QRgb> &getReference() const;
 
@@ -81,7 +85,8 @@ private:
     int lastGenerationFile = 1;
     int userNGenerations = 1;
     int generationsAmount = 1;
-    QRect frame;
+    QPoint frameTopLeftPoint;
+    QPoint frameBottomRightPoint;
     QVector<QRgb> reference;
     QMap<QRgb, long> colorTableReference;
     QString imagePath;

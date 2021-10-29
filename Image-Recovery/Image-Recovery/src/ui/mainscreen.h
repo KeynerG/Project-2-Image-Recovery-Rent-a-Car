@@ -10,7 +10,6 @@
 #include <QMap>
 #include <QMessageBox>
 #include <QPoint>
-#include <QRect>
 #include <QRgb>
 #include <QString>
 #include <QVector>
@@ -77,7 +76,6 @@ private:
     QImage *userImage;
     QPoint topLeft;
     QPoint bottomRight;
-    QRect *selectedFrame;
     QVector<QRgb> geneticReference;
     QMap<QRgb, long> colorTable;
 };

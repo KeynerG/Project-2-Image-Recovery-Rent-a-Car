@@ -44,12 +44,20 @@ void DataManager::setGenerationsAmount(int generationsAmount) {
     DataManager::generationsAmount = generationsAmount;
 }
 
-const QRect &DataManager::getFrame() const {
-    return frame;
+const QPoint &DataManager::getFrameTopLeftPoint() const {
+    return frameTopLeftPoint;
 }
 
-void DataManager::setFrame(const QRect &frame) {
-    DataManager::frame = frame;
+void DataManager::setFrameTopLeftPoint(const QPoint &frameTopLeftPoint) {
+    DataManager::frameTopLeftPoint = frameTopLeftPoint;
+}
+
+const QPoint &DataManager::getFrameBottomRightPoint() const {
+    return frameBottomRightPoint;
+}
+
+void DataManager::setFrameBottomRightPoint(const QPoint &frameBottomRightPoint) {
+    DataManager::frameBottomRightPoint = frameBottomRightPoint;
 }
 
 const QVector<QRgb> &DataManager::getReference() const {

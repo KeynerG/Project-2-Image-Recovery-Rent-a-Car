@@ -44,10 +44,9 @@ void MainScreen::saveGenImage(QImage image) {
 
 void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner) {
     userImage = new QImage(userImagePath);
-    selectedFrame = new QRect(topLeftCorner, bottomRightCorner);
-    for (int y = selectedFrame->topLeft().y(); y < selectedFrame->bottomLeft().y(); ++y) {
+    for (int y = topLeftCorner.y(); y < bottomRightCorner.y(); ++y) {
         QRgb *line = reinterpret_cast<QRgb *>(userImage->scanLine(y));
-        for (int x = selectedFrame->topLeft().x(); x < selectedFrame->topRight().x(); ++x) {
+        for (int x = topLeftCorner.x(); x < bottomRightCorner.x(); ++x) {
             QRgb &rgb = line[x];
             geneticReference.append(rgb);
             colorTable.insert(rgb, geneticReference.count(rgb));
@@ -86,7 +85,8 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
     ui->stackedWidget->setCurrentIndex(4);
     DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
     DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
-    DataManager::getInstance()->setFrame(*selectedFrame);
+    DataManager::getInstance()->setFrameTopLeftPoint(topLeft);
+    DataManager::getInstance()->setFrameBottomRightPoint(bottomRight);
     DataManager::getInstance()->setReference(geneticReference);
     DataManager::getInstance()->setColorTableReference(colorTable);
     saveGenImage(*userImage);
