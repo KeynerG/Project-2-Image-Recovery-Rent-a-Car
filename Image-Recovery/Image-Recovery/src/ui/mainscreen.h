@@ -175,6 +175,20 @@ private slots:
     void on_bottomVerticalSlider_valueChanged(int value);
 
     /**
+     * @fn void on_imageProgressBar_valueChanged(int value)
+     * @param value
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void on_imageProgressBar_valueChanged(int value);
+
+    /**
+     * @fn void on_progressBar_valueChanged(int value)
+     * @param value
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void on_progressBar_valueChanged(int value);
+
+    /**
      * @fn void on_openButton_clicked()
      * @brief
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>

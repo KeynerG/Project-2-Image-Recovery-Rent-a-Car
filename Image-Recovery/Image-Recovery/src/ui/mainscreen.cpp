@@ -73,7 +73,6 @@ void MainScreen::imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner)
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
         }
         ui->imageProgressBar->setValue(y + 1);
-        checkUserInformation();
     }
     ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
 }
@@ -205,6 +204,14 @@ void MainScreen::on_bottomHorizontalSlider_valueChanged(int value) {
 
 void MainScreen::on_bottomVerticalSlider_valueChanged(int value) {
     bottomRight.setY(value);
+    checkUserInformation();
+}
+
+void MainScreen::on_imageProgressBar_valueChanged(int value) {
+    checkUserInformation();
+}
+
+void MainScreen::on_progressBar_valueChanged(int value) {
     checkUserInformation();
 }
 
