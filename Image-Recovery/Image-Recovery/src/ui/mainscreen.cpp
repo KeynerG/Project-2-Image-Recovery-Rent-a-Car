@@ -62,7 +62,7 @@ void MainScreen::removeSelection(QPoint topLeftCorner, QPoint bottomRightCorner)
 void MainScreen::on_startButton_clicked() {
     QDir genDir("../src/generations/");
     if (!genDir.exists()) {
-        genDir.mkpath("../src/generations/");
+        genDir.mkpath("..//generations/");
     }
     ui->stackedWidget->setCurrentIndex(1);
 }
