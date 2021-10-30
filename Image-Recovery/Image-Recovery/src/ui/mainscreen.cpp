@@ -72,9 +72,9 @@ void MainScreen::imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner)
             colorTable.insert(rgb, geneticReference.count(rgb));
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
         }
+        ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
         ui->imageProgressBar->setValue(y + 1);
     }
-    ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
 }
 
 void MainScreen::on_startButton_clicked() {

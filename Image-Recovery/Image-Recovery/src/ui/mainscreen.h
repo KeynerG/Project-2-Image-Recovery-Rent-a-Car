@@ -176,6 +176,7 @@ private slots:
 
     /**
      * @fn void on_imageProgressBar_valueChanged(int value)
+     * @brief
      * @param value
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
@@ -183,6 +184,7 @@ private slots:
 
     /**
      * @fn void on_progressBar_valueChanged(int value)
+     * @brief
      * @param value
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
