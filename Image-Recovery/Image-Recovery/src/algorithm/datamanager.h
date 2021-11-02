@@ -271,7 +271,7 @@ protected:
 
 private:
     bool solidImage; /**<  */
-    int currentFileGeneration = 1; /**<  */
+    int currentFileGeneration = 0; /**<  */
     int lastGenerationFile = 1; /**<  */
     int userNGenerations = 1; /**<  */
     int generationsAmount = 1; /**<  */
