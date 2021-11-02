@@ -8,6 +8,12 @@
 #include <QDebug>
 #include <QImage>
 
+struct Subject{
+    int id;
+    QVector<QRgb> frame;
+    int similarity;
+};
+
 using namespace std;
 
 /**
@@ -19,24 +25,27 @@ class Genetic {
 
 private:
 
-    SimpleList<SimpleList<SimpleNode<int>>> generationsList;
-    SimpleList<SimpleNode<int>> generation;
+    SimpleList<SimpleList<Subject>> generationsList;
+    SimpleList<Subject> generation;
+    int precision;
 
 public:
 
+    bool firstTime = false;
+
     /**
-     * @fn void createGeneration()
+     * @fn void geneticAlgorithm()
      * @brief
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void createGeneration();
+    void geneticAlgorithm();
 
     /**
      * @fn void fitness()
      * @brief
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void fitness();
+    void fitness(SimpleList<SimpleList<Subject>> gens);
 
     /**
      * @fn void selection()

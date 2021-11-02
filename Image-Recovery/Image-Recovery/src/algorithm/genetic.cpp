@@ -1,10 +1,46 @@
 #include "genetic.h"
 
-void Genetic::createGeneration() {
+void Genetic::geneticAlgorithm() {
 
+    //while(precision != 100){ //Generations
+
+        if(firstTime) { //first generation - random
+            //int n = DataManager::getInstance()->getColorTableReference().size(); //Amount of colors
+            int pixels = DataManager::getInstance()->getReference().size(); //Amount of pixels
+
+            for(int i = 0 ; i < 10 ; i++){ //10 subjects per generation
+
+                QVector<QRgb> tmp = DataManager::getInstance()->getReference();
+
+                Subject individualSubject;
+
+                QVector<QRgb> subjectFrame;
+
+                for(int p = 0 ; p < pixels ; p++){ // "image", reference size of pixels
+                    int remainingPixels = tmp.size();
+                    int actualPixel = rand() % (remainingPixels);
+                    subjectFrame.push_back(tmp[actualPixel]);
+                    tmp.removeAt(actualPixel);
+                }
+                individualSubject.id = i;
+                individualSubject.frame = subjectFrame;
+                individualSubject.similarity = 0;
+                qDebug() << subjectFrame;
+                generation.addNodeAtEnd(individualSubject);
+            }
+            generationsList.addNodeAtEnd(generation);
+            firstTime = false;
+        }else{
+            cout << "Hola" << endl;
+        }
+
+    //}
 }
 
-void Genetic::fitness() {
+//rand() % (n) + 1; <- Numero aleatorio
+
+void Genetic::fitness(SimpleList<SimpleList<Subject>> gens) {
+
 
 }
 
