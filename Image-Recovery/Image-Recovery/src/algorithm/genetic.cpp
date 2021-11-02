@@ -1,46 +1,33 @@
 #include "genetic.h"
 
 void Genetic::geneticAlgorithm() {
-
-    //while(precision != 100){ //Generations
-
-        if(firstTime) { //first generation - random
-            //int n = DataManager::getInstance()->getColorTableReference().size(); //Amount of colors
-            int pixels = DataManager::getInstance()->getReference().size(); //Amount of pixels
-
-            for(int i = 0 ; i < 10 ; i++){ //10 subjects per generation
-
-                QVector<QRgb> tmp = DataManager::getInstance()->getReference();
-
-                Subject individualSubject;
-
-                QVector<QRgb> subjectFrame;
-
-                for(int p = 0 ; p < pixels ; p++){ // "image", reference size of pixels
-                    int remainingPixels = tmp.size();
-                    int actualPixel = rand() % (remainingPixels);
-                    subjectFrame.push_back(tmp[actualPixel]);
-                    tmp.removeAt(actualPixel);
+    while (!frameCompleted) { // create generations
+        generationID++; // Increases the generationID counter to assign the current value to the current generation.
+        if (generationID == 1) { //first generation - random
+            //int allelesAmount = DataManager::getInstance()->getColorTableReference().size(); /**< It's the number of colors that the reference of the missing part contains. */
+            int genesAmount = DataManager::getInstance()->getReference().size(); /**< Image pixels amount. */
+            for (int i = 0; i < 10; i++) { //10 chromosome per population
+                QVector<QRgb> tmpFrame = DataManager::getInstance()->getReference(); /**< Chromosome temporary frame. */
+                QVector<QRgb> chromosomeFrame; /**< Chromosome official frame. */
+                for (int g = 0; g < genesAmount; g++) {
+                    int remainingGenes = tmpFrame.size(); /**< Remaining image pixels. */
+                    int currentGen = rand() % (remainingGenes); /**< Current image pixel. */
+                    chromosomeFrame.push_back(tmpFrame[currentGen]);
+                    tmpFrame.removeAt(currentGen);
                 }
-                individualSubject.id = i;
-                individualSubject.frame = subjectFrame;
-                individualSubject.similarity = 0;
-                qDebug() << subjectFrame;
-                generation.addNodeAtEnd(individualSubject);
+                Chromosome generationChromosome(i, chromosomeFrame); /**< Chromosome with ID i, randomly generated frame and a score fitness of 0 (default). */
+                qDebug() << "Chromosome: " << i << "\n" << "Frame: " << chromosomeFrame;
+                population.append(generationChromosome);
+                qDebug() << "Chromosomes Amount: " << population.size();
             }
-            generationsList.addNodeAtEnd(generation);
-            firstTime = false;
-        }else{
-            cout << "Hola" << endl;
+            generation.addNodeAtEnd(population);
+        } else {
+            // case --> 1 < generationID
         }
-
-    //}
+    }
 }
 
-//rand() % (n) + 1; <- Numero aleatorio
-
-void Genetic::fitness(SimpleList<SimpleList<Subject>> gens) {
-
+void Genetic::fitness(SimpleList<SimpleList<Chromosome>> gens) {
 
 }
 

@@ -7,14 +7,28 @@
 
 #include <QDebug>
 #include <QImage>
-
-struct Subject{
-    int id;
-    QVector<QRgb> frame;
-    int similarity;
-};
+#include <QList>
+#include <QRgb>
+#include <QVector>
 
 using namespace std;
+
+/**
+ * @struct Subject
+ * @brief
+ * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+ */
+struct Chromosome {
+    Chromosome(int chromosomeID, QVector<QRgb> &chromosomeFrame, int chromosomeFitnessScore = 0) {
+        ID = chromosomeID;
+        frame = chromosomeFrame;
+        fitness = chromosomeFitnessScore;
+    }
+    int ID; /**< Chromosome identifier. */
+    QVector<QRgb> frame; /**< Solution to the missing frame. */
+    int fitness; /**< Similarity score respect to the reference image. */
+};
+
 
 /**
  * @class Genetic
@@ -24,14 +38,12 @@ using namespace std;
 class Genetic {
 
 private:
-
-    SimpleList<SimpleList<Subject>> generationsList;
-    SimpleList<Subject> generation;
-    int precision;
+    SimpleList<QList<Chromosome>> generation; /**<  */
+    QList<Chromosome> population; /**< List of possible frames as solutions to the missing frame. */
+    int generationID = 0;  /**< Generation identifier counter. */
+    bool frameCompleted; /**< Determines if the missing frame of the image has been completed successfully. */
 
 public:
-
-    bool firstTime = false;
 
     /**
      * @fn void geneticAlgorithm()
@@ -43,9 +55,10 @@ public:
     /**
      * @fn void fitness()
      * @brief
+     * @param gens
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void fitness(SimpleList<SimpleList<Subject>> gens);
+    void fitness(SimpleList<SimpleList<Chromosome>> gens);
 
     /**
      * @fn void selection()
