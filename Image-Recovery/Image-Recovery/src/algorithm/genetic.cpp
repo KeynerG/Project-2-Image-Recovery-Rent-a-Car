@@ -1,5 +1,30 @@
 #include "genetic.h"
 
+bool Genetic::checkGenerationNumber(int &generationID) {
+    if ((generationID % DataManager::getInstance()->getUserNGenerations()) == 0 || generationID == DataManager::getInstance()->getLastGenerationFile()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void Genetic::accuracyMeter(Chromosome &chromosome) {
+    QVector<QRgb> reference = DataManager::getInstance()->getReference(); /**< Reference of image missing frame. */
+    int sharedGenes = 0; /**< Number of pixels shared by the solution and the reference frame. */
+    if (chromosome.frame == reference) {
+        frameCompleted = true;
+        chromosome.fitness = 100;
+    } else {
+        frameCompleted = false;
+        for (int g = 0; g < reference.size(); ++g) {
+            if (chromosome.frame[g] == reference[g]) {
+                sharedGenes++;
+            }
+        }
+        chromosome.fitness = round((sharedGenes * 100) / reference.size());
+    }
+}
+
 void Genetic::geneticAlgorithm() {
     while (!frameCompleted) { // create generations
         generationID++; // Increases the generationID counter to assign the current value to the current generation.
@@ -41,14 +66,6 @@ void Genetic::crossover() {
 
 void Genetic::mutation() {
 
-}
-
-bool Genetic::checkGenerationNumber(int &generationID) {
-    if ((generationID % DataManager::getInstance()->getUserNGenerations()) == 0 || generationID == DataManager::getInstance()->getLastGenerationFile()) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 void Genetic::createXML() {

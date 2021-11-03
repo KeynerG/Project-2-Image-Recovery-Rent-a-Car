@@ -46,6 +46,23 @@ private:
 public:
 
     /**
+     * @fn bool checkGenerationNumber()
+     * @brief
+     * @param generationID
+     * @return boolean
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    bool checkGenerationNumber(int &generationID);
+
+    /**
+     * @fn void accuracyMeter(Chromosome &chromosome)
+     * @brief
+     * @param chromosome
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void accuracyMeter(Chromosome &chromosome);
+
+    /**
      * @fn void geneticAlgorithm()
      * @brief
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -80,15 +97,6 @@ public:
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
     void mutation();
-
-     /**
-      * @fn bool checkGenerationNumber()
-      * @brief
-      * @param generationID
-      * @return
-      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-      */
-    bool checkGenerationNumber(int &generationID);
 
     /**
      * @fn void createXML()
