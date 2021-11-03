@@ -29,21 +29,17 @@ void Genetic::geneticAlgorithm() {
     while (!frameCompleted) { // create generations
         generationID++; // Increases the generationID counter to assign the current value to the current generation.
         if (generationID == 1) { //first generation - random
-            //int allelesAmount = DataManager::getInstance()->getColorTableReference().size(); /**< It's the number of colors that the reference of the missing part contains. */
             int genesAmount = DataManager::getInstance()->getReference().size(); /**< Image pixels amount. */
-            for (int i = 0; i < 10; i++) { //10 chromosome per population
-                QVector<QRgb> tmpFrame = DataManager::getInstance()->getReference(); /**< Chromosome temporary frame. */
-                QVector<QRgb> chromosomeFrame; /**< Chromosome official frame. */
-                for (int g = 0; g < genesAmount; g++) {
-                    int remainingGenes = tmpFrame.size(); /**< Remaining image pixels. */
-                    int currentGen = rand() % (remainingGenes); /**< Current image pixel. */
-                    chromosomeFrame.push_back(tmpFrame[currentGen]);
-                    tmpFrame.removeAt(currentGen);
+            for (int c = 0; c < 10; ++c) { // population of 10 chromosomes (ID: 0-9)
+                QVector<QRgb> chromosomeFrame; /**< Chromosome frame. */
+                for (int g = 0; g < genesAmount; ++g) {
+                    int genSwap = rand() % genesAmount;
+                    chromosomeFrame.swapItemsAt(g , genSwap); // exchanges the QRgb at index position g with the QRgb at index position genSwap
                 }
-                Chromosome generationChromosome(i, chromosomeFrame); /**< Chromosome with ID i, randomly generated frame and a score fitness of 0 (default). */
-                qDebug() << "Chromosome: " << i << "\n" << "Frame: " << chromosomeFrame;
-                population.append(generationChromosome);
-                qDebug() << "Chromosomes Amount: " << population.size();
+                Chromosome generationChromosome(c, chromosomeFrame); /**< Chromosome with ID c, randomly generated frame and a score fitness of 0 (default). */
+                qDebug() << "Chromosome: " << c << "\n" << "Frame: " << chromosomeFrame;
+                population.append(generationChromosome); // adds the new chromosome to population
+                qDebug() << "Population: " << population.size(); // chromosomes amount
             }
             generation.addNodeAtEnd(population);
         } else {

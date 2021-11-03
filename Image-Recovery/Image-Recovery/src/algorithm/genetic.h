@@ -66,6 +66,7 @@ public:
      * @fn void geneticAlgorithm()
      * @brief
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void geneticAlgorithm();
 

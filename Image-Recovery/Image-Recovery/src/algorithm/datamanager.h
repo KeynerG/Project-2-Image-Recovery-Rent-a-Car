@@ -148,22 +148,6 @@ public:
     void setReference(const QVector<QRgb> &reference);
 
     /**
-     * @fn const QMap<QRgb, long> &getColorTableReference() const
-     * @brief
-     * @return
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    const QMap<QRgb, long> &getColorTableReference() const;
-
-    /**
-     * @fn void setColorTableReference(const QMap<QRgb, long> &colorTableReference)
-     * @brief
-     * @param colorTableReference
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    void setColorTableReference(const QMap<QRgb, long> &colorTableReference);
-
-    /**
      * @fn const QString &getImagePath() const
      * @brief
      * @return
@@ -278,7 +262,6 @@ private:
     QPoint frameTopLeftPoint; /**<  */
     QPoint frameBottomRightPoint; /**<  */
     QVector<QRgb> reference; /**<  */
-    QMap<QRgb, long> colorTableReference; /**<  */
     QString imagePath; /**<  */
     QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentFileGeneration()))) + ".png"; /**<  */
     QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png"; /**<  */
