@@ -69,6 +69,9 @@ void MainScreen::imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner)
         for (int x = topLeftCorner.x(); x < bottomRightCorner.x(); ++x) {
             QRgb &rgb = line[x];
             geneticReference.append(rgb);
+            if (!colorPalette.contains(rgb)) {
+                colorPalette.append(rgb);
+            }
             rgb = qRgba(qRed(0), qGreen(0), qBlue(0), qAlpha(0));
         }
         ui->userImageSelect->setPixmap(QPixmap::fromImage(*userImage).scaled(ui->userImageSelect->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
@@ -114,6 +117,7 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
     DataManager::getInstance()->setFrameTopLeftPoint(topLeft);
     DataManager::getInstance()->setFrameBottomRightPoint(bottomRight);
     DataManager::getInstance()->setReference(geneticReference);
+    DataManager::getInstance()->setColorPaletteReference(colorPalette);
     saveGenImage(*userImage);
 }
 

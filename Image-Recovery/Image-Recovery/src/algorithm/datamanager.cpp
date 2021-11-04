@@ -68,6 +68,14 @@ void DataManager::setReference(const QVector<QRgb> &reference) {
     DataManager::reference = reference;
 }
 
+const QList<QRgb> &DataManager::getColorPaletteReference() const {
+    return colorPaletteReference;
+}
+
+void DataManager::setColorPaletteReference(const QList<QRgb> &colorPaletteReference) {
+    DataManager::colorPaletteReference = colorPaletteReference;
+}
+
 const QString &DataManager::getImagePath() const {
     return imagePath;
 }

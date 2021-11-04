@@ -27,7 +27,7 @@ void Genetic::accuracyMeter(Chromosome &chromosome) {
 
 void Genetic::geneticAlgorithm() {
     while (!frameCompleted) { // create generations
-        generationID++; // Increases the generationID counter to assign the current value to the current generation.
+        generationID++; // increases the generationID counter to assign the current value to the current generation.
         if (generationID == 1) { //first generation - random
             int genesAmount = DataManager::getInstance()->getReference().size(); /**< Image pixels amount. */
             for (int c = 0; c < 10; ++c) { // population of 10 chromosomes (ID: 0-9)

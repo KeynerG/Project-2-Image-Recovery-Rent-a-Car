@@ -205,6 +205,7 @@ private:
     QPoint topLeft; /**<  */
     QPoint bottomRight; /**<  */
     QVector<QRgb> geneticReference; /**<  */
+    QList<QRgb> colorPalette; /**<  */
 };
 
 #endif // IMAGE_RECOVERY_MAINSCREEN_H

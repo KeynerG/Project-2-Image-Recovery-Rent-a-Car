@@ -148,6 +148,22 @@ public:
     void setReference(const QVector<QRgb> &reference);
 
     /**
+     * @fn const QList<QRgb> &getColorPaletteReference() const
+     * @brief
+     * @return
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    const QList<QRgb> &getColorPaletteReference() const;
+
+    /**
+     * @fn void setColorPaletteReference(const QList<QRgb> &colorPaletteReference)
+     * @brief
+     * @param colorPaletteReference
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void setColorPaletteReference(const QList<QRgb> &colorPaletteReference);
+
+    /**
      * @fn const QString &getImagePath() const
      * @brief
      * @return
@@ -262,6 +278,7 @@ private:
     QPoint frameTopLeftPoint; /**<  */
     QPoint frameBottomRightPoint; /**<  */
     QVector<QRgb> reference; /**<  */
+    QList<QRgb> colorPaletteReference; /**<  */
     QString imagePath; /**<  */
     QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentFileGeneration()))) + ".png"; /**<  */
     QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png"; /**<  */
