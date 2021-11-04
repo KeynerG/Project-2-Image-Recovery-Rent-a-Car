@@ -33,10 +33,16 @@ struct Chromosome {
  * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
  */
 struct Population {
-    Population(int populationID, QList<Chromosome> &chromosomeFrame, int chromosomeIndex) {
+    QList<Chromosome> cromosome;
+    Population(int populationID, QList<Chromosome> &chromosomeFrame, int chromosomeIndex = 0) {
         ID = populationID;
         chromosomeList = chromosomeFrame;
         fitChromosome = chromosomeIndex;
+    }
+    Population(){
+        ID = 0;
+        chromosomeList = cromosome;
+        fitChromosome = 0;
     }
     int ID; /**< Population identifier. */
     QList<Chromosome> chromosomeList; /**< Chromosomes list in the current population. */
@@ -54,6 +60,10 @@ private:
     QList<Population> generation; /**<  */
     Population population; /**< List of possible frames as solutions to the missing frame. */
     int generationID = 0;  /**< Generation identifier counter. */
+    int referenceSize = DataManager::getInstance()->getReference().size();
+    int half = referenceSize/2;
+    int oneQuarter = referenceSize/4;
+    int oneEight = referenceSize / 8;
     bool frameCompleted; /**< Determines if the missing frame of the image has been completed successfully. */
 
 public:
@@ -86,10 +96,10 @@ public:
     /**
      * @fn void fitness()
      * @brief
-     * @param gens
+     * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void fitness(QList<Population> gens);
+    void fitness(QList<Population> &generations);
 
     /**
      * @fn void selection()
