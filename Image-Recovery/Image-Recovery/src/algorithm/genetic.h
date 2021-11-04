@@ -70,13 +70,35 @@ private:
 public:
 
     /**
-     * @fn bool checkGenerationNumber()
+     * @fn bool checkProgress(int &generationID)
      * @brief
      * @param generationID
      * @return boolean
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    bool checkGenerationNumber(int &generationID);
+    bool checkProgress(int &generationID);
+
+    /**
+     * @fn void saveImage(QImage &image)
+     * @brief
+     * @param image
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void saveImage(QImage &image);
+
+    /**
+     * @fn void createImage()
+     * @brief
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void createImage();
+
+    /**
+     * @fn void createXML()
+     * @brief
+     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     */
+    void createXML();
 
     /**
      * @fn void accuracyMeter(Chromosome &chromosome)
@@ -95,7 +117,7 @@ public:
     void geneticAlgorithm();
 
     /**
-     * @fn void fitness()
+     * @fn void fitness(QList<Population> &generations)
      * @brief
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -103,7 +125,7 @@ public:
     void fitness(QList<Population> &generations);
 
     /**
-     * @fn void selection()
+     * @fn void selection(QList<Population> &generations)
      * @brief
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -111,7 +133,7 @@ public:
     void selection(QList<Population> &generations);
 
     /**
-     * @fn void crossover()
+     * @fn void crossover(Chromosome parentA, Chromosome parentB)
      * @brief
      * @param parent1
      * @param parent2
@@ -120,28 +142,12 @@ public:
     void crossover(Chromosome parentA, Chromosome parentB);
 
     /**
-     * @fn void mutation()
+     * @fn void mutation(QList<Population> &generations)
      * @brief
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
     void mutation(QList<Population> &generations);
-
-    /**
-     * @fn void createXML()
-     * @brief
-     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
-     */
-    void createXML();
-
-    /**
-     * @fn void createImage()
-     * @brief
-     * @param generationNumber
-     * @param image
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    void createImage(int &generationNumber, QImage &image);
 };
 
 #endif //IMAGE_RECOVERY_GENETIC_H

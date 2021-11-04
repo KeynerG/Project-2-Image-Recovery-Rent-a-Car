@@ -1,11 +1,44 @@
 #include "genetic.h"
 
-bool Genetic::checkGenerationNumber(int &generationID) {
-    if ((generationID % DataManager::getInstance()->getUserNGenerations()) == 0 || generationID == DataManager::getInstance()->getLastGenerationFile()) {
+bool Genetic::checkProgress(int &generationID) {
+    if (frameCompleted) {
+        createImage();
         return true;
+    } else if ((generationID % DataManager::getInstance()->getUserNGenerations()) == 0) {
+        createImage();
+        return false;
     } else {
         return false;
     }
+}
+
+void Genetic::saveImage(QImage &image) {
+    DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() + 1);
+    QString path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
+    bool saved = image.save(path);
+    if (!saved) {
+        qDebug() << "ERROR: The image of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully saved.";
+        if (DataManager::getInstance()->getCurrentFileGeneration() != 0) {
+            DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() - 1);
+        }
+    }
+    if (checkProgress(generationID)) {
+        DataManager::getInstance()->setLastGenerationFile(DataManager::getInstance()->getCurrentFileGeneration());
+    }
+}
+
+void Genetic::createImage() {
+    QRgb color;
+    int colorIndex = 0;
+    QVector<QRgb>generationFrame = generation.last().chromosomeList[generation.last().fitChromosome].frame;
+    QImage generationImage(DataManager::getInstance()->getImagePath());
+    for (int y = DataManager::getInstance()->getFrameTopLeftPoint().y(); y < DataManager::getInstance()->getFrameBottomRightPoint().y(); ++y) {
+        for (int x = DataManager::getInstance()->getFrameTopLeftPoint().x(); x < DataManager::getInstance()->getFrameBottomRightPoint().x(); ++x) {
+            color = generationFrame.value(colorIndex++);
+            generationImage.setPixel(x, y, color);
+        }
+    }
+    saveImage(generationImage);
 }
 
 void Genetic::accuracyMeter(Chromosome &chromosome) {
@@ -25,9 +58,14 @@ void Genetic::accuracyMeter(Chromosome &chromosome) {
     }
 }
 
+void Genetic::createXML() {
+
+}
+
 void Genetic::geneticAlgorithm() {
     while (!frameCompleted) { // create generations
         generationID++; // increases the generationID counter to assign the current value to the current generation.
+        DataManager::getInstance()->setGenerationsAmount(DataManager::getInstance()->getGenerationsAmount() + 1); // increases the generation amount at Data Manager class
         if (generationID == 1) { //first generation - random
             Population initialPopulation;
             for (int c = 0; c < 10; ++c) { // population of 10 chromosomes (ID: 0-9)
@@ -142,23 +180,4 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
 
 void Genetic::mutation(QList<Population> &generations) {
 
-}
-
-void Genetic::createXML() {
-
-}
-
-void Genetic::createImage(int &generationNumber, QImage &image) {
-    bool saveStatement = checkGenerationNumber(generationNumber);
-    if (saveStatement) {
-        DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() + 1);
-        QString path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
-        bool saved = image.save(path);
-        if (!saved) {
-            qDebug() << "ERROR: The image of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully saved.";
-            if (DataManager::getInstance()->getCurrentFileGeneration() != 0) {
-                DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() - 1);
-            }
-        }
-    }
 }
