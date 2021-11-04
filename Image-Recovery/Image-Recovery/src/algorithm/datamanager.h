@@ -1,13 +1,10 @@
 #ifndef IMAGE_RECOVERY_DATAMANAGER_H
 #define IMAGE_RECOVERY_DATAMANAGER_H
 
-#include "src/data-structures/simplelist.h"
-#include "src/data-structures/simplenode.h"
-
 #include <QMap>
-#include <QString>
 #include <QRect>
 #include <QRgb>
+#include <QString>
 #include <QVector>
 
 /**
@@ -164,6 +161,22 @@ public:
     void setColorPaletteReference(const QList<QRgb> &colorPaletteReference);
 
     /**
+     * @fn const QString &getFilesPath() const
+     * @brief
+     * @return
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    const QString &getFilesPath() const;
+
+    /**
+     * @fn void setFilesPath(const QString &filesPath)
+     * @brief
+     * @param filesPath
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void setFilesPath(const QString &filesPath);
+
+    /**
      * @fn const QString &getImagePath() const
      * @brief
      * @return
@@ -180,22 +193,6 @@ public:
     void setImagePath(const QString &imagePath);
 
     /**
-     * @fn const QString &getGenImagePath() const
-     * @brief
-     * @return
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    const QString &getGenImagePath() const;
-
-    /**
-     * @fn void setGenImagePath(const QString &genImagePath)
-     * @brief
-     * @param genImagePath
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    void setGenImagePath(const QString &genImagePath);
-
-    /**
      * @fn const QString &getFinalImagePath() const
      * @brief
      * @return
@@ -210,38 +207,6 @@ public:
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void setFinalImagePath(const QString &finalImagePath);
-
-    /**
-     * @fn const QString &getXmlPath() const
-     * @brief
-     * @return
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    const QString &getXmlPath() const;
-
-    /**
-     * @fn void setXmlPath(const QString &xmlPath)
-     * @brief
-     * @param xmlPath
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    void setXmlPath(const QString &xmlPath);
-
-    /**
-     * @fn const SimpleList<SimpleList<SimpleNode<int>>> &getGenerationsList() const
-     * @brief
-     * @return
-     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
-     */
-    const SimpleList<SimpleList<SimpleNode<int>>> &getGenerationsList() const;
-
-    /**
-     * @fn void setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList)
-     * @brief
-     * @param generationsList
-     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
-     */
-    void setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList);
 
     /**
      * @fn DataManager(DataManager &other) = delete
@@ -279,11 +244,9 @@ private:
     QPoint frameBottomRightPoint; /**<  */
     QVector<QRgb> reference; /**<  */
     QList<QRgb> colorPaletteReference; /**<  */
+    QString filesPath = "../src/generations/";
     QString imagePath; /**<  */
-    QString genImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getCurrentFileGeneration()))) + ".png"; /**<  */
-    QString finalImagePath = "../src/generations/" + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png"; /**<  */
-    QString xmlPath = "../src/generations/"; /**<  */
-    SimpleList<SimpleList<SimpleNode<int>>> generationsList; /**<  */
+    QString finalImagePath = filesPath + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png"; /**<  */
     static DataManager *instance; /**<  */
 };
 

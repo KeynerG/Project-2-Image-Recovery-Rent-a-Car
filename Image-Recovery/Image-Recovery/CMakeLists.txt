@@ -24,9 +24,7 @@ set(PROJECT_SOURCES
         src/algorithm/datamanager.cpp
         src/algorithm/datamanager.h
         src/algorithm/genetic.cpp
-        src/algorithm/genetic.h
-        src/data-structures/simplelist.h
-        src/data-structures/simplenode.h)
+        src/algorithm/genetic.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Image-Recovery

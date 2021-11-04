@@ -22,6 +22,7 @@ struct Chromosome {
         frame = chromosomeFrame;
         fitness = chromosomeFitnessScore;
     }
+
     int ID; /**< Chromosome identifier. */
     QVector<QRgb> frame; /**< Solution to the missing frame. */
     int fitness; /**< Similarity score respect to the reference image. */
@@ -33,17 +34,18 @@ struct Chromosome {
  * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
  */
 struct Population {
-    QList<Chromosome> cromosome;
+    Population() {
+        ID = 0;
+        chromosomeList = QList<Chromosome>();
+        fitChromosome = 0;
+    }
+
     Population(int populationID, QList<Chromosome> &chromosomeFrame, int chromosomeIndex = 0) {
         ID = populationID;
         chromosomeList = chromosomeFrame;
         fitChromosome = chromosomeIndex;
     }
-    Population(){
-        ID = 0;
-        chromosomeList = cromosome;
-        fitChromosome = 0;
-    }
+
     int ID; /**< Population identifier. */
     QList<Chromosome> chromosomeList; /**< Chromosomes list in the current population. */
     int fitChromosome; /**< Index of the Chromosome with the best fitness. */
@@ -58,11 +60,10 @@ class Genetic {
 
 private:
     QList<Population> generation; /**<  */
-    Population population; /**< List of possible frames as solutions to the missing frame. */
     int generationID = 0;  /**< Generation identifier counter. */
     int referenceSize = DataManager::getInstance()->getReference().size();
-    int half = referenceSize/2;
-    int oneQuarter = referenceSize/4;
+    int half = referenceSize / 2;
+    int oneQuarter = referenceSize / 4;
     int oneEight = referenceSize / 8;
     bool frameCompleted; /**< Determines if the missing frame of the image has been completed successfully. */
 
@@ -116,7 +117,7 @@ public:
      * @param parent2
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void crossover(Chromosome parent1, Chromosome parent2);
+    void crossover(Chromosome parentA, Chromosome parentB);
 
     /**
      * @fn void mutation()

@@ -76,6 +76,14 @@ void DataManager::setColorPaletteReference(const QList<QRgb> &colorPaletteRefere
     DataManager::colorPaletteReference = colorPaletteReference;
 }
 
+const QString &DataManager::getFilesPath() const {
+    return filesPath;
+}
+
+void DataManager::setFilesPath(const QString &filesPath) {
+    DataManager::filesPath = filesPath;
+}
+
 const QString &DataManager::getImagePath() const {
     return imagePath;
 }
@@ -84,36 +92,12 @@ void DataManager::setImagePath(const QString &imagePath) {
     DataManager::imagePath = imagePath;
 }
 
-const QString &DataManager::getGenImagePath() const {
-    return genImagePath;
-}
-
-void DataManager::setGenImagePath(const QString &genImagePath) {
-    DataManager::genImagePath = genImagePath;
-}
-
 const QString &DataManager::getFinalImagePath() const {
     return finalImagePath;
 }
 
 void DataManager::setFinalImagePath(const QString &finalImagePath) {
     DataManager::finalImagePath = finalImagePath;
-}
-
-const QString &DataManager::getXmlPath() const {
-    return xmlPath;
-}
-
-void DataManager::setXmlPath(const QString &xmlPath) {
-    DataManager::xmlPath = xmlPath;
-}
-
-const SimpleList<SimpleList<SimpleNode<int>>> &DataManager::getGenerationsList() const {
-    return generationsList;
-}
-
-void DataManager::setGenerationsList(const SimpleList<SimpleList<SimpleNode<int>>> &generationsList) {
-    DataManager::generationsList = generationsList;
 }
 
 DataManager *DataManager::getInstance() {

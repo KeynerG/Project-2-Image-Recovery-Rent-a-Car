@@ -80,7 +80,7 @@ void MainScreen::imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner)
 }
 
 void MainScreen::on_startButton_clicked() {
-    QDir genDir("../src/generations/");
+    QDir genDir(DataManager::getInstance()->getFilesPath());
     if (!genDir.exists()) {
         genDir.mkpath("..//generations/");
     }
@@ -136,13 +136,13 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
     if (QDir(DataManager::getInstance()->getFinalImagePath()).exists()) {
         ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
     }
-    ui->filesPathLine->setText(QString(DataManager::getInstance()->getXmlPath()));
+    ui->filesPathLine->setText(QString(DataManager::getInstance()->getFilesPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(std::to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
 }
 
 void MainScreen::on_closeButton_clicked() {
-    QDir genDir("../src/generations/");
+    QDir genDir(DataManager::getInstance()->getFilesPath());
     if (genDir.exists()) {
         genDir.removeRecursively();
     }
@@ -218,6 +218,6 @@ void MainScreen::on_progressBar_valueChanged(int value) {
 }
 
 void MainScreen::on_openButton_clicked() {
-    QString filesPath = QString(DataManager::getInstance()->getXmlPath());
+    QString filesPath = QString(DataManager::getInstance()->getFilesPath());
     QDesktopServices::openUrl(QUrl::fromLocalFile(filesPath));
 }
