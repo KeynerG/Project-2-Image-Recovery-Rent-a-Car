@@ -65,7 +65,7 @@ private:
     int half = referenceSize / 2;
     int oneQuarter = referenceSize / 4;
     int oneEight = referenceSize / 8;
-    bool frameCompleted; /**< Determines if the missing frame of the image has been completed successfully. */
+    bool frameCompleted = false; /**< Determines if the missing frame of the image has been completed successfully. */
 
 public:
 
