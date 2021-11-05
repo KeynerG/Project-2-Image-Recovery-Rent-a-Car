@@ -1097,7 +1097,7 @@
       <rect>
        <x>350</x>
        <y>230</y>
-       <width>145</width>
+       <width>311</width>
        <height>58</height>
       </rect>
      </property>
@@ -1334,7 +1334,7 @@
          </font>
         </property>
         <property name="text">
-         <string>&amp;Pattern</string>
+         <string>&amp;Multicolored</string>
         </property>
        </widget>
       </item>
@@ -1464,7 +1464,7 @@
          </font>
         </property>
         <property name="text">
-         <string>&amp;Solid</string>
+         <string>&amp;Monochromatic</string>
         </property>
        </widget>
       </item>
@@ -1496,6 +1496,9 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="backgroundSetup">
@@ -4715,6 +4718,9 @@
      <property name="text">
       <string/>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="backgroundGeneration">
      <property name="geometry">
@@ -5940,6 +5946,9 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <zorder>backgroundFinal</zorder>

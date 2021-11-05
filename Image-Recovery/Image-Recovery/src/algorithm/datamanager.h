@@ -239,7 +239,7 @@ private:
     int currentFileGeneration = 0; /**<  */
     int lastGenerationFile = 1; /**<  */
     int userNGenerations = 1; /**<  */
-    int generationsAmount = 1; /**<  */
+    int generationsAmount = 0; /**<  */
     QPoint frameTopLeftPoint; /**<  */
     QPoint frameBottomRightPoint; /**<  */
     QVector<QRgb> reference; /**<  */

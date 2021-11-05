@@ -124,19 +124,20 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
     ui->generationSlider->setMaximum(DataManager::getInstance()->getLastGenerationFile());
+    if (ui->solidButton->isChecked()) {
+        ui->generationImageLabel->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
+    }
     ui->stackedWidget->setCurrentIndex(5);
 }
 
 void MainScreen::on_displayFinalScreenButton_clicked() {
     if (ui->solidButton->isChecked()) {
-        ui->formatSelectedLabel->setText("Solid");
+        ui->formatSelectedLabel->setText("Monochromatic");
     }
     if (ui->patternButton->isChecked()) {
-        ui->formatSelectedLabel->setText("Pattern");
+        ui->formatSelectedLabel->setText("Multicolored");
     }
-    if (QDir(DataManager::getInstance()->getFinalImagePath()).exists()) {
-        ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
-    }
+    ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getFilesPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(std::to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
