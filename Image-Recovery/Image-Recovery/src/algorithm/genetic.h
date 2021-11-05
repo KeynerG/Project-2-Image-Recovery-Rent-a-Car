@@ -48,13 +48,14 @@ struct Population {
 
     int ID; /**< Population identifier. */
     QList<Chromosome> chromosomeList; /**< Chromosomes list in the current population. */
-    int fitChromosome; /**< Index of the Chromosome with the best fitness. */
+    int fitChromosome; /**< Index of the Chromosome with the best fitness score. */
 };
 
 /**
  * @class Genetic
  * @brief
  * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+ * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
  */
 class Genetic {
 
@@ -69,16 +70,15 @@ private:
 
 public:
 
-    Genetic();
+    Genetic(); /**< Genetic class constructor. */
 
     /**
-     * @fn bool checkProgress(int &generationID)
+     * @fn void checkProgress(int &generationID)
      * @brief
      * @param generationID
-     * @return boolean
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    bool checkProgress(int &generationID);
+    void checkProgress(int &generationID);
 
     /**
      * @fn void saveImage(QImage &image)
@@ -137,8 +137,8 @@ public:
     /**
      * @fn void crossover(Chromosome parentA, Chromosome parentB)
      * @brief
-     * @param parent1
-     * @param parent2
+     * @param parentA
+     * @param parentB
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
     void crossover(Chromosome parentA, Chromosome parentB);

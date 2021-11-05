@@ -2,37 +2,31 @@
 
 Genetic::Genetic() {}
 
-bool Genetic::checkProgress(int &generationID) {
-    if (frameCompleted) {
+void Genetic::checkProgress(int &generationID) {
+    if (frameCompleted || (generationID % DataManager::getInstance()->getUserNGenerations()) == 0) {
         createImage();
-        return true;
-    } else if ((generationID % DataManager::getInstance()->getUserNGenerations()) == 0) {
-        createImage();
-        return false;
-    } else {
-        return false;
     }
 }
 
 void Genetic::saveImage(QImage &image) {
     DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() + 1);
-    QString path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(
-            std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
+    QString path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
     bool saved = image.save(path);
     if (!saved) {
-        qDebug() << "ERROR: The image of generation " << DataManager::getInstance()->getCurrentFileGeneration()
-                 << " was not successfully saved.";
+        qDebug() << "ERROR: The image of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully saved.";
         if (DataManager::getInstance()->getCurrentFileGeneration() != 0) {
-            DataManager::getInstance()->setCurrentFileGeneration(
-                    DataManager::getInstance()->getCurrentFileGeneration() - 1);
+            DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() - 1);
         }
+    }
+    if (frameCompleted) {
+        DataManager::getInstance()->setLastGenerationFile(DataManager::getInstance()->getCurrentFileGeneration());
     }
 }
 
 void Genetic::createImage() {
     QRgb color;
     int colorIndex = 0;
-    QVector<QRgb>generationFrame = generation.last().chromosomeList[generation.last().fitChromosome].frame;
+    QVector<QRgb> generationFrame = generation.last().chromosomeList[generation.last().fitChromosome].frame;
     QImage generationImage(DataManager::getInstance()->getImagePath());
     for (int y = DataManager::getInstance()->getFrameTopLeftPoint().y(); y < DataManager::getInstance()->getFrameBottomRightPoint().y(); ++y) {
         for (int x = DataManager::getInstance()->getFrameTopLeftPoint().x(); x < DataManager::getInstance()->getFrameBottomRightPoint().x(); ++x) {
@@ -67,7 +61,7 @@ void Genetic::createXML() {
 void Genetic::geneticAlgorithm() {
     while (!frameCompleted) { // create generations
         generationID++; // increases the generationID counter to assign the current value to the current generation.
-        DataManager::getInstance()->setGenerationsAmount(DataManager::getInstance()->getGenerationsAmount()+1); // increases the generation amount at Data Manager class
+        DataManager::getInstance()->setGenerationsAmount(DataManager::getInstance()->getGenerationsAmount() + 1); // increases the generation amount at Data Manager class
         if (generationID == 1) { //first generation - random
             Population initialPopulation;
             for (int c = 0; c < 10; ++c) { // population of 10 chromosomes (ID: 0-9)
@@ -105,7 +99,9 @@ void Genetic::fitness(QList<Population> &generations) {
 void Genetic::selection(QList<Population> &generations) { //Select the two Chromosomes with the best fitness
     int parentA = generations.last().fitChromosome;
     int parentB = 0;
-    if (parentA == 0) { parentB = 1; }
+    if (parentA == 0) {
+        parentB = 1;
+    }
     for (int c = 0; c < 10; ++c) {
         if (c == parentA) {
             continue;
@@ -179,7 +175,6 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
             childFrame.append(parentB.frame.sliced(oneQuarter * 3, oneEight));
             childFrame.append(parentA.frame.sliced(oneEight * 7));
         }
-
         child.frame = childFrame;
         population.chromosomeList.append(child);
     }
@@ -187,7 +182,9 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
     qDebug() << "Generations: " << generation.size();
 }
 
-void Genetic::mutation(QList<Population> &keyner) {
-    int valerie = rand() % 10;
-    QVector<QRgb> jose = keyner.last().chromosomeList[valerie].frame;
+void Genetic::mutation(QList<Population> &generations) {
+    int chromosomeSelected = rand() % 10;
+    int colorSelected = rand() % DataManager::getInstance()->getColorPaletteReference().size();
+    int genSelected = rand() %  generations.last().chromosomeList[chromosomeSelected].frame.size();
+    QVector<QRgb> frameSelected = generations.last().chromosomeList[chromosomeSelected].frame;
 }
