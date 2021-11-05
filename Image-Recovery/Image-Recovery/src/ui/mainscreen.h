@@ -2,6 +2,7 @@
 #define IMAGE_RECOVERY_MAINSCREEN_H
 
 #include "src/algorithm/datamanager.h"
+#include "src/algorithm/genetic.h"
 
 #include <QDesktopServices>
 #include <QDir>
@@ -198,6 +199,7 @@ private slots:
     void on_openButton_clicked();
 
 private:
+    Genetic genetic;
     Ui::MainScreen *ui; /**<  */
     QMessageBox *qMessageBox; /**<  */
     QString userImagePath; /**<  */

@@ -69,6 +69,8 @@ private:
 
 public:
 
+    Genetic();
+
     /**
      * @fn bool checkProgress(int &generationID)
      * @brief

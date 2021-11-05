@@ -1,5 +1,7 @@
 #include "genetic.h"
 
+Genetic::Genetic() {}
+
 bool Genetic::checkProgress(int &generationID) {
     if (frameCompleted) {
         createImage();
@@ -84,19 +86,26 @@ void Genetic::geneticAlgorithm() {
         } else {
             selection(generation); //Selection and crossover, selection calls the crossover function
         }
+        fitness(generation);
+        checkProgress(generationID);
     }
 }
 
 void Genetic::fitness(QList<Population> &generations) {
-
+    int bestChromosome;
+    for (int i = 0; i < 10; ++i) {
+        accuracyMeter(generations.last().chromosomeList[i]);
+        if(generations.last().chromosomeList[i].fitness > generations.last().chromosomeList[bestChromosome].fitness){
+            bestChromosome = i;
+        }
+    }
+    generations.last().fitChromosome =bestChromosome;
 }
 
 void Genetic::selection(QList<Population> &generations) { //Select the two Chromosomes with the best fitness
     int parentA = generations.last().fitChromosome;
     int parentB;
-    if (parentA == 0) {
-        parentB = 1;
-    }
+    if (parentA == 0) {parentB = 1;}
     for (int c = 0; c < 10; ++c) {
         if (c == parentA) {
             continue;
@@ -178,6 +187,9 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
     generation.append(population);
 }
 
-void Genetic::mutation(QList<Population> &generations) {
-
+void Genetic::mutation(QList<Population> &keyner) {
+    int valerie = rand() % 10;
+    QVector<QRgb> jose =  keyner.last().chromosomeList[valerie].frame;
 }
+
+

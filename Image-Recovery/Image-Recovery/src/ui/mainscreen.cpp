@@ -119,6 +119,7 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
     DataManager::getInstance()->setReference(geneticReference);
     DataManager::getInstance()->setColorPaletteReference(colorPalette);
     saveGenImage(*userImage);
+    genetic.geneticAlgorithm();
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
