@@ -56,7 +56,8 @@ void Genetic::createXML() {
 }
 
 void Genetic::geneticAlgorithm() {
-    while (!frameCompleted) { // create generations
+//    while (!frameCompleted) { // create generations
+    while (generationID < 10) {
         generationID++; // increases the generationID counter to assign the current value to the current generation.
         DataManager::getInstance()->setGenerationsAmount(DataManager::getInstance()->getGenerationsAmount() + 1); // increases the generation amount at Data Manager class
         if (generationID == 1) { //first generation - random
@@ -102,14 +103,13 @@ void Genetic::selection(QList<Population> &generations) { //Select the two Chrom
         parentB = 1;
     }
     for (int c = 0; c < 10; ++c) {
-        if (c == parentA) {
-            continue;
-        }
-        if (generations.last().chromosomeList[c].fitness > generations.last().chromosomeList[parentB].fitness) {
+        if (parentA != c && generations.last().chromosomeList[c].fitness > generations.last().chromosomeList[parentB].fitness) {
             parentB = c;
         }
     }
-    crossover(generations.last().chromosomeList[parentA], generations.last().chromosomeList[parentA]);
+    qDebug() << "Parent A: " << parentA;
+    qDebug() << "Parent B: " << parentB;
+    crossover(generations.last().chromosomeList[parentA], generations.last().chromosomeList[parentB]);
 }
 
 void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
@@ -179,6 +179,7 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
                 qDebug() << "ERROR: Child identifier out of range.";
         }
         child.frame = childFrame;
+        qDebug() << "Child " << i << child.frame;
         population.chromosomeList.append(child);
     }
     generation.append(population);
@@ -191,17 +192,13 @@ void Genetic::mutation(QList<Population> &generations) {
     QVector<QRgb> colorPalette = DataManager::getInstance()->getColorPaletteReference();
     int mutationsAmount = rand() % frameSelected.size() / 2 + 1;
     QList<int> gensMutated;
-    qDebug() << "Chromosome's frame: " << frameSelected;
-    qDebug() << "Mutations Amount: " << mutationsAmount;
     for (int g = 0; g < mutationsAmount; ++g) {
         int genSelected = rand() % frameSelected.size();
         int colorSelected = rand() % colorPalette.size();
         if (gensMutated.count(genSelected) == 0) {
-            qDebug() << "Gen " << genSelected << " - Value " << frameSelected[genSelected] << " || Color " << colorSelected << " - Value " << colorPalette[colorSelected];
             if (frameSelected[genSelected] != colorPalette[colorSelected]) {
                 frameSelected[genSelected] = colorPalette[colorSelected];
                 gensMutated.append(genSelected);
-                qDebug() << "Mutation: Gen " << genSelected << " - Color " << frameSelected[genSelected];
             } else {
                 --g;
             }
@@ -209,5 +206,5 @@ void Genetic::mutation(QList<Population> &generations) {
             --g;
         }
     }
-    qDebug() << "Chromosome's new frame: " << frameSelected;
+    generations.last().chromosomeList[chromosomeRandom].frame = frameSelected;
 }
