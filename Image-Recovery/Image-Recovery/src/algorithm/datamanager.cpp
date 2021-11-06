@@ -92,14 +92,6 @@ void DataManager::setImagePath(const QString &imagePath) {
     DataManager::imagePath = imagePath;
 }
 
-const QString &DataManager::getFinalImagePath() const {
-    return finalImagePath;
-}
-
-void DataManager::setFinalImagePath(const QString &finalImagePath) {
-    DataManager::finalImagePath = finalImagePath;
-}
-
 DataManager *DataManager::getInstance() {
     if (instance == nullptr) {
         instance = new DataManager();

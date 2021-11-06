@@ -5071,7 +5071,7 @@
       <rect>
        <x>350</x>
        <y>199</y>
-       <width>134</width>
+       <width>161</width>
        <height>25</height>
       </rect>
      </property>
@@ -5295,7 +5295,7 @@
       <rect>
        <x>350</x>
        <y>230</y>
-       <width>131</width>
+       <width>161</width>
        <height>19</height>
       </rect>
      </property>
@@ -5797,7 +5797,7 @@
       <rect>
        <x>350</x>
        <y>279</y>
-       <width>121</width>
+       <width>221</width>
        <height>25</height>
       </rect>
      </property>
@@ -5901,7 +5901,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Generations</string>
+      <string>Generations Amount</string>
      </property>
     </widget>
     <widget class="QLabel" name="backgroundFinal">

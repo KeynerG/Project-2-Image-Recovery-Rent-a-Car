@@ -192,6 +192,13 @@ private slots:
     void on_progressBar_valueChanged(int value);
 
     /**
+     * @fn void on_generationSlider_valueChanged(int value)
+     * @param value
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void on_generationSlider_valueChanged(int value);
+
+    /**
      * @fn void on_openButton_clicked()
      * @brief
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -199,7 +206,7 @@ private slots:
     void on_openButton_clicked();
 
 private:
-    Genetic genetic;
+    Genetic genetic; /**<  */
     Ui::MainScreen *ui; /**<  */
     QMessageBox *qMessageBox; /**<  */
     QString userImagePath; /**<  */

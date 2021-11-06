@@ -193,22 +193,6 @@ public:
     void setImagePath(const QString &imagePath);
 
     /**
-     * @fn const QString &getFinalImagePath() const
-     * @brief
-     * @return
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    const QString &getFinalImagePath() const;
-
-    /**
-     * @fn void setFinalImagePath(const QString &finalImagePath)
-     * @brief
-     * @param finalImagePath
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    void setFinalImagePath(const QString &finalImagePath);
-
-    /**
      * @fn DataManager(DataManager &other) = delete
      * @brief
      * @param other

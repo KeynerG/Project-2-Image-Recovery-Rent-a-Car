@@ -40,17 +40,14 @@ void Genetic::createImage() {
 void Genetic::accuracyMeter(Chromosome &chromosome) {
     QVector<QRgb> reference = DataManager::getInstance()->getReference(); /**< Reference of image missing frame. */
     int sharedGenes = 0; /**< Number of pixels shared by the solution and the reference frame. */
-    if (chromosome.frame == reference) {
-        frameCompleted = true;
-        chromosome.fitness = 100;
-    } else {
-        frameCompleted = false;
-        for (int g = 0; g < reference.size(); ++g) {
-            if (chromosome.frame[g] == reference[g]) {
-                sharedGenes++;
-            }
+    for (int g = 0; g < reference.size(); ++g) {
+        if (chromosome.frame[g] == reference[g]) {
+            sharedGenes++;
         }
-        chromosome.fitness = round((sharedGenes * 100) / reference.size());
+    }
+    chromosome.fitness = round((sharedGenes * 100) / reference.size());
+    if (chromosome.fitness == 100) {
+        frameCompleted = true;
     }
 }
 
@@ -76,13 +73,15 @@ void Genetic::geneticAlgorithm() {
                 qDebug() << "Population size: " << initialPopulation.chromosomeList.size(); // chromosomes amount
             }
             generation.append(initialPopulation);
-            qDebug() << "Generations: " << generation.size();
         } else {
             selection(generation); //Selection and crossover, selection calls the crossover function
+            mutation(generation);
         }
         fitness(generation);
         checkProgress(generationID);
+        qDebug() << "Generation: " << generationID;
     }
+    qDebug() << "Generations Amount: " << generationID;
 }
 
 void Genetic::fitness(QList<Population> &generations) {
@@ -179,12 +178,32 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
         population.chromosomeList.append(child);
     }
     generation.append(population);
-    qDebug() << "Generations: " << generation.size();
 }
 
 void Genetic::mutation(QList<Population> &generations) {
-    int chromosomeSelected = rand() % 10;
-    int colorSelected = rand() % DataManager::getInstance()->getColorPaletteReference().size();
-    int genSelected = rand() %  generations.last().chromosomeList[chromosomeSelected].frame.size();
-    QVector<QRgb> frameSelected = generations.last().chromosomeList[chromosomeSelected].frame;
+    int chromosomeRandom = rand() % 10;
+    Chromosome chromosomeSelected = generations.last().chromosomeList[chromosomeRandom];
+    QVector<QRgb> frameSelected = chromosomeSelected.frame;
+    QVector<QRgb> colorPalette = DataManager::getInstance()->getColorPaletteReference();
+    int mutationsAmount = rand() % frameSelected.size() / 2 + 1;
+    QList<int> gensMutated;
+    qDebug() << "Chromosome's frame: " << frameSelected;
+    qDebug() << "Mutations Amount: " << mutationsAmount;
+    for (int g = 0; g < mutationsAmount; ++g) {
+        int genSelected = rand() % frameSelected.size();
+        int colorSelected = rand() % colorPalette.size();
+        if (gensMutated.count(genSelected) == 0) {
+            qDebug() << "Gen " << genSelected << " - Value " << frameSelected[genSelected] << " || Color " << colorSelected << " - Value " << colorPalette[colorSelected];
+            if (frameSelected[genSelected] != colorPalette[colorSelected]) {
+                frameSelected[genSelected] = colorPalette[colorSelected];
+                gensMutated.append(genSelected);
+                qDebug() << "Mutation: Gen " << genSelected << " - Color " << frameSelected[genSelected];
+            } else {
+                --g;
+            }
+        } else {
+            --g;
+        }
+    }
+    qDebug() << "Chromosome's new frame: " << frameSelected;
 }

@@ -123,10 +123,12 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
-    ui->generationSlider->setMaximum(DataManager::getInstance()->getLastGenerationFile());
-    if (ui->solidButton->isChecked()) {
-        ui->generationImageLabel->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
+    if (DataManager::getInstance()->getGenerationsAmount() == 1) {
+        ui->generationSlider->setHidden(true);
     }
+    ui->generationSlider->setMaximum(DataManager::getInstance()->getLastGenerationFile());
+    ui->generationSlider->setValue(ui->generationSlider->maximum());
+    ui->generationImageLabel->setPixmap(QPixmap("../src/generations/1.png").scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
     ui->stackedWidget->setCurrentIndex(5);
 }
 
@@ -137,7 +139,8 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
     if (ui->patternButton->isChecked()) {
         ui->formatSelectedLabel->setText("Multicolored");
     }
-    ui->resultImage->setPixmap(QPixmap(DataManager::getInstance()->getFinalImagePath()).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
+    QString finalImagePath = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getLastGenerationFile()))) + ".png";
+    ui->resultImage->setPixmap(QPixmap(finalImagePath).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getFilesPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(std::to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
@@ -163,7 +166,6 @@ void MainScreen::on_browseButton_clicked() {
             userImagePath = imagePath;
             ui->imagePathLine->setText(imagePath);
             ui->userImage->setPixmap(QPixmap::fromImage(imageSelected.scaled(ui->userImage->size(), Qt::AspectRatioMode::KeepAspectRatio, Qt::TransformationMode::SmoothTransformation)));
-
             ui->userImageCrop->setPixmap(QPixmap::fromImage(imageSelected.scaled(ui->userImageCrop->size(), Qt::AspectRatioMode::KeepAspectRatio, Qt::TransformationMode::SmoothTransformation)));
             ui->topHorizontalSlider->setMaximum(imageSelected.width());
             ui->topVerticalSlider->setMaximum(imageSelected.height());
@@ -180,14 +182,12 @@ void MainScreen::on_browseButton_clicked() {
 void MainScreen::on_solidButton_clicked() {
     ui->generationSpinBox->setValue(1);
     ui->generationSpinBox->setEnabled(false);
-    ui->generationSlider->setHidden(true);
     checkUserInformation();
 }
 
 void MainScreen::on_patternButton_clicked() {
     ui->generationSpinBox->setValue(1000);
     ui->generationSpinBox->setEnabled(true);
-    ui->generationSlider->setHidden(false);
     checkUserInformation();
 }
 
@@ -217,6 +217,11 @@ void MainScreen::on_imageProgressBar_valueChanged(int value) {
 
 void MainScreen::on_progressBar_valueChanged(int value) {
     checkUserInformation();
+}
+
+void MainScreen::on_generationSlider_valueChanged(int value) {
+    QString genImagePath = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(value))) + ".png";
+    ui->generationImageLabel->setPixmap(QPixmap(genImagePath).scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
 }
 
 void MainScreen::on_openButton_clicked() {
