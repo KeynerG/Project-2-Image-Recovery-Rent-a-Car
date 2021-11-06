@@ -118,61 +118,65 @@ void Genetic::crossover(Chromosome parentA, Chromosome parentB) {
     for (int i = 0; i < 10; ++i) {
         childFrame.clear();
         Chromosome child(i, childFrame);
-        if (i == 0) {
-            childFrame = parentA.frame;
-        }
-        if (i == 1) {
-            childFrame = parentB.frame;
-        }
-        if (i == 2) {
-            childFrame = parentA.frame.sliced(0, half);
-            childFrame.append(parentB.frame.sliced(half));
-        }
-        if (i == 3) {
-            childFrame.append(parentB.frame.sliced(0, half));
-            childFrame.append(parentA.frame.sliced(half));
-        }
-        if (i == 4) {
-            childFrame.append(parentA.frame.sliced(0, oneQuarter));
-            childFrame.append(parentB.frame.sliced(oneQuarter, oneQuarter));
-            childFrame.append(parentA.frame.sliced(half, oneQuarter));
-            childFrame.append(parentB.frame.sliced(oneQuarter * 3));
-        }
-        if (i == 5) {
-            childFrame.append(parentB.frame.sliced(0, oneQuarter));
-            childFrame.append(parentA.frame.sliced(oneQuarter, oneQuarter));
-            childFrame.append(parentB.frame.sliced(half, oneQuarter));
-            childFrame.append(parentA.frame.sliced(oneQuarter * 3));
-        }
-        if (i == 6) {
-            childFrame.append(parentB.frame.sliced(0, oneQuarter));
-            childFrame.append(parentA.frame.sliced(oneQuarter, half));
-            childFrame.append(parentB.frame.sliced(oneQuarter * 3));
-        }
-        if (i == 7) {
-            childFrame.append(parentA.frame.sliced(0, oneQuarter));
-            childFrame.append(parentB.frame.sliced(oneQuarter, half));
-            childFrame.append(parentA.frame.sliced(oneQuarter * 3));
-        }
-        if (i == 8) {
-            childFrame.append(parentA.frame.sliced(0, oneEight));
-            childFrame.append(parentB.frame.sliced(oneEight, oneEight));
-            childFrame.append(parentA.frame.sliced(oneQuarter, oneEight));
-            childFrame.append(parentB.frame.sliced(oneEight * 3, oneEight));
-            childFrame.append(parentA.frame.sliced(half, oneEight));
-            childFrame.append(parentB.frame.sliced(oneEight * 5, oneEight));
-            childFrame.append(parentA.frame.sliced(oneQuarter * 3, oneEight));
-            childFrame.append(parentB.frame.sliced(oneEight * 7));
-        }
-        if (i == 9) {
-            childFrame.append(parentB.frame.sliced(0, oneEight));
-            childFrame.append(parentA.frame.sliced(oneEight, oneEight));
-            childFrame.append(parentB.frame.sliced(oneQuarter, oneEight));
-            childFrame.append(parentA.frame.sliced(oneEight * 3, oneEight));
-            childFrame.append(parentB.frame.sliced(half, oneEight));
-            childFrame.append(parentA.frame.sliced(oneEight * 5, oneEight));
-            childFrame.append(parentB.frame.sliced(oneQuarter * 3, oneEight));
-            childFrame.append(parentA.frame.sliced(oneEight * 7));
+        switch (i) {
+            case 0:
+                childFrame = parentA.frame;
+                break;
+            case 1:
+                childFrame = parentB.frame;
+                break;
+            case 2:
+                childFrame = parentA.frame.sliced(0, half);
+                childFrame.append(parentB.frame.sliced(half));
+                break;
+            case 3:
+                childFrame.append(parentB.frame.sliced(0, half));
+                childFrame.append(parentA.frame.sliced(half));
+                break;
+            case 4:
+                childFrame.append(parentA.frame.sliced(0, oneQuarter));
+                childFrame.append(parentB.frame.sliced(oneQuarter, oneQuarter));
+                childFrame.append(parentA.frame.sliced(half, oneQuarter));
+                childFrame.append(parentB.frame.sliced(oneQuarter * 3));
+                break;
+            case 5:
+                childFrame.append(parentB.frame.sliced(0, oneQuarter));
+                childFrame.append(parentA.frame.sliced(oneQuarter, oneQuarter));
+                childFrame.append(parentB.frame.sliced(half, oneQuarter));
+                childFrame.append(parentA.frame.sliced(oneQuarter * 3));
+                break;
+            case 6:
+                childFrame.append(parentB.frame.sliced(0, oneQuarter));
+                childFrame.append(parentA.frame.sliced(oneQuarter, half));
+                childFrame.append(parentB.frame.sliced(oneQuarter * 3));
+                break;
+            case 7:
+                childFrame.append(parentA.frame.sliced(0, oneQuarter));
+                childFrame.append(parentB.frame.sliced(oneQuarter, half));
+                childFrame.append(parentA.frame.sliced(oneQuarter * 3));
+                break;
+            case 8:
+                childFrame.append(parentA.frame.sliced(0, oneEight));
+                childFrame.append(parentB.frame.sliced(oneEight, oneEight));
+                childFrame.append(parentA.frame.sliced(oneQuarter, oneEight));
+                childFrame.append(parentB.frame.sliced(oneEight * 3, oneEight));
+                childFrame.append(parentA.frame.sliced(half, oneEight));
+                childFrame.append(parentB.frame.sliced(oneEight * 5, oneEight));
+                childFrame.append(parentA.frame.sliced(oneQuarter * 3, oneEight));
+                childFrame.append(parentB.frame.sliced(oneEight * 7));
+                break;
+            case 9:
+                childFrame.append(parentB.frame.sliced(0, oneEight));
+                childFrame.append(parentA.frame.sliced(oneEight, oneEight));
+                childFrame.append(parentB.frame.sliced(oneQuarter, oneEight));
+                childFrame.append(parentA.frame.sliced(oneEight * 3, oneEight));
+                childFrame.append(parentB.frame.sliced(half, oneEight));
+                childFrame.append(parentA.frame.sliced(oneEight * 5, oneEight));
+                childFrame.append(parentB.frame.sliced(oneQuarter * 3, oneEight));
+                childFrame.append(parentA.frame.sliced(oneEight * 7));
+                break;
+            default:
+                qDebug() << "ERROR: Child identifier out of range.";
         }
         child.frame = childFrame;
         population.chromosomeList.append(child);
