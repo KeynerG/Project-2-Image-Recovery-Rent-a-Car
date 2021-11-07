@@ -57,6 +57,13 @@ public:
      */
     void imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner);
 
+    /**
+     * @fn void sendData()
+     * @brief
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void sendData();
+
 private slots:
 
     /**

@@ -3,6 +3,7 @@
 
 #include "src/algorithm/datamanager.h"
 
+#include <iostream>
 #include <QDebug>
 #include <QImage>
 #include <QList>

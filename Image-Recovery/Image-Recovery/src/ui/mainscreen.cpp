@@ -110,7 +110,7 @@ void MainScreen::on_displayPreviewScreenButton_clicked() {
     imageProcessing(topLeft, bottomRight);
 }
 
-void MainScreen::on_displayLoadScreenButton_clicked() {
+void MainScreen::sendData(){
     ui->stackedWidget->setCurrentIndex(4);
     DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
     DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
@@ -119,6 +119,11 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
     DataManager::getInstance()->setReference(geneticReference);
     DataManager::getInstance()->setColorPaletteReference(colorPalette);
     saveGenImage(*userImage);
+}
+
+void MainScreen::on_displayLoadScreenButton_clicked() {
+    ui->stackedWidget->setCurrentIndex(4);
+    sendData();
     genetic.geneticAlgorithm();
 }
 
@@ -127,7 +132,6 @@ void MainScreen::on_displayGenerationScreenButton_clicked() {
         ui->generationSlider->setHidden(true);
     }
     ui->generationSlider->setMaximum(DataManager::getInstance()->getLastGenerationFile());
-    ui->generationSlider->setValue(ui->generationSlider->maximum());
     ui->generationImageLabel->setPixmap(QPixmap("../src/generations/1.png").scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
     ui->stackedWidget->setCurrentIndex(5);
 }
@@ -186,7 +190,7 @@ void MainScreen::on_solidButton_clicked() {
 }
 
 void MainScreen::on_patternButton_clicked() {
-    ui->generationSpinBox->setValue(1000);
+    ui->generationSpinBox->setValue(100000);
     ui->generationSpinBox->setEnabled(true);
     checkUserInformation();
 }
