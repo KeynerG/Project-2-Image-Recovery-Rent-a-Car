@@ -59,26 +59,20 @@ struct Population {
  */
 class Genetic {
 
-private:
+public:
     QList<Population> generation; /**<  */
     int generationID = 0;  /**< Generation identifier counter. */
-    int referenceSize = DataManager::getInstance()->getReference().size();
-    int half = referenceSize / 2;
-    int oneQuarter = referenceSize / 4;
-    int oneEight = referenceSize / 8;
     bool frameCompleted = false; /**< Determines if the missing frame of the image has been completed successfully. */
-
-public:
 
     Genetic(); /**< Genetic class constructor. */
 
     /**
      * @fn void checkProgress(int &generationID)
      * @brief
-     * @param generationID
+     * @param generationId
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    void checkProgress(int &generationID);
+    void checkProgress(int &generationId);
 
     /**
      * @fn void saveImage(QImage &image)
@@ -86,7 +80,7 @@ public:
      * @param image
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    void saveImage(QImage &image);
+    void saveImage(QImage &image) const;
 
     /**
      * @fn void createImage()
@@ -141,7 +135,7 @@ public:
      * @param parentB
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void crossover(Chromosome parentA, Chromosome parentB);
+    void crossover(const Chromosome &parentA, const  Chromosome &parentB);
 
     /**
      * @fn void mutation(QList<Population> &generations)
@@ -149,7 +143,7 @@ public:
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void mutation(QList<Population> &generations);
+    void mutation(QList<Population> &generations) const;
 };
 
 #endif //IMAGE_RECOVERY_GENETIC_H

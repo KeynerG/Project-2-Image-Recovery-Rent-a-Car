@@ -12,8 +12,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt/6.2.0/gcc_64/lib/cmake)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         resources.qrc
@@ -43,7 +43,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(Image-Recovery PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Image-Recovery PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
 
 set_target_properties(Image-Recovery PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
