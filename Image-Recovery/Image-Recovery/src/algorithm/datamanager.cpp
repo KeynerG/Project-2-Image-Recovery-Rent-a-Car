@@ -4,14 +4,6 @@ DataManager *DataManager::instance = nullptr;
 
 DataManager::DataManager() {}
 
-bool DataManager::isSolidImage() const {
-    return solidImage;
-}
-
-void DataManager::setIsSolidImage(bool solidImage) {
-    DataManager::solidImage = solidImage;
-}
-
 int DataManager::getCurrentFileGeneration() const {
     return currentFileGeneration;
 }

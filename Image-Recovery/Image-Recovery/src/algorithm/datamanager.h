@@ -219,7 +219,6 @@ protected:
     DataManager(); /**< DataManager class constructor. */
 
 private:
-    bool solidImage; /**<  */
     int currentFileGeneration = 0; /**<  */
     int lastGenerationFile = 1; /**<  */
     int userNGenerations = 1; /**<  */
@@ -230,7 +229,6 @@ private:
     QList<QRgb> colorPaletteReference; /**<  */
     QString filesPath = "../src/generations/";
     QString imagePath; /**<  */
-    QString finalImagePath = filesPath + QString(QString::fromStdString(std::to_string(getLastGenerationFile()))) + ".png"; /**<  */
     static DataManager *instance; /**<  */
 };
 

@@ -7,9 +7,9 @@
 #include <QDebug>
 #include <QImage>
 #include <QList>
+#include <QProgressBar>
 #include <QRgb>
 #include <QVector>
-#include <QProgressBar>
 
 using namespace std;
 
@@ -138,7 +138,7 @@ public:
      * @param parentB
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void crossover(const Chromosome &parentA, const  Chromosome &parentB);
+    void crossover(const Chromosome &parentA, const Chromosome &parentB);
 
     /**
      * @fn void mutation(QList<Population> &generations)

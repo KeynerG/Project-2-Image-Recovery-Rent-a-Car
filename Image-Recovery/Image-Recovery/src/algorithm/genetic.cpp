@@ -140,12 +140,12 @@ void Genetic::crossover(const Chromosome &parentA, const Chromosome &parentB) {
                 childFrame.append(parentA.frame.sliced(third));
                 break;
             case 4:
-                childFrame.append(parentA.frame.sliced(0,third*2));
-                childFrame.append(parentB.frame.sliced(third*2));
+                childFrame.append(parentA.frame.sliced(0, third * 2));
+                childFrame.append(parentB.frame.sliced(third * 2));
                 break;
             case 5:
-                childFrame.append(parentB.frame.sliced(0,third*2));
-                childFrame.append(parentA.frame.sliced(third*2));
+                childFrame.append(parentB.frame.sliced(0, third * 2));
+                childFrame.append(parentA.frame.sliced(third * 2));
                 break;
             case 6:
                 childFrame.append(parentA.frame.sliced(0, quarter));
@@ -211,7 +211,7 @@ void Genetic::mutation(QList<Population> &generations) const {
     generations.last().chromosomeList[chromosomeRandom].frame = frameSelected;
 }
 
-void Genetic::inversion(QList<Population> &generations){
+void Genetic::inversion(QList<Population> &generations) {
     int chromosomeRandom = rand() % 10;
     QVector<QRgb> tmpFrame = generations.last().chromosomeList[chromosomeRandom].frame;
     QVector<QRgb> InvertedFrame;

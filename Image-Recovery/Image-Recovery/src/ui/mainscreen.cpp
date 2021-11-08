@@ -110,9 +110,8 @@ void MainScreen::on_displayPreviewScreenButton_clicked() {
     imageProcessing(topLeft, bottomRight);
 }
 
-void MainScreen::sendData(){
+void MainScreen::sendData() {
     ui->stackedWidget->setCurrentIndex(4);
-    DataManager::getInstance()->setIsSolidImage(ui->solidButton->isChecked());
     DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
     DataManager::getInstance()->setFrameTopLeftPoint(topLeft);
     DataManager::getInstance()->setFrameBottomRightPoint(bottomRight);

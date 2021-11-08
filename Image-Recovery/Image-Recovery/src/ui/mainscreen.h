@@ -8,7 +8,6 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QImage>
-#include <QMap>
 #include <QMessageBox>
 #include <QPoint>
 #include <QRgb>
