@@ -55,7 +55,8 @@ void Genetic::createXML() {
 
 }
 
-void Genetic::geneticAlgorithm() {
+void Genetic::geneticAlgorithm(QProgressBar *progressBar) {
+    progressBar->setMaximum(100);
     while (!frameCompleted) { // create generations
         generationID++; // increases the generationID counter to assign the current value to the current generation.
         DataManager::getInstance()->setGenerationsAmount(DataManager::getInstance()->getGenerationsAmount() + 1); // increases the generation amount at Data Manager class
@@ -79,6 +80,10 @@ void Genetic::geneticAlgorithm() {
         fitness(generation);
         checkProgress(generationID);
         std::cout << "Generation: " << generationID << std::endl;
+        int progress = generation.last().chromosomeList[generation.last().fitChromosome].fitness;
+        if (progressBar->value() < progress) {
+            progressBar->setValue(progress);
+        }
     }
 }
 
@@ -135,12 +140,12 @@ void Genetic::crossover(const Chromosome &parentA, const Chromosome &parentB) {
                 childFrame.append(parentA.frame.sliced(third));
                 break;
             case 4:
-                childFrame.append(parentA.frame.sliced(third));
-                childFrame.append(parentB.frame.sliced(0, third));
+                childFrame.append(parentA.frame.sliced(0,third*2));
+                childFrame.append(parentB.frame.sliced(third*2));
                 break;
             case 5:
-                childFrame.append(parentB.frame.sliced(third));
-                childFrame.append(parentA.frame.sliced(0, third));
+                childFrame.append(parentB.frame.sliced(0,third*2));
+                childFrame.append(parentA.frame.sliced(third*2));
                 break;
             case 6:
                 childFrame.append(parentA.frame.sliced(0, quarter));

@@ -41,7 +41,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="welcomeScreenPage">
     <widget class="QLabel" name="backgroundWelcome">
@@ -2339,7 +2339,7 @@
       <rect>
        <x>110</x>
        <y>80</y>
-       <width>256</width>
+       <width>263</width>
        <height>22</height>
       </rect>
      </property>
@@ -3041,7 +3041,7 @@
       <rect>
        <x>350</x>
        <y>380</y>
-       <width>246</width>
+       <width>253</width>
        <height>22</height>
       </rect>
      </property>

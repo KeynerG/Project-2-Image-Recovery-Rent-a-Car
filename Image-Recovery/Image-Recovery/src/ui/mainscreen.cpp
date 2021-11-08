@@ -124,7 +124,7 @@ void MainScreen::sendData(){
 void MainScreen::on_displayLoadScreenButton_clicked() {
     ui->stackedWidget->setCurrentIndex(4);
     sendData();
-    genetic.geneticAlgorithm();
+    genetic.geneticAlgorithm(ui->progressBar);
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {

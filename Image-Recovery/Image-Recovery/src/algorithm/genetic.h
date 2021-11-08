@@ -9,6 +9,7 @@
 #include <QList>
 #include <QRgb>
 #include <QVector>
+#include <QProgressBar>
 
 using namespace std;
 
@@ -108,10 +109,11 @@ public:
     /**
      * @fn void geneticAlgorithm()
      * @brief
+     * @param progresBar
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    void geneticAlgorithm();
+    void geneticAlgorithm(QProgressBar *progressBar);
 
     /**
      * @fn void fitness(QList<Population> &generations)
