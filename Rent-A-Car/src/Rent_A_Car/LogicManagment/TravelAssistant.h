@@ -24,7 +24,8 @@ public:
 
     void generateRoutes(int cities, QProgressBar *progress);
 
-    void calculateRoute(int originId, int destinyId, QVector<VertexItem*> vertexItemList, QVector<EdgeItem*> edgeItemList);
+    void
+    calculateRoute(int originId, int destinyId, QVector<VertexItem *> vertexItemList, QVector<EdgeItem *> edgeItemList);
 
     TravelAssistant(TravelAssistant &other) = delete;
 

@@ -249,10 +249,6 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
                 SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
                 finalGasCapacity = fEdgeAux->getData().getWeight();
                 while (fEdgeAux != nullptr) {
-                    cout << "Edge data - ID: " << fEdgeAux->getData().getId() << ", origin: "
-                         << fEdgeAux->getData().getOrigin().getId() << ", destiny: " << fEdgeAux->getData().getDestiny().getId()
-                         << ", weight: " << to_string(fEdgeAux->getData().getWeight()) << "." << endl;
-
                     if (fEdgeAux->getData().getWeight() > finalGasCapacity) {
                         finalGasCapacity = fEdgeAux->getData().getWeight();
                     }
@@ -471,6 +467,14 @@ void Graph::printFinalRoute() {
     cout << endl << "*****************************************************************************************" << endl;
     cout << endl << "Final route list:" << endl;
 
+    SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
+    finalGasCapacity = fEdgeAux->getData().getWeight();
+    while (fEdgeAux != nullptr) {
+        cout << "Edge data - ID: " << fEdgeAux->getData().getId() << ", origin: "
+             << fEdgeAux->getData().getOrigin().getId() << ", destiny: " << fEdgeAux->getData().getDestiny().getId()
+             << ", weight: " << to_string(fEdgeAux->getData().getWeight()) << "." << endl;
+        fEdgeAux = fEdgeAux->getNext();
+    }
 
     cout << endl << "More expensive connection weight: " << finalGasCapacity << endl;
 

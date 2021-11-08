@@ -34,7 +34,7 @@ private:
     QLabel *vertexAmount;
     QPushButton *confirmButton;
     QProgressBar *loadingIcon;
-    GraphWindow* gw;
+    GraphWindow *gw;
 };
 
 #endif // MAINWINDOW_H

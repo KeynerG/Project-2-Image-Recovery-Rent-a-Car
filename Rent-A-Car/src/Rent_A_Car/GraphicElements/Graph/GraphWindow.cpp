@@ -97,10 +97,20 @@ void GraphWindow::drawButtons(QStringList labelList) {
 void GraphWindow::start() {
     int originID = originBox->currentText().toInt();
     int destinyID = destinyBox->currentText().toInt();
-    if(originID == destinyID){
-        QMessageBox::warning(this, tr("Origen o destino invalidos"), tr("Por favor, digite un origen y un destino diferentes."));
-    }else{
+    if (originID == destinyID) {
+        QMessageBox::warning(this, tr("Origen o destino invalidos"),
+                             tr("Por favor, digite un origen y un destino diferentes."));
+    } else {
+        startButton->setEnabled(false);
+        originBox->setEnabled(false);
+        destinyBox->setEnabled(false);
         travelAssistant->calculateRoute(originID, destinyID, vertexItemList, edgeItemList);
-        QMessageBox::information(this,QString("¡Ruta encontrada!"),QString("La capacidad de tanque requerida es de " + QString::fromStdString(to_string(travelAssistant->getRoutes().getFinalGasCapacity())) + " litros."));
+        QMessageBox::information(this, QString("¡Ruta encontrada!"), QString("La capacidad de tanque requerida es de " +
+                                                                             QString::fromStdString(to_string(
+                                                                                     travelAssistant->getRoutes().getFinalGasCapacity())) +
+                                                                             " litros."));
+        startButton->setEnabled(true);
+        originBox->setEnabled(true);
+        destinyBox->setEnabled(true);
     }
 }

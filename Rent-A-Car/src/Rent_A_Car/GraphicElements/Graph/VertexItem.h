@@ -13,12 +13,12 @@
 
 using namespace std;
 
-class VertexItem: public QObject, public QGraphicsEllipseItem {
-    Q_OBJECT
+class VertexItem : public QObject, public QGraphicsEllipseItem {
+Q_OBJECT
 private:
     string identifier;
 public:
-    explicit VertexItem(string ID = "", complex<int> pos = (0,0), QGraphicsItem *parent = nullptr);
+    explicit VertexItem(string ID = "", complex<int> pos = (0, 0), QGraphicsItem *parent = nullptr);
 
     ~VertexItem() override;
 

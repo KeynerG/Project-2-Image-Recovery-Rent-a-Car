@@ -154,14 +154,16 @@ public:
      * @param originId
      * @param destinyId
      */
-    void calculateBestRoute(int originId, int destinyId, QVector<VertexItem*> vertexItemList, QVector<EdgeItem*> edgeItemList);
+    void calculateBestRoute(int originId, int destinyId, QVector<VertexItem *> vertexItemList,
+                            QVector<EdgeItem *> edgeItemList);
 
     /**
      * @brief Function to calculate the best route between two nodes using backtracking.
      * @param originId
      * @param destinyId
      */
-    void calculateBestRouteRecursive(int originId, int destinyId, QVector<VertexItem*> vertexItemList, QVector<EdgeItem*> edgeItemList);
+    void calculateBestRouteRecursive(int originId, int destinyId, QVector<VertexItem *> vertexItemList,
+                                     QVector<EdgeItem *> edgeItemList);
 
     /**
      * @brief Function to print the finalRoute ist.

@@ -12,12 +12,13 @@
 
 using namespace std;
 
-class EdgeItem: public QObject, public QGraphicsPathItem{
+class EdgeItem : public QObject, public QGraphicsPathItem {
 Q_OBJECT
 private:
     string id;
 public:
-    EdgeItem(complex<double> originPos, complex<double> destinyPos, const string& id, int weight, QGraphicsItem *parent = nullptr);
+    EdgeItem(complex<double> originPos, complex<double> destinyPos, const string &id, int weight,
+             QGraphicsItem *parent = nullptr);
 
     ~EdgeItem() override;
 
