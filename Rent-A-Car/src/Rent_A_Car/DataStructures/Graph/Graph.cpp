@@ -246,6 +246,18 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
                     this->finalRoute.addNodeAtEnd(edg->getData());
                     edg = edg->getNext();
                 }
+                SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
+                finalGasCapacity = fEdgeAux->getData().getWeight();
+                while (fEdgeAux != nullptr) {
+                    cout << "Edge data - ID: " << fEdgeAux->getData().getId() << ", origin: "
+                         << fEdgeAux->getData().getOrigin().getId() << ", destiny: " << fEdgeAux->getData().getDestiny().getId()
+                         << ", weight: " << to_string(fEdgeAux->getData().getWeight()) << "." << endl;
+
+                    if (fEdgeAux->getData().getWeight() > finalGasCapacity) {
+                        finalGasCapacity = fEdgeAux->getData().getWeight();
+                    }
+                    fEdgeAux = fEdgeAux->getNext();
+                }
                 printFinalRoute();
                 return;
             } else {
@@ -458,23 +470,13 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
 void Graph::printFinalRoute() {
     cout << endl << "*****************************************************************************************" << endl;
     cout << endl << "Final route list:" << endl;
-    SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
-    int maxWeight = fEdgeAux->getData().getWeight();
-    while (fEdgeAux != nullptr) {
-        cout << "Edge data - ID: " << fEdgeAux->getData().getId() << ", origin: "
-             << fEdgeAux->getData().getOrigin().getId() << ", destiny: " << fEdgeAux->getData().getDestiny().getId()
-             << ", weight: " << to_string(fEdgeAux->getData().getWeight()) << "." << endl;
 
-        if (fEdgeAux->getData().getWeight() > maxWeight) {
-            maxWeight = fEdgeAux->getData().getWeight();
-        }
 
-        fEdgeAux = fEdgeAux->getNext();
-    }
-
-    cout << endl << "More expensive connection weight: " << maxWeight << endl;
+    cout << endl << "More expensive connection weight: " << finalGasCapacity << endl;
 
     cout << endl << "*****************************************************************************************" << endl;
+
+
 }
 
 void Graph::printGraph() {
@@ -504,4 +506,12 @@ void Graph::printGraph() {
 //             << ", weight: " << to_string(sEdgeAux->getData().getWeight()) << "." << endl;
 //        sEdgeAux = sEdgeAux->getNext();
 //    }
+}
+
+int Graph::getFinalGasCapacity() const {
+    return finalGasCapacity;
+}
+
+void Graph::setFinalGasCapacity(int finalGasCapacity) {
+    Graph::finalGasCapacity = finalGasCapacity;
 }

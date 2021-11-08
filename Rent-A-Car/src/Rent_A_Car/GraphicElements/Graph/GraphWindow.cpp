@@ -101,5 +101,6 @@ void GraphWindow::start() {
         QMessageBox::warning(this, tr("Origen o destino invalidos"), tr("Por favor, digite un origen y un destino diferentes."));
     }else{
         travelAssistant->calculateRoute(originID, destinyID, vertexItemList, edgeItemList);
+        QMessageBox::information(this,QString("¡Ruta encontrada!"),QString("La capacidad de tanque requerida es de " + QString::fromStdString(to_string(travelAssistant->getRoutes().getFinalGasCapacity())) + " litros."));
     }
 }

@@ -31,6 +31,11 @@ private:
     SimpleList<Edge> sortedActiveEdges;
     SimpleList<SimpleList<Edge>> possibleRoutes;
     SimpleList<Edge> finalRoute;
+    int finalGasCapacity;
+public:
+    int getFinalGasCapacity() const;
+
+    void setFinalGasCapacity(int finalGasCapacity);
 
 public:
     /**
