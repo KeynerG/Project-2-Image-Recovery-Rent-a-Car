@@ -28,3 +28,11 @@ VertexItem::VertexItem(string ID, complex<int> pos, QGraphicsItem *parent): QGra
 VertexItem::~VertexItem() {
     delete this;
 }
+
+const string &VertexItem::getIdentifier() const {
+    return identifier;
+}
+
+void VertexItem::setIdentifier(const string &identifier) {
+    VertexItem::identifier = identifier;
+}

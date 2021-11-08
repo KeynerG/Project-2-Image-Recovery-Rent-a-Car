@@ -68,5 +68,6 @@ void MainWindow::onConfirmButtonClicked(bool checked) {
 
         gw->show();
         gw->drawGraph();
+        this->close();
     }
 }

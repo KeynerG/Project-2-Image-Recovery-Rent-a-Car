@@ -1,3 +1,5 @@
+#include <GraphicElements/Graph/VertexItem.h>
+#include <QCoreApplication>
 #include "Graph.h"
 
 Graph::Graph() {
@@ -19,7 +21,7 @@ void Graph::setEdgesList(const SimpleList<Edge> &edgesList) {
     Graph::edgesList = edgesList;
 }
 
-const SimpleList<Vertex> &Graph::getVertexList() const{
+const SimpleList<Vertex> &Graph::getVertexList() const {
     return vertexList;
 }
 
@@ -154,7 +156,7 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
         srand(time(0));
         int vertexConnections;
         if (nodes == 4) {
-            vertexConnections = (rand() % 3) + 1;
+            vertexConnections = (rand() % 2) + 1;
         } else {
             vertexConnections = (rand() % 4) + 1;
         }
@@ -201,18 +203,10 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
     }
 
     progress->setValue(100);
-    /*printGraph();
-
-    int origen, destino;
-    cout << endl << "OrigenID: ";
-    cin >> origen;
-    cout << endl << "DestinoID: ";
-    cin >> destino;
-
-    calculateBestRoute(origen, destino);*/
 }
 
-void Graph::calculateBestRoute(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList) {
+void Graph::calculateBestRoute(int originId, int destinyId, QVector<VertexItem *> vertexItemList,
+                               QVector<EdgeItem *> edgeItemList) {
     sortedEdges.clearList();
     activeEdges.clearList();
     sortedActiveEdges.clearList();
@@ -221,10 +215,27 @@ void Graph::calculateBestRoute(int originId, int destinyId, SimpleList<EdgeItem*
 
     sortEdgesListByWeight();
 
-    calculateBestRouteRecursive(originId, destinyId, edgeItemList);
+    QBrush b;
+    b.setStyle(Qt::SolidPattern);
+    b.setColor("#004040");
+    QPen p;
+    p.setStyle(Qt::SolidLine);
+
+    p.setColor("#00ffff");
+    for (int i = 0; i < edgeItemList.size(); ++i) {
+        edgeItemList[i]->setPen(p);
+    }
+
+    for (int i = 0; i < vertexItemList.size(); ++i) {
+        vertexItemList[i]->setBrush(b);
+        vertexItemList[i]->setPen(p);
+    }
+
+    calculateBestRouteRecursive(originId, destinyId, vertexItemList, edgeItemList);
 }
 
-void Graph::calculateBestRouteRecursive(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList) {
+void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<VertexItem *> vertexItemList,
+                                        QVector<EdgeItem *> edgeItemList) {
     // Breaking case: If the route is finished
     if (originId == destinyId) {
         SimpleNode<SimpleList<Edge>> *bestRoute = this->possibleRoutes.head;
@@ -281,6 +292,43 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, SimpleList<
     if (possibleRoutes.len <= 0) {
         possibleRoute.addNodeAtEnd(bestConnection->getData());
         possibleRoutes.addNodeAtEnd(possibleRoute);
+
+        QBrush b;
+        b.setStyle(Qt::SolidPattern);
+        b.setColor("#004040");
+        QPen p;
+        p.setStyle(Qt::SolidLine);
+
+        p.setColor("#00ffff");
+        for (int i = 0; i < edgeItemList.size(); ++i) {
+            edgeItemList[i]->setPen(p);
+        }
+
+        for (int i = 0; i < vertexItemList.size(); ++i) {
+            vertexItemList[i]->setBrush(b);
+            vertexItemList[i]->setPen(p);
+        }
+
+        p.setColor("#E74C3C");
+        for (int i = 0; i < possibleRoute.len; ++i) {
+            for (int j = 0; j < edgeItemList.size(); ++j) {
+                if (possibleRoute.getNodeIn(i).getId() == edgeItemList[j]->getId()) {
+                    edgeItemList[j]->setPen(p);
+                }
+            }
+            for (int j = 0; j < vertexItemList.size(); ++j) {
+                if (possibleRoute.getNodeIn(i).getOrigin().getId() == vertexItemList[j]->getIdentifier() or
+                    possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()){
+                    vertexItemList[j]->setPen(p);
+                }
+            }
+        }
+
+        QTime dieTime = QTime::currentTime().addMSecs(1000);
+        while( QTime::currentTime() < dieTime )
+        {
+            QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+        }
     } else {
         SimpleNode<SimpleList<Edge>> *route = possibleRoutes.head;
         bool added = false;
@@ -299,6 +347,43 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, SimpleList<
 
                 possibleRoutes.addNodeAtEnd(possibleRoute); //********AQUI*********
 
+                QBrush b;
+                b.setStyle(Qt::SolidPattern);
+                b.setColor("#004040");
+                QPen p;
+                p.setStyle(Qt::SolidLine);
+
+                p.setColor("#00ffff");
+                for (int i = 0; i < edgeItemList.size(); ++i) {
+                    edgeItemList[i]->setPen(p);
+                }
+
+                for (int i = 0; i < vertexItemList.size(); ++i) {
+                    vertexItemList[i]->setBrush(b);
+                    vertexItemList[i]->setPen(p);
+                }
+
+                p.setColor("#E74C3C");
+                for (int i = 0; i < possibleRoute.len; ++i) {
+                    for (int j = 0; j < edgeItemList.size(); ++j) {
+                        if (possibleRoute.getNodeIn(i).getId() == edgeItemList[j]->getId()) {
+                            edgeItemList[j]->setPen(p);
+                        }
+                    }
+                    for (int j = 0; j < vertexItemList.size(); ++j) {
+                        if (possibleRoute.getNodeIn(i).getOrigin().getId() == vertexItemList[j]->getIdentifier() or
+                            possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()){
+                            vertexItemList[j]->setPen(p);
+                        }
+                    }
+                }
+
+                QTime dieTime = QTime::currentTime().addMSecs(1000);
+                while( QTime::currentTime() < dieTime )
+                {
+                    QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+                }
+
                 added = true;
             }
             route = route->getNext();
@@ -307,6 +392,43 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, SimpleList<
         if (!added) {
             possibleRoute.addNodeAtEnd(bestConnection->getData());
             possibleRoutes.addNodeAtEnd(possibleRoute);
+
+            QBrush b;
+            b.setStyle(Qt::SolidPattern);
+            b.setColor("#004040");
+            QPen p;
+            p.setStyle(Qt::SolidLine);
+
+            p.setColor("#00ffff");
+            for (int i = 0; i < edgeItemList.size(); ++i) {
+                edgeItemList[i]->setPen(p);
+            }
+
+            for (int i = 0; i < vertexItemList.size(); ++i) {
+                vertexItemList[i]->setBrush(b);
+                vertexItemList[i]->setPen(p);
+            }
+
+            p.setColor("#E74C3C");
+            for (int i = 0; i < possibleRoute.len; ++i) {
+                for (int j = 0; j < edgeItemList.size(); ++j) {
+                    if (possibleRoute.getNodeIn(i).getId() == edgeItemList[j]->getId()) {
+                        edgeItemList[j]->setPen(p);
+                    }
+                }
+                for (int j = 0; j < vertexItemList.size(); ++j) {
+                    if (possibleRoute.getNodeIn(i).getOrigin().getId() == vertexItemList[j]->getIdentifier() or
+                        possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()){
+                        vertexItemList[j]->setPen(p);
+                    }
+                }
+            }
+
+            QTime dieTime = QTime::currentTime().addMSecs(1000);
+            while( QTime::currentTime() < dieTime )
+            {
+                QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+            }
         }
     }
 
@@ -329,7 +451,7 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, SimpleList<
     }
 
     // Calls itself recursively with a new OriginId parameter.
-    calculateBestRouteRecursive(movingToNode, destinyId, edgeItemList);
+    calculateBestRouteRecursive(movingToNode, destinyId, vertexItemList, edgeItemList);
 
 }
 

@@ -9,7 +9,11 @@
 #include <ctime>
 #include <cstdlib>
 #include <QProgressBar>
+#include <QVector>
+#include <QThread>
+#include <QTime>
 #include "../../GraphicElements/Graph/EdgeItem.h"
+#include "../../GraphicElements/Graph/VertexItem.h"
 
 using namespace std;
 
@@ -145,14 +149,14 @@ public:
      * @param originId
      * @param destinyId
      */
-    void calculateBestRoute(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList);
+    void calculateBestRoute(int originId, int destinyId, QVector<VertexItem*> vertexItemList, QVector<EdgeItem*> edgeItemList);
 
     /**
      * @brief Function to calculate the best route between two nodes using backtracking.
      * @param originId
      * @param destinyId
      */
-    void calculateBestRouteRecursive(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList);
+    void calculateBestRouteRecursive(int originId, int destinyId, QVector<VertexItem*> vertexItemList, QVector<EdgeItem*> edgeItemList);
 
     /**
      * @brief Function to print the finalRoute ist.

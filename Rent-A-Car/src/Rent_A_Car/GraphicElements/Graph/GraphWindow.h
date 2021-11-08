@@ -10,30 +10,39 @@
 #include <complex>
 #include <QComboBox>
 #include <QPushButton>
+#include <QMessageBox>
 
-class GraphWindow: public QGraphicsView{
-    Q_OBJECT
+class GraphWindow : public QGraphicsView {
+Q_OBJECT
 private:
-    QGraphicsScene* scene;
-    TravelAssistant* travelAssistant = TravelAssistant::getInstance();
+    QGraphicsScene *scene;
+    TravelAssistant *travelAssistant = TravelAssistant::getInstance();
     SimpleList<complex<double>> positions;
     QStringList labelList;
-    QLabel* originLabel;
-    QComboBox* originBox;
-    QLabel* destinyLabel;
-    QComboBox* destinyBox;
-    QPushButton* startButton;
-    SimpleList<EdgeItem*>* edgeItemList;
+    QLabel *originLabel;
+    QComboBox *originBox;
+    QLabel *destinyLabel;
+    QComboBox *destinyBox;
+    QPushButton *startButton;
+    QVector<EdgeItem *> edgeItemList;
+    QVector<VertexItem *> vertexItemList;
 
 
     static complex<double> calculateNodePosition(int k, int n);
+
     void drawNodes(SimpleList<Vertex> routeList);
+
     void drawEdges(SimpleList<Edge> edgeList);
+
     void drawButtons(QStringList labelList);
+
 public slots:
+
     void start();
+
 public:
     explicit GraphWindow(QWidget *parent = nullptr);
+
     void drawGraph();
 };
 

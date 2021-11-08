@@ -2,6 +2,7 @@
 
 EdgeItem::EdgeItem(complex<double> originPos, complex<double> destinyPos, const string& ID, int weight, QGraphicsItem *parent) {
     setPos(0,0);
+    this->id = ID;
     //Defines form
     auto* path = new QPainterPath(QPointF(originPos.real()+15,originPos.imag()+15));
     path->lineTo(destinyPos.real()+15,destinyPos.imag()+15);
@@ -21,4 +22,12 @@ EdgeItem::EdgeItem(complex<double> originPos, complex<double> destinyPos, const 
 }
 EdgeItem::~EdgeItem(){
     delete this;
+}
+
+const string &EdgeItem::getId() const {
+    return id;
+}
+
+void EdgeItem::setId(const string &id) {
+    EdgeItem::id = id;
 }

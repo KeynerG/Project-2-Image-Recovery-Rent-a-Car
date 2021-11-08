@@ -14,10 +14,16 @@ using namespace std;
 
 class EdgeItem: public QObject, public QGraphicsPathItem{
 Q_OBJECT
+private:
+    string id;
 public:
     EdgeItem(complex<double> originPos, complex<double> destinyPos, const string& id, int weight, QGraphicsItem *parent = nullptr);
 
     ~EdgeItem() override;
+
+    const string &getId() const;
+
+    void setId(const string &id);
 };
 
 
