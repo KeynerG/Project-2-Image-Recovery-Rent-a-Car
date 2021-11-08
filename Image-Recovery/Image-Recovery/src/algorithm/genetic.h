@@ -62,7 +62,7 @@ struct Population {
 class Genetic {
 
 public:
-    QList<Population> generation; /**<  */
+    Population generation; /**<  */
     int generationID = 0;  /**< Generation identifier counter. */
     bool frameCompleted = false; /**< Determines if the missing frame of the image has been completed successfully. */
 
@@ -121,7 +121,7 @@ public:
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void fitness(QList<Population> &generations);
+    void fitness(Population &generations);
 
     /**
      * @fn void selection(QList<Population> &generations)
@@ -129,7 +129,7 @@ public:
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void selection(QList<Population> &generations);
+    void selection(Population &generations);
 
     /**
      * @fn void crossover(Chromosome parentA, Chromosome parentB)
@@ -146,7 +146,7 @@ public:
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void mutation(QList<Population> &generations) const;
+    void mutation(Population &generations) const;
 
     /**
      * @fn void inversion(QList<Population> &generations)
@@ -154,7 +154,7 @@ public:
      * @param generations
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void inversion(QList<Population> &generations);
+    void inversion(Population &generations);
 };
 
 #endif //IMAGE_RECOVERY_GENETIC_H

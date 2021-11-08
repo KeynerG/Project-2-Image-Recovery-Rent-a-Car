@@ -26,7 +26,7 @@ void Genetic::saveImage(QImage &image) const {
 void Genetic::createImage() {
     QRgb color;
     int colorIndex = 0;
-    QVector<QRgb> generationFrame = generation.last().chromosomeList[generation.last().fitChromosome].frame;
+    QVector<QRgb> generationFrame = generation.chromosomeList[generation.fitChromosome].frame;
     QImage generationImage(DataManager::getInstance()->getImagePath());
     for (int y = DataManager::getInstance()->getFrameTopLeftPoint().y(); y < DataManager::getInstance()->getFrameBottomRightPoint().y(); ++y) {
         for (int x = DataManager::getInstance()->getFrameTopLeftPoint().x(); x < DataManager::getInstance()->getFrameBottomRightPoint().x(); ++x) {
@@ -71,7 +71,7 @@ void Genetic::geneticAlgorithm(QProgressBar *progressBar) {
                 Chromosome generationChromosome(c, chromosomeFrame); /**< Chromosome with ID c, randomly generated frame and a score fitness of 0 (default). */
                 initialPopulation.chromosomeList.append(generationChromosome); // adds the new chromosome to population
             }
-            generation.append(initialPopulation);
+            generation = initialPopulation;
         } else {
             selection(generation); //Selection and crossover, selection calls the crossover function
             mutation(generation);
@@ -80,36 +80,36 @@ void Genetic::geneticAlgorithm(QProgressBar *progressBar) {
         fitness(generation);
         checkProgress(generationID);
         std::cout << "Generation: " << generationID << std::endl;
-        int progress = generation.last().chromosomeList[generation.last().fitChromosome].fitness;
+        int progress = generation.chromosomeList[generation.fitChromosome].fitness;
         if (progressBar->value() < progress) {
             progressBar->setValue(progress);
         }
     }
 }
 
-void Genetic::fitness(QList<Population> &generations) {
+void Genetic::fitness(Population &generation) {
     int bestChromosome = 0;
     for (int i = 0; i < 10; ++i) {
-        accuracyMeter(generations.last().chromosomeList[i]);
-        if (generations.last().chromosomeList[i].fitness > generations.last().chromosomeList[bestChromosome].fitness) {
+        accuracyMeter(generation.chromosomeList[i]);
+        if (generation.chromosomeList[i].fitness > generation.chromosomeList[bestChromosome].fitness) {
             bestChromosome = i;
         }
     }
-    generations.last().fitChromosome = bestChromosome;
+    generation.fitChromosome = bestChromosome;
 }
 
-void Genetic::selection(QList<Population> &generations) { //Select the two Chromosomes with the best fitness
-    int parentA = generations.last().fitChromosome;
+void Genetic::selection(Population &generation) { //Select the two Chromosomes with the best fitness
+    int parentA = generation.fitChromosome;
     int parentB = 0;
     if (parentA == 0) {
         parentB = 1;
     }
     for (int c = 0; c < 10; ++c) {
-        if (parentA != c && generations.last().chromosomeList[c].fitness > generations.last().chromosomeList[parentB].fitness) {
+        if (parentA != c && generation.chromosomeList[c].fitness > generation.chromosomeList[parentB].fitness) {
             parentB = c;
         }
     }
-    crossover(generations.last().chromosomeList[parentA], generations.last().chromosomeList[parentB]);
+    crossover(generation.chromosomeList[parentA], generation.chromosomeList[parentB]);
 }
 
 void Genetic::crossover(const Chromosome &parentA, const Chromosome &parentB) {
@@ -185,12 +185,12 @@ void Genetic::crossover(const Chromosome &parentA, const Chromosome &parentB) {
         Chromosome child(i, childFrame);
         population.chromosomeList.append(child);
     }
-    generation.append(population);
+    generation = population;
 }
 
-void Genetic::mutation(QList<Population> &generations) const {
+void Genetic::mutation(Population &generation) const {
     int chromosomeRandom = rand() % 10;
-    QVector<QRgb> frameSelected = generations.last().chromosomeList[chromosomeRandom].frame;
+    QVector<QRgb> frameSelected = generation.chromosomeList[chromosomeRandom].frame;
     QVector<QRgb> colorPalette = DataManager::getInstance()->getColorPaletteReference();
     int mutationsAmount = rand() % frameSelected.size() / colorPalette.size() + 1;
     QList<int> gensMutated;
@@ -208,16 +208,16 @@ void Genetic::mutation(QList<Population> &generations) const {
             --g;
         }
     }
-    generations.last().chromosomeList[chromosomeRandom].frame = frameSelected;
+    generation.chromosomeList[chromosomeRandom].frame = frameSelected;
 }
 
-void Genetic::inversion(QList<Population> &generations) {
+void Genetic::inversion(Population &generation) {
     int chromosomeRandom = rand() % 10;
-    QVector<QRgb> tmpFrame = generations.last().chromosomeList[chromosomeRandom].frame;
+    QVector<QRgb> tmpFrame = generation.chromosomeList[chromosomeRandom].frame;
     QVector<QRgb> InvertedFrame;
-    for (int i = 0; i < generations.last().chromosomeList[chromosomeRandom].frame.size(); ++i) {
+    for (int i = 0; i < generation.chromosomeList[chromosomeRandom].frame.size(); ++i) {
         InvertedFrame.append(tmpFrame.last());
         tmpFrame.removeLast();
     }
-    generations.last().chromosomeList[chromosomeRandom].frame = InvertedFrame;
+    generation.chromosomeList[chromosomeRandom].frame = InvertedFrame;
 }
