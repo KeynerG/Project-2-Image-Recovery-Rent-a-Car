@@ -62,14 +62,15 @@ struct Population {
 class Genetic {
 
 public:
-    Population generation; /**<  */
+    Population population; /**<  */
     int generationID = 0;  /**< Generation identifier counter. */
     bool frameCompleted = false; /**< Determines if the missing frame of the image has been completed successfully. */
+    int progress; /**< Progress reference. */
 
     Genetic(); /**< Genetic class constructor. */
 
     /**
-     * @fn void checkProgress(int &generationID)
+     * @fn checkProgress
      * @brief
      * @param generationId
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -77,7 +78,7 @@ public:
     void checkProgress(int &generationId);
 
     /**
-     * @fn void saveImage(QImage &image)
+     * @fn saveImage
      * @brief
      * @param image
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -85,21 +86,21 @@ public:
     void saveImage(QImage &image) const;
 
     /**
-     * @fn void createImage()
+     * @fn createImage
      * @brief
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void createImage();
 
     /**
-     * @fn void createXML()
+     * @fn createXML
      * @brief
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
     void createXML();
 
     /**
-     * @fn void accuracyMeter(Chromosome &chromosome)
+     * @fn accuracyMeter
      * @brief
      * @param chromosome
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -107,54 +108,56 @@ public:
     void accuracyMeter(Chromosome &chromosome);
 
     /**
-     * @fn void geneticAlgorithm()
+     * @fn geneticAlgorithm
      * @brief
-     * @param progresBar
+     * @param progressBar
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void geneticAlgorithm(QProgressBar *progressBar);
 
     /**
-     * @fn void fitness(QList<Population> &generations)
+     * @fn fitness
      * @brief
-     * @param generations
+     * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void fitness(Population &generations);
+    void fitness(Population &generation);
 
     /**
-     * @fn void selection(QList<Population> &generations)
+     * @fn selection
      * @brief
-     * @param generations
+     * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
-    void selection(Population &generations);
+    void selection(Population &generation);
 
     /**
-     * @fn void crossover(Chromosome parentA, Chromosome parentB)
+     * @fn crossover
      * @brief
      * @param parentA
      * @param parentB
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void crossover(const Chromosome &parentA, const Chromosome &parentB);
 
     /**
-     * @fn void mutation(QList<Population> &generations)
+     * @fn mutation
      * @brief
-     * @param generations
-     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     * @param generation
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    void mutation(Population &generations) const;
+    static void mutation(Population &generation) ;
 
     /**
-     * @fn void inversion(QList<Population> &generations)
+     * @fn inversion
      * @brief
-     * @param generations
+     * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    void inversion(Population &generations);
+    static void inversion(Population &generation);
 };
 
 #endif //IMAGE_RECOVERY_GENETIC_H
