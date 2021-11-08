@@ -9,6 +9,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <QProgressBar>
+#include "../../GraphicElements/Graph/EdgeItem.h"
 
 using namespace std;
 
@@ -144,14 +145,14 @@ public:
      * @param originId
      * @param destinyId
      */
-    void calculateBestRoute(int originId, int destinyId);
+    void calculateBestRoute(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList);
 
     /**
      * @brief Function to calculate the best route between two nodes using backtracking.
      * @param originId
      * @param destinyId
      */
-    void calculateBestRouteRecursive(int originId, int destinyId);
+    void calculateBestRouteRecursive(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList);
 
     /**
      * @brief Function to print the finalRoute ist.

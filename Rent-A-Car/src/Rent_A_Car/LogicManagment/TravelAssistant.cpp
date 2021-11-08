@@ -18,8 +18,8 @@ void TravelAssistant::generateRoutes(int cities, QProgressBar *progress) {
     this->routes.generateGraphOf(cities, progress);
 }
 
-void TravelAssistant::clculateRoute(int originId, int destinyId) {
-    this->routes.calculateBestRoute(originId, destinyId);
+void TravelAssistant::calculateRoute(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList) {
+    this->routes.calculateBestRoute(originId, destinyId, edgeItemList);
 }
 
 TravelAssistant *TravelAssistant::getInstance() {
@@ -28,4 +28,3 @@ TravelAssistant *TravelAssistant::getInstance() {
     }
     return instance;
 }
-

@@ -19,7 +19,7 @@ void Graph::setEdgesList(const SimpleList<Edge> &edgesList) {
     Graph::edgesList = edgesList;
 }
 
-const SimpleList<Vertex> Graph::getVertexList() const {
+const SimpleList<Vertex> &Graph::getVertexList() const{
     return vertexList;
 }
 
@@ -201,8 +201,7 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
     }
 
     progress->setValue(100);
-
-    printGraph();
+    /*printGraph();
 
     int origen, destino;
     cout << endl << "OrigenID: ";
@@ -210,10 +209,10 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
     cout << endl << "DestinoID: ";
     cin >> destino;
 
-    calculateBestRoute(origen, destino);
+    calculateBestRoute(origen, destino);*/
 }
 
-void Graph::calculateBestRoute(int originId, int destinyId) {
+void Graph::calculateBestRoute(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList) {
     sortedEdges.clearList();
     activeEdges.clearList();
     sortedActiveEdges.clearList();
@@ -222,10 +221,10 @@ void Graph::calculateBestRoute(int originId, int destinyId) {
 
     sortEdgesListByWeight();
 
-    calculateBestRouteRecursive(originId, destinyId);
+    calculateBestRouteRecursive(originId, destinyId, edgeItemList);
 }
 
-void Graph::calculateBestRouteRecursive(int originId, int destinyId) {
+void Graph::calculateBestRouteRecursive(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList) {
     // Breaking case: If the route is finished
     if (originId == destinyId) {
         SimpleNode<SimpleList<Edge>> *bestRoute = this->possibleRoutes.head;
@@ -298,7 +297,7 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId) {
                 }
                 possibleRoute.addNodeAtEnd(aux->getData());
 
-                possibleRoutes.addNodeAtEnd(possibleRoute);
+                possibleRoutes.addNodeAtEnd(possibleRoute); //********AQUI*********
 
                 added = true;
             }
@@ -330,7 +329,7 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId) {
     }
 
     // Calls itself recursively with a new OriginId parameter.
-    calculateBestRouteRecursive(movingToNode, destinyId);
+    calculateBestRouteRecursive(movingToNode, destinyId, edgeItemList);
 
 }
 

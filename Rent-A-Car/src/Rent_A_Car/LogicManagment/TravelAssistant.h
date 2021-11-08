@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QProgressBar>
 #include <DataStructures/Graph/Graph.h>
+#include "../GraphicElements/Graph/EdgeItem.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ public:
 
     void generateRoutes(int cities, QProgressBar *progress);
 
-    void clculateRoute(int originId, int destinyId);
+    void calculateRoute(int originId, int destinyId, SimpleList<EdgeItem*>* edgeItemList);
 
     TravelAssistant(TravelAssistant &other) = delete;
 

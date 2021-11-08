@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     instructionsLabel = new QLabel("Select the number of cities:", this);
     instructionsLabel->setAlignment(Qt::AlignCenter);
     instructionsLabel->setGeometry(100, 175, 200, 25);
-    instructionsLabel->setStyleSheet("font-size:12; color:#00ffff;");
+    instructionsLabel->setStyleSheet("font-size:12; color:'white';");
 
     //Slider for vertex selection
     slider = new QSlider(Qt::Horizontal, this);
@@ -53,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     loadingIcon->setValue(0);
     loadingIcon->hide();
 
-    gw = new GraphWindow();
+    gw = new GraphWindow(this);
+    //TravelAssistant::getInstance()->setGraphWindow(gw);
 }
 
 MainWindow::~MainWindow() {

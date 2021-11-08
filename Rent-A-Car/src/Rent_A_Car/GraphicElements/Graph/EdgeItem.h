@@ -2,14 +2,20 @@
 #define RENT_A_CAR_EDGEITEM_H
 
 #include <QObject>
-#include <QGraphicsRectItem>
+#include <QGraphicsPathItem>
 #include <QBrush>
+#include <string>
+#include <complex>
+#include <QPen>
+#include <QLabel>
+#include <QGraphicsProxyWidget>
 
-class EdgeItem: public QObject, public QGraphicsRectItem{
+using namespace std;
+
+class EdgeItem: public QObject, public QGraphicsPathItem{
 Q_OBJECT
 public:
-
-    EdgeItem(QGraphicsItem *parent = nullptr);
+    EdgeItem(complex<double> originPos, complex<double> destinyPos, const string& id, int weight, QGraphicsItem *parent = nullptr);
 
     ~EdgeItem() override;
 };
