@@ -23,11 +23,13 @@ struct Chromosome {
         ID = chromosomeID;
         frame = chromosomeFrame;
         fitness = chromosomeFitnessScore;
+        mutations = QList<int>();
     }
 
     int ID; /**< Chromosome identifier. */
     QVector<QRgb> frame; /**< Solution to the missing frame. */
     int fitness; /**< Similarity score respect to the reference image. */
+    QList<int> mutations;
 };
 
 /**
@@ -148,16 +150,7 @@ public:
      * @param generation
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
-    static void mutation(Population &generation) ;
-
-    /**
-     * @fn inversion
-     * @brief
-     * @param generation
-     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
-     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
-     */
-    static void inversion(Population &generation);
+    void mutation(Population &generation);
 };
 
 #endif //IMAGE_RECOVERY_GENETIC_H
