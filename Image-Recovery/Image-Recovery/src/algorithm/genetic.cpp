@@ -56,7 +56,6 @@ void Genetic::createXML() {
 }
 
 void Genetic::geneticAlgorithm(QProgressBar *progressBar) {
-    progressBar->setMaximum(100);
     while (!frameCompleted) { // create generations
         generationID++; // increases the generationID counter to assign the current value to the current generation.
         DataManager::getInstance()->setGenerationsAmount(DataManager::getInstance()->getGenerationsAmount() + 1); // increases the generation amount at Data Manager class
