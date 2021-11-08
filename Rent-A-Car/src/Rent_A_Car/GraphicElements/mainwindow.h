@@ -8,6 +8,7 @@
 #include <QProgressBar>
 #include "DataStructures/Graph/Graph.h"
 #include "LogicManagment/TravelAssistant.h"
+#include "Graph/GraphWindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -33,7 +34,7 @@ private:
     QLabel *vertexAmount;
     QPushButton *confirmButton;
     QProgressBar *loadingIcon;
-
+    GraphWindow *gw;
 };
 
 #endif // MAINWINDOW_H

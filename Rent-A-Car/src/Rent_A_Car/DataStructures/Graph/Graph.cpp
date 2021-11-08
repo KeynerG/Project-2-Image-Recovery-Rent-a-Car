@@ -19,7 +19,7 @@ void Graph::setEdgesList(const SimpleList<Edge> &edgesList) {
     Graph::edgesList = edgesList;
 }
 
-const SimpleList<Vertex> &Graph::getVertexList() const {
+const SimpleList<Vertex> Graph::getVertexList() const {
     return vertexList;
 }
 

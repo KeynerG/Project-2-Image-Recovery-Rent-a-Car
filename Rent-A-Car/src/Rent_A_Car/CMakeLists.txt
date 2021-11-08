@@ -19,9 +19,8 @@ include_directories(cmake-build-debug/)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        GraphicElements/mainwindow.cpp
+        GraphicElements/mainwindow.h
         DataStructures/SimpleList/SimpleList.h 
         DataStructures/SimpleList/SimpleNode.h 
         DataStructures/Graph/Graph.cpp 
@@ -31,7 +30,13 @@ set(PROJECT_SOURCES
         DataStructures/Graph/Edge.cpp 
         DataStructures/Graph/Edge.h 
         LogicManagment/TravelAssistant.cpp 
-        LogicManagment/TravelAssistant.h)
+        LogicManagment/TravelAssistant.h
+        GraphicElements/Graph/GraphWindow.cpp
+        GraphicElements/Graph/GraphWindow.h
+        GraphicElements/Graph/VertexItem.cpp
+        GraphicElements/Graph/VertexItem.h
+        GraphicElements/Graph/EdgeItem.cpp
+        GraphicElements/Graph/EdgeItem.h)
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Rent_A_Car

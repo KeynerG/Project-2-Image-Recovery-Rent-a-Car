@@ -13,7 +13,6 @@ class Vertex {
 private:
     string id;
     string name;
-
 public:
 
     /**

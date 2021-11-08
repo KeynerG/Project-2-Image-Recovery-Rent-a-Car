@@ -51,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     loadingIcon->setStyleSheet(
             "QProgressBar {""background-color: #001010;""color: white;""border-style: outset;""border-width: 1px;""border-color: #004040;""border-radius: 3px;""text-align: center; }""QProgressBar::chunk {""background-color: #004040;}");
     loadingIcon->setValue(0);
+    loadingIcon->hide();
+
+    gw = new GraphWindow();
 }
 
 MainWindow::~MainWindow() {
@@ -59,6 +62,10 @@ MainWindow::~MainWindow() {
 
 void MainWindow::onConfirmButtonClicked(bool checked) {
     if (checked) {
+        this->loadingIcon->show();
         TravelAssistant::getInstance()->generateRoutes(this->slider->value(), this->loadingIcon);
+
+        gw->show();
+        gw->drawGraph();
     }
 }
