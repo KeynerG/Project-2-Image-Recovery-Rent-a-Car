@@ -145,6 +145,14 @@ public:
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
     void mutation(QList<Population> &generations) const;
+
+    /**
+     * @fn void inversion(QList<Population> &generations)
+     * @brief
+     * @param generations
+     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     */
+    void inversion(QList<Population> &generations);
 };
 
 #endif //IMAGE_RECOVERY_GENETIC_H

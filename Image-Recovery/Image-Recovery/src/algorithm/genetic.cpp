@@ -74,6 +74,7 @@ void Genetic::geneticAlgorithm() {
         } else {
             selection(generation); //Selection and crossover, selection calls the crossover function
             mutation(generation);
+            inversion(generation);
         }
         fitness(generation);
         checkProgress(generationID);
@@ -203,4 +204,15 @@ void Genetic::mutation(QList<Population> &generations) const {
         }
     }
     generations.last().chromosomeList[chromosomeRandom].frame = frameSelected;
+}
+
+void Genetic::inversion(QList<Population> &generations){
+    int chromosomeRandom = rand() % 10;
+    QVector<QRgb> tmpFrame = generations.last().chromosomeList[chromosomeRandom].frame;
+    QVector<QRgb> InvertedFrame;
+    for (int i = 0; i < generations.last().chromosomeList[chromosomeRandom].frame.size(); ++i) {
+        InvertedFrame.append(tmpFrame.last());
+        tmpFrame.removeLast();
+    }
+    generations.last().chromosomeList[chromosomeRandom].frame = InvertedFrame;
 }
