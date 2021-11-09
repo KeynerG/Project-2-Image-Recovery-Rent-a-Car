@@ -4,10 +4,5 @@
         <file>src/resources/backgrounds/home.png</file>
         <file>src/resources/backgrounds/load.png</file>
         <file>src/resources/backgrounds/main.png</file>
-        <file>src/resources/images/pattern/1.png</file>
-        <file>src/resources/images/pattern/2.png</file>
-        <file>src/resources/images/solid/1.png</file>
-        <file>src/resources/images/solid/2.png</file>
-        <file>src/resources/images/solid/3.png</file>
     </qresource>
 </RCC>

@@ -43,29 +43,29 @@ void Genetic::saveXML(QFile &file) {
     file.open(QIODevice::WriteOnly);
     QXmlStreamWriter xmlWriter(&file);
     xmlWriter.setAutoFormatting(true);
-    xmlWriter.writeStartElement("Generation");
-        xmlWriter.writeTextElement("ID", QString(QString::fromStdString(std::to_string(generationID))));
-        xmlWriter.writeTextElement("Fitness_Score", QString(QString::fromStdString(std::to_string(population.chromosomeList[population.fitChromosome].fitness))));
-        xmlWriter.writeTextElement("Best_Chromosome", "Chromosome_" + QString(QString::fromStdString(std::to_string(population.fitChromosome))));
-        xmlWriter.writeStartElement("Population");
-            for (int id = 0; id < 10; ++id) {
-                QString frame = "(";
-                xmlWriter.writeStartElement("Chromosome");
-                xmlWriter.writeAttribute("ID", QString(QString::fromStdString(std::to_string(id))));
-                xmlWriter.writeAttribute("Fitness_Score",QString(QString::fromStdString(std::to_string(population.chromosomeList[id].fitness))));
-                for (int gen = 0; gen < population.chromosomeList[id].frame.size(); ++gen) {
-                    if (gen < population.chromosomeList[id].frame.size() - 1) {
-                        frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen]))) + ",";
-                    } else {
-                        frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen])));
-                    }
-                }
-                xmlWriter.writeTextElement("Solution", frame + ")");
-                xmlWriter.writeEndElement();
-            }
-        xmlWriter.writeEndElement();
-    xmlWriter.writeEndElement();
     xmlWriter.writeStartDocument();
+        xmlWriter.writeStartElement("Generation");
+            xmlWriter.writeTextElement("ID", QString(QString::fromStdString(std::to_string(generationID))));
+            xmlWriter.writeTextElement("Fitness_Score", QString(QString::fromStdString(std::to_string(population.chromosomeList[population.fitChromosome].fitness))));
+            xmlWriter.writeTextElement("Best_Chromosome", "Chromosome_" + QString(QString::fromStdString(std::to_string(population.fitChromosome))));
+            xmlWriter.writeStartElement("Population");
+                for (int id = 0; id < 10; ++id) {
+                    QString frame = "(";
+                    xmlWriter.writeStartElement("Chromosome");
+                    xmlWriter.writeAttribute("ID", QString(QString::fromStdString(std::to_string(id))));
+                    xmlWriter.writeAttribute("Fitness_Score",QString(QString::fromStdString(std::to_string(population.chromosomeList[id].fitness))));
+                    for (int gen = 0; gen < population.chromosomeList[id].frame.size(); ++gen) {
+                        if (gen < population.chromosomeList[id].frame.size() - 1) {
+                            frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen]))) + ",";
+                        } else {
+                            frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen])));
+                        }
+                    }
+                    xmlWriter.writeTextElement("Solution", frame + ")");
+                    xmlWriter.writeEndElement();
+                }
+            xmlWriter.writeEndElement();
+        xmlWriter.writeEndElement();
     xmlWriter.writeEndDocument();
     file.close();
 }
