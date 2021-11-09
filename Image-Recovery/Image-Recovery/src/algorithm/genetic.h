@@ -110,6 +110,14 @@ public:
     void accuracyMeter(Chromosome &chromosome);
 
     /**
+     * @fn mutationDetector
+     * @brief
+     * @param chromosome
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void mutationDetector(Chromosome &chromosome);
+
+    /**
      * @fn geneticAlgorithm
      * @brief
      * @param progressBar

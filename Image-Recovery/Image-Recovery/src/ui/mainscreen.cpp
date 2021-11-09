@@ -189,7 +189,7 @@ void MainScreen::on_solidButton_clicked() {
 }
 
 void MainScreen::on_patternButton_clicked() {
-    ui->generationSpinBox->setValue(100000);
+    ui->generationSpinBox->setValue(10);
     ui->generationSpinBox->setEnabled(true);
     checkUserInformation();
 }

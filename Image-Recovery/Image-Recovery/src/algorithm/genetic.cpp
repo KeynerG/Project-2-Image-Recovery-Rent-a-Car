@@ -3,7 +3,7 @@
 Genetic::Genetic() = default;
 
 void Genetic::checkProgress(int &generationId) {
-    if (frameCompleted || (generationId % DataManager::getInstance()->getUserNGenerations()) == 0) {
+    if ((generationId == 1) || ((generationId % DataManager::getInstance()->getUserNGenerations()) == 0) || frameCompleted) {
         createImage();
     }
 }
@@ -44,8 +44,6 @@ void Genetic::accuracyMeter(Chromosome &chromosome) {
     for (int g = 0; g < reference.size(); ++g) {
         if (chromosome.frame[g] == reference[g]) {
             sharedGenes++;
-        } else {
-            chromosome.mutations.append(g);
         }
     }
     // chromosome fitness calculation
@@ -53,6 +51,15 @@ void Genetic::accuracyMeter(Chromosome &chromosome) {
     // check algorithm success condition
     if (chromosome.fitness == 100) {
         frameCompleted = true;
+    }
+}
+
+void Genetic::mutationDetector(Chromosome &chromosome) {
+    QVector<QRgb> reference = DataManager::getInstance()->getReference();
+    for (int g = 0; g < reference.size(); ++g) {
+        if (chromosome.frame[g] != reference[g]) {
+            chromosome.mutations.append(g);
+        }
     }
 }
 
@@ -198,24 +205,22 @@ void Genetic::mutation(Population &generation) {
     QVector<int> mutationsAmount;
     QList<int> gensMutated;
     for (int c = 0; c < generation.chromosomeList.size(); ++c) {
-        accuracyMeter(generation.chromosomeList[c]);
-        if (c != generation.fitChromosome) {
-            frameSelected = generation.chromosomeList[c].frame;
-            mutationsAmount = generation.chromosomeList[c].mutations;
-            gensMutated.clear();
-            for (int g = 0; g < mutationsAmount.size(); ++g) {
-                int genSelected = mutationsAmount[g];
-                int colorSelected = rand() % colorPalette.size();
-                if (gensMutated.count(genSelected) == 0) {
-                    if (frameSelected[genSelected] != colorPalette[colorSelected]) {
-                        frameSelected[genSelected] = colorPalette[colorSelected];
-                        gensMutated.append(genSelected);
-                    } else {
-                        --g;
-                    }
+        mutationDetector(generation.chromosomeList[c]);
+        frameSelected = generation.chromosomeList[c].frame;
+        mutationsAmount = generation.chromosomeList[c].mutations;
+        gensMutated.clear();
+        for (int g = 0; g < mutationsAmount.size(); ++g) {
+            int genSelected = mutationsAmount[g];
+            int colorSelected = rand() % colorPalette.size();
+            if (gensMutated.count(genSelected) == 0) {
+                if (frameSelected[genSelected] != colorPalette[colorSelected]) {
+                    frameSelected[genSelected] = colorPalette[colorSelected];
+                    gensMutated.append(genSelected);
                 } else {
                     --g;
                 }
+            } else {
+                --g;
             }
             generation.chromosomeList[c].frame = frameSelected;
         }
