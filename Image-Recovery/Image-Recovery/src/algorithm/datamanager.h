@@ -227,7 +227,7 @@ private:
     QPoint frameBottomRightPoint; /**<  */
     QVector<QRgb> reference; /**<  */
     QList<QRgb> colorPaletteReference; /**<  */
-    QString filesPath = "../src/generations/";
+    QString filesPath = "../src/generations/"; /**<  */
     QString imagePath; /**<  */
     static DataManager *instance; /**<  */
 };

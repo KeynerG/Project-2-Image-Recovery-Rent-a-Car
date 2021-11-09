@@ -4,11 +4,6 @@
 MainScreen::MainScreen(QWidget *parent) : QWidget(parent), ui(new Ui::MainScreen) {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
-    connect(ui->generationSlider, SIGNAL(valueChanged(int)), ui->genNumberLabel, SLOT(setNum(int)));
-    connect(ui->topHorizontalSlider, SIGNAL(valueChanged(int)), ui->originXValueLabel, SLOT(setNum(int)));
-    connect(ui->topVerticalSlider, SIGNAL(valueChanged(int)), ui->originYValueLabel, SLOT(setNum(int)));
-    connect(ui->bottomHorizontalSlider, SIGNAL(valueChanged(int)), ui->finalXValueLabel, SLOT(setNum(int)));
-    connect(ui->bottomVerticalSlider, SIGNAL(valueChanged(int)), ui->finalYValueLabel, SLOT(setNum(int)));
 }
 
 MainScreen::~MainScreen() {
@@ -53,7 +48,7 @@ void MainScreen::checkUserInformation() {
 }
 
 void MainScreen::saveGenImage(QImage image) {
-    QString path = "../src/generations/missing.png";
+    QString path = "../src/generations/user-image.png";
     bool saved = image.save(path);
     if (saved) {
         DataManager::getInstance()->setImagePath(path);
@@ -111,7 +106,6 @@ void MainScreen::on_displayPreviewScreenButton_clicked() {
 }
 
 void MainScreen::sendData() {
-    ui->stackedWidget->setCurrentIndex(4);
     DataManager::getInstance()->setUserNGenerations(ui->generationSpinBox->value());
     DataManager::getInstance()->setFrameTopLeftPoint(topLeft);
     DataManager::getInstance()->setFrameBottomRightPoint(bottomRight);
@@ -195,21 +189,25 @@ void MainScreen::on_patternButton_clicked() {
 }
 
 void MainScreen::on_topHorizontalSlider_valueChanged(int value) {
+    ui->originXValueLabel->setNum(value);
     topLeft.setX(value);
     checkUserInformation();
 }
 
 void MainScreen::on_topVerticalSlider_valueChanged(int value) {
+    ui->originYValueLabel->setNum(value);
     topLeft.setY(value);
     checkUserInformation();
 }
 
 void MainScreen::on_bottomHorizontalSlider_valueChanged(int value) {
+    ui->finalXValueLabel->setNum(value);
     bottomRight.setX(value);
     checkUserInformation();
 }
 
 void MainScreen::on_bottomVerticalSlider_valueChanged(int value) {
+    ui->finalYValueLabel->setNum(value);
     bottomRight.setY(value);
     checkUserInformation();
 }
@@ -223,6 +221,7 @@ void MainScreen::on_progressBar_valueChanged(int value) {
 }
 
 void MainScreen::on_generationSlider_valueChanged(int value) {
+    ui->genNumberLabel->setNum(value);
     QString genImagePath = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(value))) + ".png";
     ui->generationImageLabel->setPixmap(QPixmap(genImagePath).scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
 }

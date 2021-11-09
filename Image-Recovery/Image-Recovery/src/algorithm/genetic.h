@@ -29,7 +29,7 @@ struct Chromosome {
     int ID; /**< Chromosome identifier. */
     QVector<QRgb> frame; /**< Solution to the missing frame. */
     int fitness; /**< Similarity score respect to the reference image. */
-    QList<int> mutations;
+    QList<int> mutations; /**< Number of pixels different (QRgb) from the reference image. */
 };
 
 /**
@@ -64,7 +64,7 @@ struct Population {
 class Genetic {
 
 public:
-    Population population; /**<  */
+    Population population; /**< Reference to Population structure. */
     int generationID = 0;  /**< Generation identifier counter. */
     bool frameCompleted = false; /**< Determines if the missing frame of the image has been completed successfully. */
     int progress; /**< Progress reference. */
@@ -72,7 +72,7 @@ public:
     Genetic(); /**< Genetic class constructor. */
 
     /**
-     * @fn checkProgress
+     * @fn void checkProgress(int &generationId)
      * @brief
      * @param generationId
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -80,7 +80,7 @@ public:
     void checkProgress(int &generationId);
 
     /**
-     * @fn saveImage
+     * @fn void saveImage(QImage &image) const
      * @brief
      * @param image
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -88,21 +88,21 @@ public:
     void saveImage(QImage &image) const;
 
     /**
-     * @fn createImage
+     * @fn void createImage()
      * @brief
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void createImage();
 
     /**
-     * @fn createXML
+     * @fn void createXML()
      * @brief
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
     void createXML();
 
     /**
-     * @fn accuracyMeter
+     * @fn void accuracyMeter(Chromosome &chromosome)
      * @brief
      * @param chromosome
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -110,7 +110,7 @@ public:
     void accuracyMeter(Chromosome &chromosome);
 
     /**
-     * @fn mutationDetector
+     * @fn void mutationDetector(Chromosome &chromosome)
      * @brief
      * @param chromosome
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -118,7 +118,7 @@ public:
     void mutationDetector(Chromosome &chromosome);
 
     /**
-     * @fn geneticAlgorithm
+     * @fn void geneticAlgorithm(QProgressBar *progressBar)
      * @brief
      * @param progressBar
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -127,7 +127,7 @@ public:
     void geneticAlgorithm(QProgressBar *progressBar);
 
     /**
-     * @fn fitness
+     * @fn void fitness(Population &generation)
      * @brief
      * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -135,7 +135,7 @@ public:
     void fitness(Population &generation);
 
     /**
-     * @fn selection
+     * @fn void selection(Population &generation)
      * @brief
      * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -143,7 +143,7 @@ public:
     void selection(Population &generation);
 
     /**
-     * @fn crossover
+     * @fn void crossover(const Chromosome &parentA, const Chromosome &parentB)
      * @brief
      * @param parentA
      * @param parentB
@@ -153,7 +153,7 @@ public:
     void crossover(const Chromosome &parentA, const Chromosome &parentB);
 
     /**
-     * @fn mutation
+     * @fn void mutation(Population &generation)
      * @brief
      * @param generation
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
