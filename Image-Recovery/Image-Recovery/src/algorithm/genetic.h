@@ -5,11 +5,13 @@
 
 #include <iostream>
 #include <QDebug>
+#include <QDir>
 #include <QImage>
 #include <QList>
 #include <QProgressBar>
 #include <QRgb>
 #include <QVector>
+#include <QXmlStreamWriter>
 
 using namespace std;
 
@@ -95,9 +97,17 @@ public:
     void createImage();
 
     /**
+     * @fn void saveXML(QFile &file)
+     * @brief
+     * @param file
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
+     */
+    void saveXML(QFile &file);
+
+    /**
      * @fn void createXML()
      * @brief
-     * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
+     * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void createXML();
 

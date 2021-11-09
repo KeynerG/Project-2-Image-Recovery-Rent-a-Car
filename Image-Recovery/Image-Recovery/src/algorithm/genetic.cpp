@@ -5,6 +5,7 @@ Genetic::Genetic() = default;
 void Genetic::checkProgress(int &generationId) {
     if ((generationId == 1) || ((generationId % DataManager::getInstance()->getUserNGenerations()) == 0) || frameCompleted) {
         createImage();
+        createXML();
     }
 }
 
@@ -37,6 +38,49 @@ void Genetic::createImage() {
     saveImage(generationImage);
 }
 
+void Genetic::saveXML(QFile &file) {
+    file.open(QIODevice::WriteOnly);
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartElement("Generation");
+        xmlWriter.writeTextElement("ID", QString(QString::fromStdString(std::to_string(generationID))));
+        xmlWriter.writeTextElement("Fitness_Score", QString(QString::fromStdString(std::to_string(population.chromosomeList[population.fitChromosome].fitness))));
+        xmlWriter.writeTextElement("Best_Chromosome", "Chromosome_" + QString(QString::fromStdString(std::to_string(population.fitChromosome))));
+        xmlWriter.writeStartElement("Population");
+            for (int id = 0; id < 10; ++id) {
+                QString frame = "(";
+                xmlWriter.writeStartElement("Chromosome");
+                xmlWriter.writeAttribute("ID", QString(QString::fromStdString(std::to_string(id))));
+                xmlWriter.writeAttribute("Fitness_Score",QString(QString::fromStdString(std::to_string(population.chromosomeList[id].fitness))));
+                for (int gen = 0; gen < population.chromosomeList[id].frame.size(); ++gen) {
+                    if (gen < population.chromosomeList[id].frame.size() - 1) {
+                        frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen]))) + ",";
+                    } else {
+                        frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen])));
+                    }
+                }
+                xmlWriter.writeTextElement("Solution", frame + ")");
+                xmlWriter.writeEndElement();
+            }
+        xmlWriter.writeEndElement();
+    xmlWriter.writeEndElement();
+    xmlWriter.writeStartDocument();
+    xmlWriter.writeEndDocument();
+    file.close();
+}
+
+void Genetic::createXML() {
+    QDir genDir(DataManager::getInstance()->getFilesPath());
+    QString path;
+    if (genDir.exists()) {
+        path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".xml";
+        QFile generationFile(path);
+        saveXML(generationFile);
+    } else {
+        qDebug() << "ERROR: The xml of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully created.";
+    }
+}
+
 void Genetic::accuracyMeter(Chromosome &chromosome) {
     QVector<QRgb> reference = DataManager::getInstance()->getReference(); /**< Reference of image missing frame. */
     int sharedGenes = 0; /**< Number of pixels shared by the solution and the reference frame. */
@@ -61,10 +105,6 @@ void Genetic::mutationDetector(Chromosome &chromosome) {
             chromosome.mutations.append(g);
         }
     }
-}
-
-void Genetic::createXML() {
-
 }
 
 void Genetic::geneticAlgorithm(QProgressBar *progressBar) {
