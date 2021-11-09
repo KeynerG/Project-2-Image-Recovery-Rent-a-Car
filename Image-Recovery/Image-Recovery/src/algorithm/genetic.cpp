@@ -3,15 +3,16 @@
 Genetic::Genetic() = default;
 
 void Genetic::checkProgress(int &generationId) {
+    std::cout << "Generation: " << generationId << std::endl;
     if ((generationId == 1) || ((generationId % DataManager::getInstance()->getUserNGenerations()) == 0) || frameCompleted) {
         createImage();
-        createXML();
     }
+    createXML();
 }
 
 void Genetic::saveImage(QImage &image) const {
     DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() + 1);
-    QString path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
+    QString path = DataManager::getInstance()->getFilesPath() + "solutions/" + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
     bool saved = image.save(path);
     if (!saved) {
         qDebug() << "ERROR: The image of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully saved.";
@@ -73,7 +74,7 @@ void Genetic::createXML() {
     QDir genDir(DataManager::getInstance()->getFilesPath());
     QString path;
     if (genDir.exists()) {
-        path = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".xml";
+        path = DataManager::getInstance()->getFilesPath() + "information/Generation-" + QString(QString::fromStdString(std::to_string(generationID))) + ".xml";
         QFile generationFile(path);
         saveXML(generationFile);
     } else {
@@ -129,7 +130,6 @@ void Genetic::geneticAlgorithm(QProgressBar *progressBar) {
         }
         fitness(population);
         checkProgress(generationID);
-        std::cout << "Generation: " << generationID << std::endl;
         // update app progress bar
         progress = population.chromosomeList[population.fitChromosome].fitness;
         if (progressBar->value() < progress) {

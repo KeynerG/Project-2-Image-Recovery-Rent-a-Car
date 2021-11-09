@@ -77,7 +77,8 @@ void MainScreen::imageProcessing(QPoint topLeftCorner, QPoint bottomRightCorner)
 void MainScreen::on_startButton_clicked() {
     QDir genDir(DataManager::getInstance()->getFilesPath());
     if (!genDir.exists()) {
-        genDir.mkpath("..//generations/");
+        genDir.mkpath("..//generations/solutions/");
+        genDir.mkpath("..//generations/information/");
     }
     ui->stackedWidget->setCurrentIndex(1);
 }
@@ -125,7 +126,7 @@ void MainScreen::on_displayGenerationScreenButton_clicked() {
         ui->generationSlider->setHidden(true);
     }
     ui->generationSlider->setMaximum(DataManager::getInstance()->getLastGenerationFile());
-    ui->generationImageLabel->setPixmap(QPixmap("../src/generations/1.png").scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
+    ui->generationImageLabel->setPixmap(QPixmap("../src/generations/solutions/1.png").scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
     ui->stackedWidget->setCurrentIndex(5);
 }
 
@@ -136,7 +137,7 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
     if (ui->patternButton->isChecked()) {
         ui->formatSelectedLabel->setText("Multicolored");
     }
-    QString finalImagePath = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getLastGenerationFile()))) + ".png";
+    QString finalImagePath = DataManager::getInstance()->getFilesPath() + "solutions/" + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getLastGenerationFile()))) + ".png";
     ui->resultImage->setPixmap(QPixmap(finalImagePath).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getFilesPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(std::to_string(DataManager::getInstance()->getGenerationsAmount())));
@@ -222,7 +223,7 @@ void MainScreen::on_progressBar_valueChanged(int value) {
 
 void MainScreen::on_generationSlider_valueChanged(int value) {
     ui->genNumberLabel->setNum(value);
-    QString genImagePath = DataManager::getInstance()->getFilesPath() + QString(QString::fromStdString(std::to_string(value))) + ".png";
+    QString genImagePath = DataManager::getInstance()->getFilesPath() + "solutions/" + QString(QString::fromStdString(std::to_string(value))) + ".png";
     ui->generationImageLabel->setPixmap(QPixmap(genImagePath).scaled(ui->generationImageLabel->size(), Qt::AspectRatioMode::KeepAspectRatio,Qt::TransformationMode::SmoothTransformation));
 }
 
