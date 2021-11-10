@@ -1,7 +1,7 @@
 # Rent A Car
 
 ### Demo
-![DEMO]()
+![DEMO](https://github.com/KeynerG/Project-2-Image-Recovery-Rent-a-Car/blob/Rent-A-Car/docs/Rent-A-Car-DEMO.gif)
 
 ### Institución
 [Instituto Tecnológico de Costa Rica](https://www.tec.ac.cr/)
