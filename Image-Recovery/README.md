@@ -1,7 +1,7 @@
 # Image Recovery
 
 ### Demo
-
+![DEMO](https://github.com/KeynerG/Project-2-Image-Recovery-Rent-a-Car/blob/Image-Recovery/docs/Image-Recovery-DEMO.gif)
 
 ### Institución
 [Instituto Tecnológico de Costa Rica](https://www.tec.ac.cr/)
