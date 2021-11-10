@@ -1,0 +1,26 @@
+var class_data_manager =
+[
+    [ "DataManager", "class_data_manager.html#acd33ffe3bb2efb28bd8d277b75c25bf7", null ],
+    [ "DataManager", "class_data_manager.html#ac2eec7fa355109eda41308e1de76d2a8", null ],
+    [ "getColorPaletteReference", "class_data_manager.html#af851de06e9c55f32e38b5b56e3e20ccb", null ],
+    [ "getCurrentFileGeneration", "class_data_manager.html#a39831f8d909399bd81a15e0a3b599e90", null ],
+    [ "getFilesPath", "class_data_manager.html#a1bafdf94b9df7f303a65a83d19ccf4ee", null ],
+    [ "getFrameBottomRightPoint", "class_data_manager.html#a0412c5a9061a4aecaabdf780250b4236", null ],
+    [ "getFrameTopLeftPoint", "class_data_manager.html#adacea5578eeef6186db8bae8b35cf35a", null ],
+    [ "getGenerationsAmount", "class_data_manager.html#a5a237d0ea1a7d74d9ae12f47556b51d2", null ],
+    [ "getImagePath", "class_data_manager.html#ad2b1a44294420813b371bd21c70b6e3c", null ],
+    [ "getLastGenerationFile", "class_data_manager.html#aef71f0fc06b157b6d74cf8cdd8dfef9e", null ],
+    [ "getReference", "class_data_manager.html#a0092c121a47b4ea717520087cc0417fe", null ],
+    [ "getUserNGenerations", "class_data_manager.html#a8f791c9dfc8177da81462333bbc1bcb2", null ],
+    [ "operator=", "class_data_manager.html#ac08aa292eabc62e76e6c59e25e57f495", null ],
+    [ "setColorPaletteReference", "class_data_manager.html#a484f22fea3232a93c50bbb526e0fc846", null ],
+    [ "setCurrentFileGeneration", "class_data_manager.html#acfc6c3c20585aecbd01d7894c3103b7c", null ],
+    [ "setFilesPath", "class_data_manager.html#a36f3d146524c6308f68048e181560cd6", null ],
+    [ "setFrameBottomRightPoint", "class_data_manager.html#ac9eab8e73250aad67f06819e3c60f889", null ],
+    [ "setFrameTopLeftPoint", "class_data_manager.html#a145717f0345e89291606bcce4672f488", null ],
+    [ "setGenerationsAmount", "class_data_manager.html#a311e84f0dfee29792fdf45d60e281551", null ],
+    [ "setImagePath", "class_data_manager.html#a424ed908175bc5ce7d4aeddbf21ef5d9", null ],
+    [ "setLastGenerationFile", "class_data_manager.html#a78def6afa9618743e00949c7e72c0486", null ],
+    [ "setReference", "class_data_manager.html#ae2d91bb36bb5b6549de100a74821c0ed", null ],
+    [ "setUserNGenerations", "class_data_manager.html#a0f6bd0ae984a791ee6a507a2b98f764e", null ]
+];

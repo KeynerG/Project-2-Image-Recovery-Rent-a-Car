@@ -122,7 +122,7 @@ void MainScreen::on_displayLoadScreenButton_clicked() {
 }
 
 void MainScreen::on_displayGenerationScreenButton_clicked() {
-    if (DataManager::getInstance()->getGenerationsAmount() == 1) {
+    if (DataManager::getInstance()->getGenerationsAmount() <= 1 || DataManager::getInstance()->getGenerationsAmount() == ui->generationSpinBox->value()) {
         ui->generationSlider->setHidden(true);
     }
     ui->genNumberLabel->setNum(ui->generationSpinBox->value());
@@ -223,9 +223,9 @@ void MainScreen::on_progressBar_valueChanged(int value) {
 }
 
 void MainScreen::on_generationSlider_valueChanged(int value) {
-    if(value==ui->generationSlider->maximum()){
+    if (value == ui->generationSlider->maximum()) {
         ui->genNumberLabel->setNum(DataManager::getInstance()->getGenerationsAmount());
-    }else{
+    } else {
         ui->genNumberLabel->setNum(value * ui->generationSpinBox->value());
     }
     QString genImagePath = DataManager::getInstance()->getFilesPath() + "solutions/" + QString(QString::fromStdString(std::to_string(value))) + ".png";
