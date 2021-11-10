@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/resources/backgrounds/final.png</file>
+        <file>src/resources/backgrounds/home.png</file>
+        <file>src/resources/backgrounds/load.png</file>
+        <file>src/resources/backgrounds/main.png</file>
+    </qresource>
+</RCC>
