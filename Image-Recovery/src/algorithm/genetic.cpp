@@ -15,7 +15,7 @@ void Genetic::saveImage(QImage &image) const {
     QString path = DataManager::getInstance()->getFilesPath() + "solutions/" + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getCurrentFileGeneration()))) + ".png";
     bool saved = image.save(path);
     if (!saved) {
-        qDebug() << "ERROR: The image of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully saved.";
+        qDebug() << "ERROR: The solution " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully saved.";
         if (DataManager::getInstance()->getCurrentFileGeneration() != 0) {
             DataManager::getInstance()->setCurrentFileGeneration(DataManager::getInstance()->getCurrentFileGeneration() - 1);
         }
@@ -30,55 +30,65 @@ void Genetic::createImage() {
     int colorIndex = 0;
     QVector<QRgb> generationFrame = population.chromosomeList[population.fitChromosome].frame;
     QImage generationImage(DataManager::getInstance()->getImagePath());
+    QDir genDir(DataManager::getInstance()->getFilesPath() + "solutions/");
     for (int y = DataManager::getInstance()->getFrameTopLeftPoint().y(); y < DataManager::getInstance()->getFrameBottomRightPoint().y(); ++y) {
         for (int x = DataManager::getInstance()->getFrameTopLeftPoint().x(); x < DataManager::getInstance()->getFrameBottomRightPoint().x(); ++x) {
             color = generationFrame.value(colorIndex++);
             generationImage.setPixel(x, y, color);
         }
     }
-    saveImage(generationImage);
+    if (genDir.exists()) {
+        saveImage(generationImage);
+    } else {
+        qDebug() << "ERROR: The solution " << DataManager::getInstance()->getCurrentFileGeneration() + 1 << " was not successfully created.";
+        genDir.mkpath("..///solutions/");
+    }
 }
 
 void Genetic::saveXML(QFile &file) {
     file.open(QIODevice::WriteOnly);
-    QXmlStreamWriter xmlWriter(&file);
-    xmlWriter.setAutoFormatting(true);
-    xmlWriter.writeStartDocument();
-        xmlWriter.writeStartElement("Generation");
-            xmlWriter.writeTextElement("ID", QString(QString::fromStdString(std::to_string(generationID))));
-            xmlWriter.writeTextElement("Fitness_Score", QString(QString::fromStdString(std::to_string(population.chromosomeList[population.fitChromosome].fitness))));
-            xmlWriter.writeTextElement("Best_Chromosome", "Chromosome_" + QString(QString::fromStdString(std::to_string(population.fitChromosome))));
-            xmlWriter.writeStartElement("Population");
-                for (int id = 0; id < 10; ++id) {
-                    QString frame = "(";
-                    xmlWriter.writeStartElement("Chromosome");
-                    xmlWriter.writeAttribute("ID", QString(QString::fromStdString(std::to_string(id))));
-                    xmlWriter.writeAttribute("Fitness_Score",QString(QString::fromStdString(std::to_string(population.chromosomeList[id].fitness))));
-                    for (int gen = 0; gen < population.chromosomeList[id].frame.size(); ++gen) {
-                        if (gen < population.chromosomeList[id].frame.size() - 1) {
-                            frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen]))) + ",";
-                        } else {
-                            frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen])));
+    if (file.exists()) {
+        QXmlStreamWriter xmlWriter(&file);
+        xmlWriter.setAutoFormatting(true);
+        xmlWriter.writeStartDocument();
+            xmlWriter.writeStartElement("Generation");
+                xmlWriter.writeTextElement("ID", QString(QString::fromStdString(std::to_string(generationID))));
+                xmlWriter.writeTextElement("Fitness_Score", QString(QString::fromStdString(std::to_string(population.chromosomeList[population.fitChromosome].fitness))));
+                xmlWriter.writeTextElement("Best_Chromosome", "Chromosome_" + QString(QString::fromStdString(std::to_string(population.fitChromosome))));
+                xmlWriter.writeStartElement("Population");
+                    for (int id = 0; id < 10; ++id) {
+                        QString frame = "(";
+                        xmlWriter.writeStartElement("Chromosome");
+                        xmlWriter.writeAttribute("ID", QString(QString::fromStdString(std::to_string(id))));
+                        xmlWriter.writeAttribute("Fitness_Score",QString(QString::fromStdString(std::to_string(population.chromosomeList[id].fitness))));
+                        for (int gen = 0; gen < population.chromosomeList[id].frame.size(); ++gen) {
+                            if (gen < population.chromosomeList[id].frame.size() - 1) {
+                                frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen]))) + ",";
+                            } else {
+                                frame = frame + QString(QString::fromStdString(std::to_string(population.chromosomeList[id].frame[gen])));
+                            }
                         }
+                        xmlWriter.writeTextElement("Solution", frame + ")");
+                        xmlWriter.writeEndElement();
                     }
-                    xmlWriter.writeTextElement("Solution", frame + ")");
-                    xmlWriter.writeEndElement();
-                }
+                xmlWriter.writeEndElement();
             xmlWriter.writeEndElement();
-        xmlWriter.writeEndElement();
-    xmlWriter.writeEndDocument();
-    file.close();
+        xmlWriter.writeEndDocument();
+        file.close();
+    } else {
+        qDebug() << "ERROR: The xml of generation " << QString(QString::fromStdString(std::to_string(generationID))) << " was not successfully saved.";
+    }
 }
 
 void Genetic::createXML() {
-    QDir genDir(DataManager::getInstance()->getFilesPath());
-    QString path;
+    QDir genDir(DataManager::getInstance()->getFilesPath() + "information/");
     if (genDir.exists()) {
-        path = DataManager::getInstance()->getFilesPath() + "information/Generation-" + QString(QString::fromStdString(std::to_string(generationID))) + ".xml";
+        QString path = DataManager::getInstance()->getFilesPath() + "information/Generation-" + QString(QString::fromStdString(std::to_string(generationID))) + ".xml";
         QFile generationFile(path);
         saveXML(generationFile);
     } else {
-        qDebug() << "ERROR: The xml of generation " << DataManager::getInstance()->getCurrentFileGeneration() << " was not successfully created.";
+        qDebug() << "ERROR: The xml of generation " << QString(QString::fromStdString(std::to_string(generationID))) << " was not successfully created.";
+        genDir.mkpath("..///information/");
     }
 }
 
