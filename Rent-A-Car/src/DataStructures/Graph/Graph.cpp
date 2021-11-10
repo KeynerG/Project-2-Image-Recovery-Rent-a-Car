@@ -155,10 +155,10 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
         // Generates a random number for the individual vertex connections
         srand(time(0));
         int vertexConnections;
-        if (nodes == 4) {
+        if (nodes == 4 or nodes > 15) {
             vertexConnections = (rand() % 2) + 1;
         } else {
-            vertexConnections = (rand() % 4) + 1;
+            vertexConnections = (rand() % 3) + 1;
         }
 
         for (int j = 0; j < vertexConnections; j++) {
@@ -325,16 +325,15 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
             }
             for (int j = 0; j < vertexItemList.size(); ++j) {
                 if (possibleRoute.getNodeIn(i).getOrigin().getId() == vertexItemList[j]->getIdentifier() or
-                    possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()){
+                    possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()) {
                     vertexItemList[j]->setPen(p);
                 }
             }
         }
 
         QTime dieTime = QTime::currentTime().addMSecs(1000);
-        while( QTime::currentTime() < dieTime )
-        {
-            QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+        while (QTime::currentTime() < dieTime) {
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
         }
     } else {
         SimpleNode<SimpleList<Edge>> *route = possibleRoutes.head;
@@ -352,7 +351,7 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
                 }
                 possibleRoute.addNodeAtEnd(aux->getData());
 
-                possibleRoutes.addNodeAtEnd(possibleRoute); //********AQUI*********
+                possibleRoutes.addNodeAtEnd(possibleRoute);
 
                 QBrush b;
                 b.setStyle(Qt::SolidPattern);
@@ -379,16 +378,15 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
                     }
                     for (int j = 0; j < vertexItemList.size(); ++j) {
                         if (possibleRoute.getNodeIn(i).getOrigin().getId() == vertexItemList[j]->getIdentifier() or
-                            possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()){
+                            possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()) {
                             vertexItemList[j]->setPen(p);
                         }
                     }
                 }
 
                 QTime dieTime = QTime::currentTime().addMSecs(1000);
-                while( QTime::currentTime() < dieTime )
-                {
-                    QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+                while (QTime::currentTime() < dieTime) {
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
                 }
 
                 added = true;
@@ -425,16 +423,15 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
                 }
                 for (int j = 0; j < vertexItemList.size(); ++j) {
                     if (possibleRoute.getNodeIn(i).getOrigin().getId() == vertexItemList[j]->getIdentifier() or
-                        possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()){
+                        possibleRoute.getNodeIn(i).getDestiny().getId() == vertexItemList[j]->getIdentifier()) {
                         vertexItemList[j]->setPen(p);
                     }
                 }
             }
 
             QTime dieTime = QTime::currentTime().addMSecs(1000);
-            while( QTime::currentTime() < dieTime )
-            {
-                QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+            while (QTime::currentTime() < dieTime) {
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
             }
         }
     }
@@ -464,7 +461,8 @@ void Graph::calculateBestRouteRecursive(int originId, int destinyId, QVector<Ver
 
 void Graph::printFinalRoute() {
     cout << endl << "*****************************************************************************************" << endl;
-    cout << endl << "Final route list:" << endl;
+    cout << endl << "Final route list - From " << this->finalRoute.head->getData().getOrigin().getId() << " to "
+         << this->finalRoute.tail->getData().getDestiny().getId() << ":" << endl;
 
     SimpleNode<Edge> *fEdgeAux = this->finalRoute.head;
     finalGasCapacity = fEdgeAux->getData().getWeight();

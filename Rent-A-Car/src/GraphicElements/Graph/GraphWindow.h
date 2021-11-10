@@ -7,6 +7,7 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QWidget>
 
 #include "src/DataStructures/SimpleList/SimpleList.h"
 #include "src/LogicManagment/TravelAssistant.h"
@@ -25,8 +26,11 @@ private:
     QLabel *destinyLabel;
     QComboBox *destinyBox;
     QPushButton *startButton;
+    QPushButton *backButton;
+    QPushButton *closeButton;
     QVector<EdgeItem *> edgeItemList;
     QVector<VertexItem *> vertexItemList;
+    QWidget *parent;
 
 
     static complex<double> calculateNodePosition(int k, int n);
@@ -41,8 +45,14 @@ public slots:
 
     void start();
 
+    void goBack();
+
+    void closeApp();
+
 public:
     explicit GraphWindow(QWidget *parent = nullptr);
+
+    ~GraphWindow();
 
     void drawGraph();
 };

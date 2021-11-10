@@ -33,11 +33,6 @@ private:
     SimpleList<Edge> finalRoute;
     int finalGasCapacity;
 public:
-    int getFinalGasCapacity() const;
-
-    void setFinalGasCapacity(int finalGasCapacity);
-
-public:
     /**
      * @brief Class default constructor.
      */
@@ -102,6 +97,18 @@ public:
      * @param finalRoutes
      */
     void setFinalRoutes(const SimpleList<SimpleList<Edge>> &finalRoutes);
+
+    /**
+     * @brief finalGasCapacity getter.
+     * @return finalGasCapacity
+     */
+    int getFinalGasCapacity() const;
+
+    /**
+     * @brief finalGasCapacity setter.
+     * @param finalGasCapacity
+     */
+    void setFinalGasCapacity(int finalGasCapacity);
 
     /**
      * @brief Function to add a new vertex in the graph.

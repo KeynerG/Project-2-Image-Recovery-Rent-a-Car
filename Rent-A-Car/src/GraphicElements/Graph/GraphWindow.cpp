@@ -1,11 +1,16 @@
 #include "src/GraphicElements/Graph/GraphWindow.h"
 
 GraphWindow::GraphWindow(QWidget *parent) {
+    this->parent = parent;
     setFixedSize(610, 610);
     setBackgroundBrush(QColor("#001010"));
     this->scene = new QGraphicsScene(0, 0, 600, 500, this);
     setScene(this->scene);
     setWindowTitle("Rent A Car");
+}
+
+GraphWindow::~GraphWindow() {
+    delete this;
 }
 
 void GraphWindow::drawGraph() {
@@ -92,6 +97,22 @@ void GraphWindow::drawButtons(QStringList labelList) {
     startButton->setVisible(true);
     startButton->setStyleSheet("color: white; background: #001010");
     connect(startButton, SIGNAL(clicked(bool)), this, SLOT(start()));
+
+    //Back Button
+    backButton = new QPushButton(this);
+    backButton->setText("Regresar");
+    backButton->setGeometry(10, 550, 120, 50);
+    backButton->setVisible(true);
+    backButton->setStyleSheet("color: white; background: #001010");
+    connect(backButton, SIGNAL(clicked(bool)), this, SLOT(goBack()));
+
+    //Close Button
+    closeButton = new QPushButton(this);
+    closeButton->setText("Cerrar");
+    closeButton->setGeometry(480, 550, 120, 50);
+    closeButton->setVisible(true);
+    closeButton->setStyleSheet("color: white; background: #001010");
+    connect(closeButton, SIGNAL(clicked(bool)), this, SLOT(closeApp()));
 }
 
 void GraphWindow::start() {
@@ -113,4 +134,14 @@ void GraphWindow::start() {
         originBox->setEnabled(true);
         destinyBox->setEnabled(true);
     }
+}
+
+void GraphWindow::goBack() {
+    this->parent->show();
+    this->close();
+}
+
+void GraphWindow::closeApp() {
+    this->parent->close();
+    this->close();
 }

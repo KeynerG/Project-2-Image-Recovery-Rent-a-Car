@@ -27,6 +27,8 @@ private slots:
 
     void onConfirmButtonClicked(bool checked);
 
+    void closeApp();
+
 private:
     Ui::MainWindow *ui;
     QLabel *title;
@@ -34,6 +36,7 @@ private:
     QSlider *slider;
     QLabel *vertexAmount;
     QPushButton *confirmButton;
+    QPushButton *closeButton;
     QProgressBar *loadingIcon;
     GraphWindow *gw;
 };
