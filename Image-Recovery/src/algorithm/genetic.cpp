@@ -4,7 +4,7 @@ Genetic::Genetic() = default;
 
 void Genetic::checkProgress(int &generationId) {
     std::cout << "Generation: " << generationId << std::endl;
-    if ((generationId == 1) || ((generationId % DataManager::getInstance()->getUserNGenerations()) == 0) || frameCompleted) {
+    if (((generationId % DataManager::getInstance()->getUserNGenerations()) == 0) || frameCompleted) {
         createImage();
     }
     createXML();
