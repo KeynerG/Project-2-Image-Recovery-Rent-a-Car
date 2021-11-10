@@ -1,4 +1,7 @@
-# Proyecto - Image Recovery & Rent A Car
+# Rent A Car
+
+### Demo
+![DEMO]()
 
 ### Institución
 [Instituto Tecnológico de Costa Rica](https://www.tec.ac.cr/)
@@ -13,7 +16,5 @@
 II 2021
 
 ### Estudiantes
-- [Keyner S. Gómez Pana](https://github.com/KeynerG) - 2018250637
-- [Valerie M. Hernández Fernández](https://github.com/valeriehernandez-7) - 2020010829
 - [Jose A. Rodríguez Rojas](https://github.com/JoseAndres216) - 2019279722
 - [Daniel A. Zúñiga Barahona](https://github.com/danyazunigab) - 2019043724

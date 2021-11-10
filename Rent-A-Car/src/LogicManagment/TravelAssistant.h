@@ -4,9 +4,10 @@
 #include <iostream>
 #include <QProgressBar>
 #include <QVector>
-#include <DataStructures/Graph/Graph.h>
-#include <../GraphicElements/Graph/VertexItem.h>
-#include "../GraphicElements/Graph/EdgeItem.h"
+
+#include "src/DataStructures/Graph/Graph.h"
+#include "src/GraphicElements/Graph/VertexItem.h"
+#include "src/GraphicElements/Graph/EdgeItem.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ class TravelAssistant {
 private:
     Graph routes;
     static TravelAssistant *instance;
+
 protected:
     TravelAssistant();
 

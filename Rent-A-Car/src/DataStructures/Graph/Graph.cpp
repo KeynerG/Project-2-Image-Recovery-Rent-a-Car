@@ -1,5 +1,6 @@
-#include <GraphicElements/Graph/VertexItem.h>
 #include <QCoreApplication>
+
+#include "src/GraphicElements/Graph/VertexItem.h"
 #include "Graph.h"
 
 Graph::Graph() {
@@ -8,7 +9,6 @@ Graph::Graph() {
     this->sortedEdges = SimpleList<Edge>();
     this->activeEdges = SimpleList<Edge>();
     this->possibleRoutes = SimpleList<SimpleList<Edge>>();
-
     this->possibleRoutes.setHead(nullptr);
     this->possibleRoutes.setTail(nullptr);
 }
@@ -201,7 +201,6 @@ void Graph::generateGraphOf(int nodes, QProgressBar *progress) {
         }
         current = current->getNext();
     }
-
     progress->setValue(100);
 }
 
@@ -477,10 +476,7 @@ void Graph::printFinalRoute() {
     }
 
     cout << endl << "More expensive connection weight: " << finalGasCapacity << endl;
-
     cout << endl << "*****************************************************************************************" << endl;
-
-
 }
 
 void Graph::printGraph() {

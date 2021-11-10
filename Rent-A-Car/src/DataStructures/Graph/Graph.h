@@ -1,10 +1,6 @@
 #ifndef RENT_A_CAR_GRAPH_H
 #define RENT_A_CAR_GRAPH_H
 
-#include "./DataStructures/SimpleList/SimpleList.h"
-#include "Edge.h"
-#include "Vertex.h"
-
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -12,8 +8,12 @@
 #include <QVector>
 #include <QThread>
 #include <QTime>
-#include "../../GraphicElements/Graph/EdgeItem.h"
-#include "../../GraphicElements/Graph/VertexItem.h"
+
+#include "src/DataStructures/SimpleList/SimpleList.h"
+#include "src/GraphicElements/Graph/EdgeItem.h"
+#include "src/GraphicElements/Graph/VertexItem.h"
+#include "Edge.h"
+#include "Vertex.h"
 
 using namespace std;
 

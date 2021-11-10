@@ -1,4 +1,4 @@
-#include "GraphicElements/Graph/GraphWindow.h"
+#include "src/GraphicElements/Graph/GraphWindow.h"
 
 GraphWindow::GraphWindow(QWidget *parent) {
     setFixedSize(610, 610);

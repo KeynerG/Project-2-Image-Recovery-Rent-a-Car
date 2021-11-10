@@ -6,9 +6,10 @@
 #include <QSlider>
 #include <QPushButton>
 #include <QProgressBar>
-#include "DataStructures/Graph/Graph.h"
-#include "LogicManagment/TravelAssistant.h"
-#include "Graph/GraphWindow.h"
+
+#include "src/DataStructures/Graph/Graph.h"
+#include "src/LogicManagment/TravelAssistant.h"
+#include "src/GraphicElements/Graph/GraphWindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

@@ -18,25 +18,25 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 include_directories(cmake-build-debug/)
 
 set(PROJECT_SOURCES
-        main.cpp
-        GraphicElements/mainwindow.cpp
-        GraphicElements/mainwindow.h
-        DataStructures/SimpleList/SimpleList.h 
-        DataStructures/SimpleList/SimpleNode.h 
-        DataStructures/Graph/Graph.cpp 
-        DataStructures/Graph/Graph.h 
-        DataStructures/Graph/Vertex.cpp 
-        DataStructures/Graph/Vertex.h 
-        DataStructures/Graph/Edge.cpp 
-        DataStructures/Graph/Edge.h 
-        LogicManagment/TravelAssistant.cpp 
-        LogicManagment/TravelAssistant.h
-        GraphicElements/Graph/GraphWindow.cpp
-        GraphicElements/Graph/GraphWindow.h
-        GraphicElements/Graph/VertexItem.cpp
-        GraphicElements/Graph/VertexItem.h
-        GraphicElements/Graph/EdgeItem.cpp
-        GraphicElements/Graph/EdgeItem.h)
+        src/main.cpp
+        src/GraphicElements/mainwindow.cpp
+        src/GraphicElements/mainwindow.h
+        src/DataStructures/SimpleList/SimpleList.h 
+        src/DataStructures/SimpleList/SimpleNode.h 
+        src/DataStructures/Graph/Graph.cpp 
+        src/DataStructures/Graph/Graph.h 
+        src/DataStructures/Graph/Vertex.cpp 
+        src/DataStructures/Graph/Vertex.h 
+        src/DataStructures/Graph/Edge.cpp 
+        src/DataStructures/Graph/Edge.h 
+        src/LogicManagment/TravelAssistant.cpp 
+        src/LogicManagment/TravelAssistant.h
+        src/GraphicElements/Graph/GraphWindow.cpp
+        src/GraphicElements/Graph/GraphWindow.h
+        src/GraphicElements/Graph/VertexItem.cpp
+        src/GraphicElements/Graph/VertexItem.h
+        src/GraphicElements/Graph/EdgeItem.cpp
+        src/GraphicElements/Graph/EdgeItem.h)
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Rent_A_Car

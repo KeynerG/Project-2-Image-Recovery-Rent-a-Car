@@ -1,9 +1,9 @@
 #ifndef RENT_A_CAR_EDGE_H
 #define RENT_A_CAR_EDGE_H
 
-#include "Vertex.h"
-
 #include <iostream>
+
+#include "Vertex.h"
 
 using namespace std;
 

@@ -2,15 +2,16 @@
 #define RENT_A_CAR_GRAPHWINDOW_H
 
 #include <QGraphicsView>
-#include <../DataStructures/SimpleList/SimpleList.h>
-#include "../../LogicManagment/TravelAssistant.h"
-#include "VertexItem.h"
-#include "EdgeItem.h"
 #include <cmath>
 #include <complex>
 #include <QComboBox>
 #include <QPushButton>
 #include <QMessageBox>
+
+#include "src/DataStructures/SimpleList/SimpleList.h"
+#include "src/LogicManagment/TravelAssistant.h"
+#include "VertexItem.h"
+#include "EdgeItem.h"
 
 class GraphWindow : public QGraphicsView {
 Q_OBJECT
