@@ -139,7 +139,7 @@ void MainScreen::on_displayFinalScreenButton_clicked() {
         ui->formatSelectedLabel->setText("Multicolored");
     }
     QString finalImagePath = DataManager::getInstance()->getFilesPath() + "solutions/" + QString(QString::fromStdString(std::to_string(DataManager::getInstance()->getLastGenerationFile()))) + ".png";
-    ui->resultImage->setPixmap(QPixmap(finalImagePath).scaledToWidth(ui->resultImage->width(), Qt::TransformationMode::SmoothTransformation));
+    ui->resultImage->setPixmap(QPixmap(finalImagePath).scaled(ui->resultImage->size(), Qt::AspectRatioMode::KeepAspectRatio, Qt::TransformationMode::SmoothTransformation));
     ui->filesPathLine->setText(QString(DataManager::getInstance()->getFilesPath()));
     ui->generationTotalLabel->setText(QString::fromStdString(std::to_string(DataManager::getInstance()->getGenerationsAmount())));
     ui->stackedWidget->setCurrentIndex(6);
