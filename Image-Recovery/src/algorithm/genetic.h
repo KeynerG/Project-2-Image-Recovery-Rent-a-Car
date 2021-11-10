@@ -17,7 +17,7 @@ using namespace std;
 
 /**
  * @struct Chromosome
- * @brief
+ * @brief This struct is created like an Object that have the variables of chromosomeFrame, mutations, ID and fitness.
  * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
  */
 struct Chromosome {
@@ -36,7 +36,7 @@ struct Chromosome {
 
 /**
  * @struct Population
- * @brief
+ * @brief This struct is created like an Object that have the variables of chromosomeList, ID and fitChromosome.
  * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
  */
 struct Population {
@@ -59,7 +59,7 @@ struct Population {
 
 /**
  * @class Genetic
- * @brief
+ * @brief This class have all the logic for the genetic algorithm.
  * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
  * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
  */
@@ -75,7 +75,7 @@ public:
 
     /**
      * @fn void checkProgress(int &generationId)
-     * @brief
+     * @brief This method receives the generationId and evaluates if that generation have to be saved in an image calling createImage().
      * @param generationId
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
@@ -83,7 +83,7 @@ public:
 
     /**
      * @fn void saveImage(QImage &image) const
-     * @brief
+     * @brief This method receives the image generated in createImage() and saves it with an unique name.
      * @param image
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
@@ -91,14 +91,14 @@ public:
 
     /**
      * @fn void createImage()
-     * @brief
+     * @brief This method takes the fitChromosome of the current generation and makes a QImage, then send it to saveImage().
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void createImage();
 
     /**
      * @fn void saveXML(QFile &file)
-     * @brief
+     * @brief This method receives the generated XML in createXML() and saves it with an unique name.
      * @param file
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
@@ -106,14 +106,14 @@ public:
 
     /**
      * @fn void createXML()
-     * @brief
+     * @brief This method takes the information of the current generation and write a XML whit the information.
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
     void createXML();
 
     /**
      * @fn void accuracyMeter(Chromosome &chromosome)
-     * @brief
+     * @brief This method receives a Chromosome a detects how many pixels are equals to the pixels in the reference.
      * @param chromosome
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
@@ -121,7 +121,7 @@ public:
 
     /**
      * @fn void mutationDetector(Chromosome &chromosome)
-     * @brief
+     * @brief This method receives a Chromosome a detects which pixels are not equals to the pixels in the reference.
      * @param chromosome
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
@@ -129,7 +129,7 @@ public:
 
     /**
      * @fn void geneticAlgorithm(QProgressBar *progressBar)
-     * @brief
+     * @brief This method is the main loop of the genetic, it generates the first generation randomly and call the other functions to make new generations until find the perfect chromosome.
      * @param progressBar
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
@@ -138,7 +138,7 @@ public:
 
     /**
      * @fn void fitness(Population &generation)
-     * @brief
+     * @brief This method receives the current generation and send each Chromosome to the function accuracyMeter(), then it saves the Chromosome with the highest fitness in the fitChromosome variable.
      * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
@@ -146,7 +146,7 @@ public:
 
     /**
      * @fn void selection(Population &generation)
-     * @brief
+     * @brief This method receives the current generation and select the two chromosomes with the highest fitness.
      * @param generation
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
      */
@@ -154,7 +154,7 @@ public:
 
     /**
      * @fn void crossover(const Chromosome &parentA, const Chromosome &parentB)
-     * @brief
+     * @brief This method receives two chromosomes and make 10 new chromosomes mixing them.
      * @param parentA
      * @param parentB
      * @author <a href="https://github.com/KeynerG">Keyner S. Gómez Pana</a>
@@ -164,7 +164,7 @@ public:
 
     /**
      * @fn void mutation(Population &generation)
-     * @brief
+     * @brief This method receives the current generation, select a random chromosome and change values of the frame to makes mutations.
      * @param generation
      * @author <a href="https://github.com/valeriehernandez-7">Valerie M. Hernández Fernández</a>
      */
